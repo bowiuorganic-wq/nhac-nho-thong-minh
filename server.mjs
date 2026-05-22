@@ -654,15 +654,16 @@ function defaultPeriodicInterval(lower) {
 }
 
 function cleanTask(raw) {
-  return raw
-    .replace(/((một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi|mốt|lăm|lam|linh|lẻ|le|mươi|trăm|tram)\s+){1,6}(ngày|ngay|tuần|tuan|tháng|thang|năm|nam|phút|phut|giờ|gio|tiếng|tieng)\s*(nữa|nua|sau)/gi, '')
-    .replace(/\b\d+\s*(phút|phut|giờ|gio|tiếng|tieng|ngày|ngay|tuần|tuan|tháng|thang|năm|nam)\s*(nữa|nua|sau)\b/gi, '')
-    .replace(/\b(lúc|luc)?\s*\d{1,2}\s*(giờ|gio)(\s*\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem|rưỡi|ruoi)?\b/gi, '')
-    .replace(/\b(lúc|luc)?\s*\d{1,2}([h:]\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem)?\b/gi, '')
-    .replace(/\b(thứ|thu)\s*(hai|ba|tư|tu|năm|nam|sáu|sau|bảy|bay|2|3|4|5|6|7)\b/gi, '')
-    .replace(/\b(chủ nhật|chu nhat|cn|hàng tuần|hang tuan|mỗi tuần|moi tuan|hàng ngày|hang ngay|mỗi ngày|moi ngay|hàng tháng|hang thang|mỗi tháng|moi thang)\b/gi, '')
-    .replace(/\b(nhắc sớm|nhac som|nhắc trước|nhac truoc|báo trước|bao truoc)\b.*$/gi, '')
-    .replace(/\b(sáng mai|sang mai|chiều mai|chieu mai|ngày mai|ngay mai|mai|hôm nay|hom nay|sáng|sang|chiều|chieu|tuần sau|tuan sau|tháng sau|thang sau)\b/gi, '')
+  const token = '__MEAL_SANG__';
+  let protectedRaw = String(raw || '').replace(/ăn\s+sáng/gi, 'ăn ' + token).replace(/an\s+sang/gi, 'an ' + token);
+  return protectedRaw
+    .replace(/\d+\s*(phút|phut|giờ|gio|tiếng|tieng|ngày|ngay|tuần|tuan|tháng|thang|năm|nam)\s*(nữa|nua|sau)/gi, '')
+    .replace(/(một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi)(\s+\w+){0,5}\s*(ngày|ngay|tháng|thang|năm|nam|tuần|tuan|giờ|gio|phút|phut)\s*(nữa|nua|sau)/gi, '')
+    .replace(/(lúc|luc)?\s*\d{1,2}\s*(giờ|gio)(\s*\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem|rưỡi|ruoi)?/gi, '')
+    .replace(/(lúc|luc)?\s*\d{1,2}([h:]\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem)?/gi, '')
+    .replace(/(thứ|thu)\s*(hai|ba|tư|tu|năm|nam|sáu|sau|bảy|bay|2|3|4|5|6|7)/gi, '')
+    .replace(/(chủ nhật|chu nhat|cn|hàng tuần|hang tuan|mỗi tuần|moi tuan|hàng ngày|hang ngay|mỗi ngày|moi ngay|hàng tháng|hang thang|mỗi tháng|moi thang|nhắc sớm|nhac som|nhắc trước|nhac truoc|báo trước|bao truoc|ngày mai|ngay mai|hôm nay|hom nay|sáng|sang|chiều|chieu)/gi, '')
+    .replace(new RegExp(token, 'g'), 'sáng')
     .replace(/\s+/g, ' ')
     .trim();
 }

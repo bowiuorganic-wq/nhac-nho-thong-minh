@@ -33,3 +33,11 @@ http://localhost:5173
 - Node version: 18+
 
 Nếu có OpenAI API key, thêm biến môi trường `OPENAI_API_KEY`. Không có key thì app dùng bộ phân tích local.
+
+
+## V8.6 - Web Rules Fixed
+
+- Bản web dùng parser trong trình duyệt để giữ đúng múi giờ của người dùng.
+- Sửa lỗi giờ bị lệch khi deploy Render dùng UTC.
+- Đồng bộ rule bản điện thoại: ngủ/dậy chỉ báo chính, cách/cứ X ngày, từ thứ 2 - chủ nhật.
+- Giữ cụm ‘ăn sáng’ trong tên công việc, không xóa nhầm chữ sáng.

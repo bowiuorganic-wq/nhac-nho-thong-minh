@@ -1,8 +1,5 @@
 {
   "appId": "smart.reminder",
   "appName": "Smart Reminder",
-  "webDir": "www",
-  "server": {
-    "androidScheme": "https"
-  }
+  "webDir": "www"
 }

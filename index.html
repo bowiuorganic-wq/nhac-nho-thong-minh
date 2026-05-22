@@ -56,7 +56,7 @@
         <div class="section-title"><h2>⭐ Công việc của tôi</h2><button id="addTemplate" class="btn mini primary">+ Tạo mẫu</button></div>
         <div id="templates" class="templates"></div>
       </div>
-      <div class="card small"><b>Lưu ý:</b> bản V7.8 dùng báo thức native cơ bản: hiện màn hình báo thức, chuông báo thức, Dừng và Báo lại. Trên Chrome, app vẫn dùng timer trong tab để test logic.</div>
+      <div class="card small"><b>Lưu ý:</b> bản web dùng tốt nhất khi trang còn mở trên Chrome. Khi cần báo thức chắc chắn lúc tắt app/khóa máy, hãy dùng bản Android native.</div>
     </section>
 
     <section id="list" class="page">
@@ -127,12 +127,12 @@
         </div>
         <div class="form-section">
           <b>5. Nhạc chuông tự tải lên</b>
-          <p class="small">Vào <b>Cài đặt → Tải nhạc chuông của tôi</b>, chọn file âm thanh của bạn rồi chọn <b>Nhạc của tôi đã tải lên</b> ở mục Nhạc chuông thông báo. Sau khi tải lên, nhạc sẽ tự xuất hiện trong danh sách nhạc chuông. Khi chạy APK Android V7.8, app sẽ cố gắng dùng nhạc đã tải lên cho báo thức native.</p>
+          <p class="small">Vào <b>Cài đặt → Tải nhạc chuông của tôi</b>, chọn file âm thanh của bạn rồi chọn <b>Nhạc của tôi đã tải lên</b> ở mục Nhạc chuông thông báo. Sau khi tải lên, nhạc sẽ tự xuất hiện trong danh sách nhạc chuông. Trên bản web, nhạc tải lên phát khi trang còn mở và đến giờ báo trong trình duyệt.</p>
         </div>
 
         <div class="form-section">
           <b>7. Thông báo khi tắt app</b>
-          <p class="small">Bản V7.8 đặt báo thức native khi bấm <b>Đặt nhắc nhở</b>. Đến giờ, điện thoại hiển thị màn hình báo thức có nội dung nhắc, chuông báo thức, nút <b>Dừng</b> và nút <b>Báo lại</b>.</p>
+          <p class="small">Bản web đặt lịch trong trình duyệt khi bấm <b>Đặt nhắc nhở</b>. Đến giờ, nếu trang còn mở, app hiển thị popup/âm thanh và có nút <b>Dừng</b>.</p>
         </div>
         <div class="form-section">
           <b>6. Khi chuông báo</b>
@@ -419,37 +419,14 @@ async function analyzeInput(){
   const text=$('#text').value.trim(); if(!text) return toast('Nhập hoặc nói nội dung cần nhắc');
   $('#analysis').style.display='block'; $('#analysis').innerHTML='<b>🤖 Đang phân tích...</b>';
   try{
-    const nativeApp = isCapacitorNativeApp();
-
-    // Trong APK Android, server.mjs không chạy trong điện thoại.
-    // Vì vậy không gọi /api/analyze để tránh lỗi nhận về <!doctype html> rồi parse JSON.
-    if(nativeApp){
-      const data = browserLocalAnalyze(text, new Date().toISOString(), settings);
-      pending={...data, source:'local', templateId:null};
-      renderPending(pending);
-      return;
-    }
-
-    const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,nowISO:new Date().toISOString(),settings})});
-    const contentType = r.headers.get('content-type') || '';
-    const raw = await r.text();
-
-    if(!contentType.includes('application/json')){
-      throw new Error('API không trả JSON. App sẽ dùng bộ phân tích local.');
-    }
-
-    const data=JSON.parse(raw); if(!r.ok) throw new Error(data.error||'Lỗi phân tích');
-    pending={...data, source:'ai', templateId:null}; renderPending(pending);
-  }catch(e){
-    console.warn('Analyze fallback:', e);
-    try{
-      const data = browserLocalAnalyze(text, new Date().toISOString(), settings);
-      pending={...data, source:'local', templateId:null};
-      renderPending(pending);
-      toast('Đang dùng phân tích local trong app');
-    }catch(err){
-      $('#analysis').innerHTML=`<b style="color:#b91c1c">❌ ${escapeHtml(err.message||e.message)}</b><p class="small">Không phân tích được nội dung. Vui lòng nhập rõ hơn.</p>`;
-    }
+    // Bản web dùng parser trong trình duyệt để giữ đúng múi giờ của người dùng.
+    // Không gọi /api/analyze cho logic thời gian, tránh server Render dùng UTC làm lệch giờ.
+    const data = browserLocalAnalyze(text, new Date().toISOString(), settings);
+    pending={...data, source:'local', templateId:null};
+    renderPending(pending);
+  }catch(err){
+    console.warn('Analyze local failed:', err);
+    $('#analysis').innerHTML=`<b style="color:#b91c1c">❌ ${escapeHtml(err.message||'Không phân tích được')}</b><p class="small">Vui lòng nhập rõ hơn, ví dụ: 10 giờ dậy ăn sáng.</p>`;
   }
 }
 
@@ -705,8 +682,13 @@ function blaPeriodicPreType(distanceMin){ const days=distanceMin>30*24*60?5:dist
 function blaLooksPeriodic(lower){ return /thay dau|bao duong|bao tri|dong tien|tien dien|tien nuoc|tien mang|internet|wifi|gia han|kiem tra he thong|kiem tra camera|dinh ky/.test(lower); }
 function blaLooksOneTime(lower){ return /di kham|gap khach|du lich|dam cuoi|di an|di choi|sinh nhat|phong van|hen/.test(lower); }
 function blaDefaultPeriodicInterval(lower){ if(/tien dien|tien nuoc|tien mang|internet|wifi|dong tien/.test(lower)) return {unit:'month',interval:1}; if(/bao duong|bao tri/.test(lower)) return {unit:'month',interval:6}; if(/gia han|nam/.test(lower)) return {unit:'year',interval:1}; return {unit:'month',interval:3}; }
-function blaCleanTask(raw){ return raw.replace(/\b\d+\s*(phút|phut|giờ|gio|tiếng|tieng|ngày|ngay|tuần|tuan|tháng|thang|năm|nam)\s*(nữa|nua|sau)\b/gi,'').replace(/\b(một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi)(\s+\w+){0,5}\s*(ngày|ngay|tháng|thang|năm|nam|tuần|tuan|giờ|gio|phút|phut)\s*(nữa|nua|sau)\b/gi,'').replace(/\b(lúc|luc)?\s*\d{1,2}\s*(giờ|gio)(\s*\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem|rưỡi|ruoi)?\b/gi,'')
-    .replace(/\b(lúc|luc)?\s*\d{1,2}([h:]\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem)?\b/gi,'').replace(/\b(thứ|thu)\s*(hai|ba|tư|tu|năm|nam|sáu|sau|bảy|bay|2|3|4|5|6|7)\b/gi,'').replace(/\b(chủ nhật|chu nhat|cn|hàng tuần|hang tuan|mỗi tuần|moi tuan|hàng ngày|hang ngay|mỗi ngày|moi ngay|hàng tháng|hang thang|mỗi tháng|moi thang|nhắc sớm|nhac som|nhắc trước|nhac truoc|báo trước|bao truoc|ngày mai|ngay mai|hôm nay|hom nay|sáng|sang|chiều|chieu)\b/gi,'').replace(/\s+/g,' ').trim(); }
+function blaCleanTask(raw){
+  // Bảo vệ cụm “ăn sáng” để không xóa chữ “sáng” như một buổi trong ngày.
+  const token='__MEAL_SANG__';
+  let protectedRaw = String(raw||'').replace(/ăn\s+sáng/gi, 'ăn '+token).replace(/an\s+sang/gi, 'an '+token);
+  return protectedRaw.replace(/\d+\s*(phút|phut|giờ|gio|tiếng|tieng|ngày|ngay|tuần|tuan|tháng|thang|năm|nam)\s*(nữa|nua|sau)/gi,'').replace(/(một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi)(\s+\w+){0,5}\s*(ngày|ngay|tháng|thang|năm|nam|tuần|tuan|giờ|gio|phút|phut)\s*(nữa|nua|sau)/gi,'').replace(/(lúc|luc)?\s*\d{1,2}\s*(giờ|gio)(\s*\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem|rưỡi|ruoi)?/gi,'')
+    .replace(/(lúc|luc)?\s*\d{1,2}([h:]\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem)?/gi,'').replace(/(thứ|thu)\s*(hai|ba|tư|tu|năm|nam|sáu|sau|bảy|bay|2|3|4|5|6|7)/gi,'').replace(/(chủ nhật|chu nhat|cn|hàng tuần|hang tuan|mỗi tuần|moi tuan|hàng ngày|hang ngay|mỗi ngày|moi ngay|hàng tháng|hang thang|mỗi tháng|moi thang|nhắc sớm|nhac som|nhắc trước|nhac truoc|báo trước|bao truoc|ngày mai|ngay mai|hôm nay|hom nay|sáng|sang|chiều|chieu)/gi,'').replace(new RegExp(token,'g'),'sáng').replace(/\s+/g,' ').trim(); }
+
 function blaTitle(task){ if(!task) return 'Nhắc việc'; return task.charAt(0).toUpperCase()+task.slice(1); }
 function blaEmoji(lower){ if(/ca phe|coffee/.test(lower)) return '☕'; if(/thuoc/.test(lower)) return '💊'; if(/dau xe|xe may|xe/.test(lower)) return '🏍️'; if(/bao cao|report/.test(lower)) return '📋'; if(/hop|meeting/.test(lower)) return '👥'; if(/dien|nuoc|internet|wifi|tien/.test(lower)) return '💡'; if(/goi|khach|phone/.test(lower)) return '📞'; if(/kham|thuoc/.test(lower)) return '🏥'; return '🔔'; }
 
@@ -1270,6 +1252,18 @@ function fmt(iso){ if(!iso)return 'Không'; return new Date(iso).toLocaleString(
 function escapeHtml(s){ return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._timer); t._timer=setTimeout(()=>t.classList.remove('show'),2800); }
 
+
+
+// ===== Web deployment helpers =====
+(function registerSmartReminderPwa(){
+  try{
+    if('serviceWorker' in navigator){
+      window.addEventListener('load',()=>{
+        navigator.serviceWorker.register('/sw.js').catch(err=>console.warn('Service worker registration failed', err));
+      });
+    }
+  }catch(e){ console.warn('PWA helper failed', e); }
+})();
 
 </script>
 </body>
