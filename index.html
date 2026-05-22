@@ -56,7 +56,7 @@
         <div class="section-title"><h2>⭐ Công việc của tôi</h2><button id="addTemplate" class="btn mini primary">+ Tạo mẫu</button></div>
         <div id="templates" class="templates"></div>
       </div>
-      <div class="card small"><b>Lưu ý:</b> bản web dùng tốt nhất khi trang còn mở trên Chrome. Khi cần báo thức chắc chắn lúc tắt app/khóa máy, hãy dùng bản Android native.</div>
+      <div class="card small"><b>Lưu ý:</b> bản V7.8 dùng báo thức native cơ bản: hiện màn hình báo thức, chuông báo thức, Dừng và Báo lại. Trên Chrome, app vẫn dùng timer trong tab để test logic.</div>
     </section>
 
     <section id="list" class="page">
@@ -127,12 +127,12 @@
         </div>
         <div class="form-section">
           <b>5. Nhạc chuông tự tải lên</b>
-          <p class="small">Vào <b>Cài đặt → Tải nhạc chuông của tôi</b>, chọn file âm thanh của bạn rồi chọn <b>Nhạc của tôi đã tải lên</b> ở mục Nhạc chuông thông báo. Sau khi tải lên, nhạc sẽ tự xuất hiện trong danh sách nhạc chuông. Trên bản web, nhạc tải lên phát khi trang còn mở và đến giờ báo trong trình duyệt.</p>
+          <p class="small">Vào <b>Cài đặt → Tải nhạc chuông của tôi</b>, chọn file âm thanh của bạn rồi chọn <b>Nhạc của tôi đã tải lên</b> ở mục Nhạc chuông thông báo. Sau khi tải lên, nhạc sẽ tự xuất hiện trong danh sách nhạc chuông. Khi chạy APK Android V7.8, app sẽ cố gắng dùng nhạc đã tải lên cho báo thức native.</p>
         </div>
 
         <div class="form-section">
           <b>7. Thông báo khi tắt app</b>
-          <p class="small">Bản web đặt lịch trong trình duyệt khi bấm <b>Đặt nhắc nhở</b>. Đến giờ, nếu trang còn mở, app hiển thị popup/âm thanh và có nút <b>Dừng</b>.</p>
+          <p class="small">Bản V7.8 đặt báo thức native khi bấm <b>Đặt nhắc nhở</b>. Đến giờ, điện thoại hiển thị màn hình báo thức có nội dung nhắc, chuông báo thức, nút <b>Dừng</b> và nút <b>Báo lại</b>.</p>
         </div>
         <div class="form-section">
           <b>6. Khi chuông báo</b>
@@ -1270,18 +1270,6 @@ function fmt(iso){ if(!iso)return 'Không'; return new Date(iso).toLocaleString(
 function escapeHtml(s){ return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._timer); t._timer=setTimeout(()=>t.classList.remove('show'),2800); }
 
-
-
-// ===== Web deployment helpers =====
-(function registerSmartReminderPwa(){
-  try{
-    if('serviceWorker' in navigator){
-      window.addEventListener('load',()=>{
-        navigator.serviceWorker.register('/sw.js').catch(err=>console.warn('Service worker registration failed', err));
-      });
-    }
-  }catch(e){ console.warn('PWA helper failed', e); }
-})();
 
 </script>
 </body>

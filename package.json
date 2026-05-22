@@ -1,6 +1,6 @@
 {
-  "name": "smart-reminder-web-ready",
-  "version": "8.5.0",
+  "name": "smart-reminder-v7-8-basic-alarm-compile-fix",
+  "version": "7.8.0",
   "type": "module",
   "private": true,
   "scripts": {
@@ -9,5 +9,11 @@
   "engines": {
     "node": ">=18"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@capacitor/core": "latest",
+    "@capacitor/cli": "latest",
+    "@capacitor/android": "latest",
+    "@capacitor/local-notifications": "latest",
+    "@capacitor-community/speech-recognition": "latest"
+  }
 }
