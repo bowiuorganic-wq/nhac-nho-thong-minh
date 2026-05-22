@@ -1,0 +1,13 @@
+{
+  "name": "smart-reminder-web-ready",
+  "version": "8.5.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {}
+}

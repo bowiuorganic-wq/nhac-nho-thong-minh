@@ -1,0 +1,1288 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Reminder V7.8</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#eef2f7;color:#0f172a;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}.app{max-width:560px;min-height:100vh;margin:0 auto;background:#fff;box-shadow:0 0 36px rgba(15,23,42,.10)}header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#0f67d8,#0ea5e9);color:#fff;padding:18px}header h1{font-size:20px;margin:0 0 4px}header p{margin:0;font-size:13px;opacity:.92}.tabs{display:flex;background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:76px;z-index:18}.tab{flex:1;border:0;background:#fff;padding:13px 6px;font-weight:800;color:#64748b;cursor:pointer}.tab.active{color:#0f67d8;border-bottom:3px solid #0f67d8}.page{display:none;padding:16px}.page.active{display:block}.card{border:1px solid #e5e7eb;border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(15,23,42,.05);padding:16px;margin-bottom:14px}.row{display:flex;gap:8px}.row>*{min-width:0}.input,select{width:100%;border:1.5px solid #dbe2ea;border-radius:14px;padding:12px 13px;font-size:14px;outline:none;background:#fff}.input:focus,select:focus{border-color:#0f67d8}.btn{border:0;border-radius:14px;padding:11px 13px;font-weight:850;cursor:pointer;white-space:nowrap}.btn:disabled{opacity:.55;cursor:not-allowed}.primary{background:#0f67d8;color:#fff}.ghost{background:#f1f5f9;color:#334155}.danger{background:#fee2e2;color:#b91c1c}.ok{background:#16a34a;color:#fff}.warn{background:#f59e0b;color:#fff}.mini{padding:8px 10px;font-size:12px;border-radius:11px}.mic-wrap{text-align:center}.mic{width:86px;height:86px;border-radius:999px;border:0;background:#0f67d8;color:white;font-size:36px;cursor:pointer;box-shadow:0 12px 28px rgba(15,103,216,.32);transition:.2s}.mic.recording{background:#dc2626;animation:pulse 1s infinite}@keyframes pulse{50%{transform:scale(1.06)}}.hint{font-size:13px;color:#64748b;margin:10px 0 0}.transcript{display:none;margin-top:12px;text-align:left;background:#eff6ff;border:1px dashed #93c5fd;padding:12px;border-radius:14px;font-size:14px;line-height:1.5}.small{font-size:12px;color:#64748b;line-height:1.55}.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.section-title h2{font-size:15px;margin:0}.templates,.list,.report-grid{display:grid;gap:10px}.template,.rem,.report{display:flex;gap:12px;align-items:flex-start;border:1px solid #e5e7eb;border-radius:18px;padding:13px;background:#fff}.template-icon,.icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:#eff6ff;flex-shrink:0}.template-body,.rem-body,.report-body{min-width:0;flex:1}.title{font-weight:900;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{font-size:12px;color:#64748b;line-height:1.55}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.analysis{display:none}.kv{display:grid;grid-template-columns:120px 1fr;gap:8px;font-size:14px}.k{color:#64748b}.type{display:inline-block;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:900}.quick{background:#dbeafe;color:#1d4ed8}.periodic{background:#dcfce7;color:#15803d}.recurring{background:#ffedd5;color:#c2410c}.empty{text-align:center;color:#94a3b8;padding:34px 10px}.permission{display:none;align-items:center;gap:10px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:14px;padding:10px 12px;font-size:13px;margin-bottom:14px}.permission .btn{margin-left:auto;padding:8px 10px;background:#ea580c;color:#fff}.modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.64);z-index:100;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.box{width:min(430px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px;padding:22px 18px;box-shadow:0 24px 80px rgba(15,23,42,.35)}.box h2{margin:0 0 10px;font-size:19px}.alarm-box{text-align:center}.bell{font-size:58px;animation:shake .42s infinite alternate}@keyframes shake{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}.alarm-box p{color:#475569;white-space:pre-line;line-height:1.55}.modal-actions{display:flex;gap:9px;margin-top:16px}.modal-actions .btn{flex:1}.field{margin-bottom:11px}.field label{display:block;font-size:12px;font-weight:800;color:#475569;margin-bottom:5px}.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}.form-section{border:1px solid #e5e7eb;border-radius:16px;padding:12px;margin:10px 0;background:#f8fafc}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,90px);background:#111827;color:#fff;padding:11px 16px;border-radius:999px;font-size:13px;z-index:120;transition:.25s;white-space:nowrap;max-width:calc(100vw - 24px);overflow:hidden;text-overflow:ellipsis}.toast.show{transform:translate(-50%,0)}.settings-grid{display:grid;gap:12px}.pill{display:inline-flex;align-items:center;gap:5px;background:#f1f5f9;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800}.report.quick-r{border-color:#bfdbfe;background:#eff6ff}.report.recurring-r{border-color:#fed7aa;background:#fff7ed}.report.periodic-r{border-color:#bbf7d0;background:#f0fdf4}@media(max-width:460px){.row,.two,.three{grid-template-columns:1fr;flex-direction:column}.btn{width:100%}.kv{grid-template-columns:96px 1fr}.tabs{top:82px}.modal-actions{flex-direction:column}}
+  
+    /* V8.3 UX/UI polish */
+    :root{--brand:#2563eb;--brand2:#06b6d4;--ink:#0f172a;--muted:#64748b;--soft:#f8fafc;--line:#e2e8f0;--radius:22px}
+    body{background:radial-gradient(circle at top left,#dbeafe 0,#eef2ff 30%,#f8fafc 65%,#fff 100%)}
+    .app{max-width:590px;background:rgba(255,255,255,.96);box-shadow:0 28px 90px rgba(15,23,42,.16)}
+    header{background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 48%,#06b6d4 100%);padding:22px 18px 20px;border-bottom-left-radius:26px;border-bottom-right-radius:26px;box-shadow:0 12px 34px rgba(37,99,235,.28)}
+    header h1{font-size:23px;letter-spacing:-.03em;display:flex;align-items:center;gap:8px}
+    header p{font-size:13.5px;opacity:.95;line-height:1.45}
+    .tabs{top:92px;margin:12px 14px 0;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 28px rgba(15,23,42,.06)}
+    .tab{padding:14px 8px;background:#fff}.tab.active{background:#eff6ff;color:#1d4ed8;border-bottom:0;box-shadow:inset 0 -3px 0 #2563eb}
+    .page{padding:16px 14px 22px}.card{border-color:var(--line);border-radius:var(--radius);box-shadow:0 14px 40px rgba(15,23,42,.07);padding:18px}.card:hover{box-shadow:0 18px 46px rgba(15,23,42,.09)}
+    .input,select{border-radius:16px;border-color:#d6dee9;background:#fbfdff}.input:focus,select:focus{box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+    .btn{border-radius:16px;padding:12px 15px;box-shadow:0 8px 18px rgba(15,23,42,.07);transition:.18s}.btn:active{transform:translateY(1px)}.primary{background:linear-gradient(135deg,#2563eb,#06b6d4)}.ghost{background:#f8fafc;border:1px solid #e2e8f0}.danger{background:#fee2e2;border:1px solid #fecaca}.ok{background:linear-gradient(135deg,#16a34a,#22c55e)}.warn{background:linear-gradient(135deg,#f59e0b,#f97316)}
+    .mic{width:98px;height:98px;background:linear-gradient(135deg,#2563eb,#06b6d4);box-shadow:0 18px 42px rgba(37,99,235,.34)}.mic-wrap{background:linear-gradient(180deg,#ffffff,#f8fbff)}
+    .template,.rem,.report{border-radius:20px;border-color:#e2e8f0;background:linear-gradient(180deg,#fff,#fbfdff)}.template-icon,.icon{width:48px;height:48px;border-radius:18px;background:#e0f2fe}.title{font-size:15px}.meta{font-size:12.5px}.type{padding:5px 10px}.analysis{border:1px solid #bfdbfe;background:linear-gradient(180deg,#eff6ff,#fff)}.kv{gap:10px}.k{font-weight:800;color:#475569}.pill{background:#e0f2fe;color:#075985}.form-section{background:#f8fafc;border-radius:18px;border-color:#e2e8f0}.toast{box-shadow:0 16px 38px rgba(0,0,0,.22)}
+    @media(max-width:460px){.tabs{top:96px}.btn{padding:13px 14px}.mic{width:92px;height:92px}}
+
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header><h1>🔔 Nhắc nhở thông minh</h1><p>Thiết lập lịch trình công việc &gt; Mốc thời gian được ghi nhận &gt; Thông báo được gửi đi</p></header>
+    <nav class="tabs">
+      <button class="tab active" data-tab="add">➕ Thêm mới</button>
+      <button class="tab" data-tab="list">📋 Danh sách <span id="count"></span></button>
+      <button class="tab" data-tab="settings">⚙️ Cài đặt</button>
+    </nav>
+
+    <section id="add" class="page active">
+      <div id="permission" class="permission">🔔 Bật thông báo để Chrome nhắc ngoài tab <button class="btn" id="btnPerm">Cho phép</button></div>
+      <div class="card mic-wrap">
+        <button id="mic" class="mic" title="Nhấn để nói">🎙️</button>
+        <p id="micHint" class="hint">Nhấn mic rồi nói, ví dụ: “5 giờ nữa gọi khách”</p>
+        <div id="transcript" class="transcript"></div>
+      </div>
+
+      <div class="card">
+        <div class="row">
+          <input id="text" class="input" placeholder="Gõ tự nhiên: Sáng mai gọi khách, ba tháng sau thay dầu xe máy..." />
+          <button id="analyze" class="btn primary">Phân tích</button>
+        </div>
+        <p class="small">AI chỉ dùng cho câu nhập tự nhiên. Với “Công việc của tôi”, app dùng đúng cấu hình bạn đã cài, không phân tích lại.</p>
+      </div>
+
+      <div id="analysis" class="analysis card"></div>
+
+      <div class="card">
+        <div class="section-title"><h2>⭐ Công việc của tôi</h2><button id="addTemplate" class="btn mini primary">+ Tạo mẫu</button></div>
+        <div id="templates" class="templates"></div>
+      </div>
+      <div class="card small"><b>Lưu ý:</b> bản web dùng tốt nhất khi trang còn mở trên Chrome. Khi cần báo thức chắc chắn lúc tắt app/khóa máy, hãy dùng bản Android native.</div>
+    </section>
+
+    <section id="list" class="page">
+      <div class="card"><div class="section-title"><h2>📊 Báo cáo theo nhóm</h2></div><div id="reports" class="report-grid"></div></div>
+      <div class="card"><div class="section-title"><h2>Danh sách chi tiết</h2></div><div id="reminders" class="list"></div></div>
+    </section>
+
+    <section id="settings" class="page">
+      <div class="card settings-grid">
+        <div class="field"><label>Giờ mặc định nếu không nói giờ</label><input id="setDefaultTime" class="input" type="time" /></div>
+        <div class="three">
+          <div class="field"><label>Chuông Tức thời</label><select id="setAlarmQuick"></select></div>
+          <div class="field"><label>Chuông Lặp lại thường xuyên</label><select id="setAlarmRecurring"></select></div>
+          <div class="field"><label>Chuông Định kỳ dài hạn</label><select id="setAlarmPeriodic"></select></div>
+        </div>
+        <div class="field"><label>Nhạc chuông thông báo</label><select id="setAlarmSound">
+          <option value="classic">Classic - bíp rõ</option>
+          <option value="double">Double - hai nhịp</option>
+          <option value="soft">Soft - nhẹ</option>
+          <option value="urgent">Urgent - gấp</option>
+          <option value="uploaded">Nhạc của tôi đã tải lên</option>
+        </select></div>
+        <div class="form-section">
+          <b>Tải nhạc chuông của tôi</b>
+          <p class="small">Bạn có thể tự chọn file nhạc hợp lệ trên máy/điện thoại để dùng làm chuông trong app. Nên dùng file <b>.mp3</b>, <b>.wav</b>, <b>.m4a</b> ngắn khoảng 10–30 giây, dung lượng nhỏ hơn 2MB để app lưu ổn định.</p>
+          <div class="field"><label>Chọn file nhạc chuông</label><input id="customRingtoneFile" class="input" type="file" accept="audio/*" /></div>
+          <div class="row"><button id="previewCustomRingtone" class="btn ghost">Nghe nhạc đã tải</button><button id="removeCustomRingtone" class="btn danger">Xóa nhạc đã tải</button></div>
+          <p id="customRingtoneStatus" class="small">Chưa có nhạc chuông tự tải lên.</p>
+          <p class="small"><b>Lưu ý:</b> nhạc tự tải lên phát tốt khi app đang mở. Nếu muốn nhạc tự tải lên vẫn phát chính xác khi app đã bị tắt hoàn toàn, cần nâng cấp native Android sâu hơn để xử lý âm thanh native.</p>
+        </div>
+        <div class="form-section">
+          <b>Số lần gợi nhắc</b>
+          <p class="small">Cài đặt này chỉ áp dụng cho các nhắc nhở tạo từ <b>Công việc của tôi</b>. Nhập bằng mic/text vẫn dùng quy tắc phân tích riêng.</p>
+          <div class="three">
+            <div class="field"><label>Tức thời từ mẫu</label><select id="setTplAlertsQuick"></select></div>
+            <div class="field"><label>Lặp lại thường xuyên từ mẫu</label><select id="setTplAlertsRecurring"></select></div>
+            <div class="field"><label>Định kỳ dài hạn từ mẫu</label><select id="setTplAlertsPeriodic"></select></div>
+          </div>
+        </div>
+        <div class="form-section">
+          <b>Báo lại</b>
+          <p class="small">Khi chuông báo thức hiện lên, bấm <b>Báo lại</b> để tắt chuông tạm thời và nhắc lại sau số phút này.</p>
+          <div class="field"><label>Số phút báo lại</label><select id="setSnoozeMinutes"><option value="3">3 phút</option><option value="5">5 phút</option><option value="10">10 phút</option><option value="15">15 phút</option><option value="30">30 phút</option></select></div>
+        </div>
+        <div class="row"><button id="saveSettings" class="btn primary">Lưu cài đặt</button><button id="testSound" class="btn ghost">Nghe thử</button></div>
+      </div>
+
+      <div class="card">
+        <div class="section-title"><h2>📘 Hướng dẫn sử dụng</h2></div>
+        <div class="form-section">
+          <b>1. Tạo nhắc nhở bằng AI</b>
+          <p class="small">Vào tab <b>Thêm mới</b>, bấm mic để nói hoặc gõ nội dung rồi bấm <b>Phân tích</b>. Kiểm tra lại kết quả app hiểu, sau đó bấm <b>Đặt nhắc nhở</b>.</p>
+          <p class="small"><b>Ví dụ:</b> “30 phút nữa pha cà phê”, “sáng mai gọi khách”, “ba tháng sau thay dầu xe máy”, “mười ngày nữa đi khám”, “làm báo cáo 14h thứ 2 hàng tuần nhắc sớm 10h”.</p>
+        </div>
+        <div class="form-section">
+          <b>2. Dùng Công việc của tôi</b>
+          <p class="small">Dùng khi bạn có công việc quen thuộc. Bấm <b>+ Tạo mẫu</b>, tự cài loại nhắc, thời gian, chu kỳ, chuông. Sau đó chỉ cần bấm <b>Dùng</b>, app tự fill theo cấu hình đã cài, không cần AI phân tích lại. Mục <b>Số lần gợi nhắc</b> trong Cài đặt chỉ áp dụng cho các mẫu này.</p>
+        </div>
+        <div class="form-section">
+          <b>3. Hiểu 3 nhóm nhắc nhở</b>
+          <p class="small"><span class="type quick">Tức thời</span> Việc một lần. Nếu còn ≤ 2 giờ: chỉ nhắc đúng giờ. Nếu > 2 giờ: nhắc trước 60 phút. Nếu là sự kiện một lần xa hơn 7 ngày, app có thể nhắc trước 3 ngày, 2 ngày, 1 ngày và 60 phút tùy khoảng thời gian.</p>
+          <p class="small"><span class="type recurring">Lặp lại thường xuyên</span> Việc hàng ngày/hàng tuần/hàng tháng. Chỉ nhắc đúng giờ, trừ khi bạn nói rõ “nhắc sớm”. Không cần dấu phẩy: ví dụ “làm báo cáo 14h thứ 2 hàng tuần nhắc sớm 10h” vẫn phải hiểu nhắc trước 10h và nhắc chính 14h.</p>
+          <p class="small"><span class="type periodic">Định kỳ dài hạn</span> Việc bảo trì, đóng phí, gia hạn, thay dầu... Có nhắc trước và hỏi <b>Rồi/Chưa</b> trước hạn.</p>
+        </div>
+        <div class="form-section">
+          <b>4. Quy tắc giờ mặc định</b>
+          <p class="small">Nếu nói <b>sáng</b> nhưng không nói giờ, app dùng <b>09:00</b>. Nếu nói <b>chiều</b> nhưng không nói giờ, app dùng <b>14:00</b>. Nếu không nói buổi và không nói giờ, app dùng giờ mặc định trong cài đặt.</p>
+        </div>
+        <div class="form-section">
+          <b>5. Nhạc chuông tự tải lên</b>
+          <p class="small">Vào <b>Cài đặt → Tải nhạc chuông của tôi</b>, chọn file âm thanh của bạn rồi chọn <b>Nhạc của tôi đã tải lên</b> ở mục Nhạc chuông thông báo. Sau khi tải lên, nhạc sẽ tự xuất hiện trong danh sách nhạc chuông. Trên bản web, nhạc tải lên phát khi trang còn mở và đến giờ báo trong trình duyệt.</p>
+        </div>
+
+        <div class="form-section">
+          <b>7. Thông báo khi tắt app</b>
+          <p class="small">Bản web đặt lịch trong trình duyệt khi bấm <b>Đặt nhắc nhở</b>. Đến giờ, nếu trang còn mở, app hiển thị popup/âm thanh và có nút <b>Dừng</b>.</p>
+        </div>
+        <div class="form-section">
+          <b>6. Khi chuông báo</b>
+          <p class="small">Bấm <b>Dừng chuông</b> để tắt. Nếu popup bị kẹt, bấm <b>Tắt khẩn cấp</b> hoặc phím <b>Esc</b>. Với việc định kỳ dài hạn, nếu app hỏi <b>Rồi/Chưa</b>, bấm <b>Rồi</b> để cài chu kỳ tiếp theo hoặc <b>Chưa</b> để app nhắc lại ngày hôm sau.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title"><h2>Dữ liệu test</h2></div>
+        <div class="row"><button id="clearReminders" class="btn danger">Xóa nhắc nhở</button><button id="clearAll" class="btn danger">Xóa toàn bộ</button><button id="resetSettings" class="btn ghost">Khôi phục mặc định</button></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="alarm" class="modal">
+    <div class="box alarm-box">
+      <div id="alarmEmoji" class="bell">🔔</div>
+      <h2 id="alarmTitle">Nhắc nhở!</h2>
+      <p id="alarmMsg"></p>
+      <div id="alarmActions" class="modal-actions"></div>
+      <button id="emergencyStop" class="btn danger" style="margin-top:10px;width:100%">Tắt khẩn cấp</button>
+    </div>
+  </div>
+
+  <div id="templateModal" class="modal">
+    <div class="box">
+      <h2 id="tplTitle">Tạo mẫu công việc</h2>
+      <input type="hidden" id="tplId" />
+      <div class="two"><div class="field"><label>Tên mẫu</label><input id="tplName" class="input" placeholder="Thay dầu xe máy" /></div><div class="field"><label>Emoji</label><input id="tplEmoji" class="input" placeholder="🏍️" /></div></div>
+      <div class="field"><label>Tên công việc</label><input id="tplTask" class="input" placeholder="Thay dầu xe máy" /></div>
+      <div class="field"><label>Loại nhắc</label><select id="tplType"><option value="quick">Tức thời</option><option value="periodic">Định kỳ dài hạn</option><option value="recurring">Lặp lại thường xuyên</option></select></div>
+
+      <div id="tplQuick" class="form-section">
+        <b>Tức thời</b><p class="small">Khi bấm mẫu, app sẽ đặt thời gian chính = hiện tại + khoảng thời gian này. Nếu lớn hơn 2 giờ, app tự nhắc trước 60 phút.</p>
+        <div class="two"><div class="field"><label>Sau bao lâu?</label><input id="tplQuickInterval" class="input" type="number" min="1" value="30" /></div><div class="field"><label>Đơn vị</label><select id="tplQuickUnit"><option value="minute">Phút</option><option value="hour">Giờ</option><option value="day">Ngày</option><option value="week">Tuần</option><option value="month">Tháng</option></select></div></div>
+      </div>
+
+      <div id="tplPeriodic" class="form-section" style="display:none">
+        <b>Định kỳ dài hạn</b><p class="small">Dùng cho thay dầu, đóng tiền, gia hạn, bảo trì...</p>
+        <div class="two"><div class="field"><label>Chu kỳ</label><input id="tplPeriodicInterval" class="input" type="number" min="1" value="3" /></div><div class="field"><label>Đơn vị</label><select id="tplPeriodicUnit"><option value="day">Ngày</option><option value="week">Tuần</option><option value="month">Tháng</option><option value="year">Năm</option></select></div></div>
+        <div class="two"><div class="field"><label>Giờ nhắc chính</label><input id="tplPeriodicTime" class="input" type="time" value="09:00" /></div><div class="field"><label>Nhắc trước bao nhiêu ngày?</label><input id="tplPreDays" class="input" type="number" min="0" value="5" /></div></div>
+      </div>
+
+      <div id="tplRecurring" class="form-section" style="display:none">
+        <b>Lặp lại thường xuyên</b><p class="small">Nếu không bật nhắc sớm, app chỉ nhắc đúng giờ.</p>
+        <div class="two"><div class="field"><label>Tần suất</label><select id="tplFreq"><option value="day">Hàng ngày</option><option value="week">Hàng tuần</option><option value="month">Hàng tháng</option></select></div><div class="field"><label>Giờ nhắc chính</label><input id="tplMainTime" class="input" type="time" value="14:00" /></div></div>
+        <div class="two"><div class="field"><label>Thứ trong tuần</label><select id="tplWeekday"><option value="1">Thứ 2</option><option value="2">Thứ 3</option><option value="3">Thứ 4</option><option value="4">Thứ 5</option><option value="5">Thứ 6</option><option value="6">Thứ 7</option><option value="0">Chủ nhật</option></select></div><div class="field"><label>Ngày trong tháng</label><input id="tplMonthday" class="input" type="number" min="1" max="28" value="1" /></div></div>
+        <div class="two"><div class="field"><label><input id="tplEarlyEnabled" type="checkbox" /> Có nhắc sớm</label></div><div class="field"><label>Giờ nhắc sớm</label><input id="tplEarlyTime" class="input" type="time" value="10:00" /></div></div>
+      </div>
+
+      <div class="two"><div class="field"><label>Thời lượng chuông</label><select id="tplAlarmSeconds"></select></div><div class="field"><label>Nhạc chuông</label><select id="tplAlarmSound"><option value="classic">Classic</option><option value="double">Double</option><option value="soft">Soft</option><option value="urgent">Urgent</option><option value="uploaded">Nhạc của tôi đã tải lên</option></select></div></div>
+      <div class="modal-actions"><button id="cancelTemplate" class="btn ghost">Hủy</button><button id="saveTemplate" class="btn primary">Lưu mẫu</button></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const MAX_DELAY = 2147483647;
+const TYPE_LABEL = { quick:'Tức thời', recurring:'Lặp lại thường xuyên', periodic:'Định kỳ dài hạn' };
+const TYPE_CLASS = { quick:'quick', recurring:'recurring', periodic:'periodic' };
+const NATIVE_CHANNEL_ID = 'smart_reminder_v77_fallback';
+const NATIVE_CHANNEL_NAME = 'Smart Reminder - thông báo dự phòng';
+let reminders = load('sr_v5_reminders', []);
+let templates = load('sr_v5_templates', []);
+let settings = load('sr_v5_settings', { defaultTime:'09:00', alarmQuick:180, alarmRecurring:180, alarmPeriodic:180, alarmSound:'classic', templateAlertQuick:2, templateAlertRecurring:1, templateAlertPeriodic:1, customRingtoneName:null, customRingtoneDataUrl:null, snoozeMinutes:5 });
+let timers = new Map();
+let recognition = null, recording = false, pending = null, activeAlarm = null, beepTimer = null, beepStopAt = 0;
+
+init();
+function init(){
+  $$('.tab').forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
+  $('#btnPerm').onclick=requestPermission;
+  $('#mic').onclick=toggleMic;
+  $('#analyze').onclick=analyzeInput;
+  $('#text').addEventListener('keydown',e=>{if(e.key==='Enter') analyzeInput();});
+  $('#addTemplate').onclick=()=>openTemplateModal();
+  $('#tplType').onchange=toggleTemplateType;
+  $('#cancelTemplate').onclick=closeTemplateModal;
+  $('#saveTemplate').onclick=saveTemplateFromForm;
+  $('#emergencyStop').onclick=emergencyStop;
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') emergencyStop(); });
+  initSettingsUI();
+  $('#saveSettings').onclick=saveSettings;
+  $('#testSound').onclick=()=>startBeep(4, settings.alarmSound);
+  if($('#customRingtoneFile')) $('#customRingtoneFile').onchange=handleCustomRingtoneUpload;
+  if($('#previewCustomRingtone')) $('#previewCustomRingtone').onclick=()=>playUploadedRingtonePreview();
+  if($('#removeCustomRingtone')) $('#removeCustomRingtone').onclick=removeCustomRingtone;
+  $('#resetSettings').onclick=resetSettings;
+  $('#clearReminders').onclick=async()=>{ if(confirm('Xóa tất cả nhắc nhở?')){ await cancelAllNativeLocalNotifications(); await cancelAllNativeLoudAlarms(); reminders=[]; persistReminders(); rescheduleAll(); renderAll(); toast('Đã xóa nhắc nhở'); } };
+  $('#clearAll').onclick=async()=>{ if(confirm('Xóa toàn bộ nhắc nhở, mẫu và cài đặt?')){ await cancelAllNativeLocalNotifications(); await cancelAllNativeLoudAlarms(); localStorage.removeItem('sr_v5_reminders');localStorage.removeItem('sr_v5_templates');localStorage.removeItem('sr_v5_settings'); location.reload(); } };
+  if ('Notification' in window && Notification.permission === 'default') $('#permission').style.display='flex';
+  initNativeNotificationHandlers();
+  renderAll(); rescheduleAll();
+}
+
+function load(key, fallback){ try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback));}catch{return fallback;} }
+function save(key, value){ localStorage.setItem(key, JSON.stringify(value)); }
+function persistReminders(){ save('sr_v5_reminders', reminders); updateCount(); }
+function persistTemplates(){ save('sr_v5_templates', templates); }
+function persistSettings(){ save('sr_v5_settings', settings); }
+function switchTab(tab){ $$('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab)); $$('.page').forEach(p=>p.classList.toggle('active',p.id===tab)); if(tab==='list') renderAll(); if(tab==='settings') initSettingsUI(); }
+function updateCount(){ const n=reminders.length; $('#count').textContent=n?`(${n})`:''; }
+async function requestPermission(){
+  if(isCapacitorNativeApp()){
+    const ok = await ensureNativeNotificationPermissions();
+    if(ok){ $('#permission').style.display='none'; toast('Đã bật thông báo native'); }
+    return;
+  }
+  if(!('Notification' in window)) return toast('Trình duyệt không hỗ trợ thông báo');
+  const p=await Notification.requestPermission();
+  if(p==='granted'){ $('#permission').style.display='none'; toast('Đã bật thông báo'); }
+}
+
+async function ensureNativeNotificationPermissions(){
+  try{
+    if(!isCapacitorNativeApp()) return false;
+    const LocalNotifications = window.Capacitor?.Plugins?.LocalNotifications;
+    if(!LocalNotifications){
+      toast('Chưa có plugin Local Notifications. Hãy chạy npx cap sync android rồi cài lại app.');
+      return false;
+    }
+
+    let perm = await LocalNotifications.checkPermissions();
+    if(perm.display !== 'granted') perm = await LocalNotifications.requestPermissions();
+    if(perm.display !== 'granted'){
+      alert('Bạn cần cho phép Thông báo để app có thể báo khi đã tắt/khóa màn hình.');
+      return false;
+    }
+
+    // Exact alarm giúp báo đúng giờ hơn. Nếu máy chưa cấp, app vẫn thử đặt notification,
+    // nhưng sẽ cảnh báo để người dùng bật trong Cài đặt nếu cần.
+    if(typeof LocalNotifications.checkExactNotificationSetting === 'function'){
+      const exact = await LocalNotifications.checkExactNotificationSetting();
+      const v = exact?.exact_alarm || exact?.exactAlarm || exact?.value || '';
+      if(v && v !== 'granted' && v !== 'enabled'){
+        if(typeof LocalNotifications.changeExactNotificationSetting === 'function'){
+          toast('Nếu có màn hình Báo thức & lời nhắc, hãy bật cho Smart Reminder.');
+          try{ await LocalNotifications.changeExactNotificationSetting(); }catch{}
+        }
+      }
+    }
+    return true;
+  }catch(e){
+    console.warn('ensureNativeNotificationPermissions failed:', e);
+    return false;
+  }
+}
+
+async function toggleMic(){
+  // APK Android/Capacitor: ưu tiên mic native Android.
+  // Chrome máy tính: dùng Web Speech API như cũ.
+  if(isCapacitorNativeApp()){
+    const nativeOk = await toggleNativeMic();
+    if(nativeOk) return;
+    // Nếu native plugin chưa sẵn sàng, không để app kẹt ở trạng thái "Đang nghe".
+    return;
+  }
+  return toggleWebMic();
+}
+
+async function toggleNativeMic(){
+  const SpeechRecognition = window.Capacitor?.Plugins?.SpeechRecognition;
+
+  if(!SpeechRecognition){
+    toast('APK chưa nhận plugin mic native. Hãy chạy npm install @capacitor-community/speech-recognition rồi npx cap sync android.');
+    resetMicUi();
+    return false;
+  }
+
+  try{
+    const available = await SpeechRecognition.available();
+    if(!available || available.available !== true){
+      alert('Thiết bị chưa hỗ trợ nhận giọng nói. Hãy kiểm tra Google app hoặc Speech Services by Google trên điện thoại.');
+      resetMicUi();
+      return false;
+    }
+
+    let permission = await SpeechRecognition.checkPermissions();
+    if(!permission || permission.speechRecognition !== 'granted'){
+      permission = await SpeechRecognition.requestPermissions();
+    }
+
+    if(!permission || permission.speechRecognition !== 'granted'){
+      alert('Bạn cần cho phép quyền micro để dùng tính năng nói.');
+      resetMicUi();
+      return false;
+    }
+
+    setMicListeningUi('Đang nghe... hãy nói nội dung cần nhắc');
+
+    const result = await SpeechRecognition.start({
+      language: 'vi-VN',
+      maxResults: 1,
+      prompt: 'Hãy nói nội dung cần nhắc',
+      popup: true,
+      partialResults: false
+    });
+
+    resetMicUi();
+
+    const text = result?.matches?.length ? result.matches[0] : '';
+    if(!text){
+      $('#transcript').style.display='block';
+      $('#transcript').textContent='Không nghe được nội dung. Bạn thử nói lại nhé.';
+      return true;
+    }
+
+    $('#transcript').style.display='block';
+    $('#transcript').textContent=text;
+    $('#text').value=text;
+    analyzeInput();
+    return true;
+  }catch(error){
+    resetMicUi();
+    console.error('Native speech error:', error);
+    alert('Lỗi nhận giọng nói: '+(error.message || JSON.stringify(error)));
+    return false;
+  }
+}
+
+function toggleWebMic(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){
+    toast('Trình duyệt/app hiện tại không hỗ trợ nhận giọng nói web.');
+    resetMicUi();
+    return;
+  }
+
+  if(recording){
+    recognition?.stop();
+    return;
+  }
+
+  recognition = new SR();
+  recognition.lang='vi-VN';
+  recognition.interimResults=true;
+  recognition.continuous=false;
+
+  recording=true;
+  setMicListeningUi('Đang nghe... nhấn lại để dừng');
+
+  recognition.onresult=e=>{
+    let t='';
+    for(let i=0;i<e.results.length;i++) t+=e.results[i][0].transcript;
+    $('#transcript').textContent=t;
+  };
+
+  recognition.onerror=e=>{
+    resetMicUi();
+    toast('Lỗi mic: '+e.error);
+  };
+
+  recognition.onend=()=>{
+    recording=false;
+    resetMicUi();
+    const t=$('#transcript').textContent.trim();
+    if(t && t!=='...' && t!=='Đang nghe...'){
+      $('#text').value=t;
+      analyzeInput();
+    }
+  };
+
+  recognition.start();
+}
+
+function setMicListeningUi(message){
+  recording=true;
+  $('#mic').classList.add('recording');
+  $('#micHint').textContent=message;
+  $('#transcript').style.display='block';
+  $('#transcript').textContent='Đang nghe...';
+}
+
+function resetMicUi(){
+  recording=false;
+  $('#mic').classList.remove('recording');
+  $('#micHint').textContent='Nhấn mic rồi nói, ví dụ: “5 giờ nữa gọi khách”';
+}
+
+async function analyzeInput(){
+  const text=$('#text').value.trim(); if(!text) return toast('Nhập hoặc nói nội dung cần nhắc');
+  $('#analysis').style.display='block'; $('#analysis').innerHTML='<b>🤖 Đang phân tích...</b>';
+  try{
+    const nativeApp = isCapacitorNativeApp();
+
+    // Trong APK Android, server.mjs không chạy trong điện thoại.
+    // Vì vậy không gọi /api/analyze để tránh lỗi nhận về <!doctype html> rồi parse JSON.
+    if(nativeApp){
+      const data = browserLocalAnalyze(text, new Date().toISOString(), settings);
+      pending={...data, source:'local', templateId:null};
+      renderPending(pending);
+      return;
+    }
+
+    const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,nowISO:new Date().toISOString(),settings})});
+    const contentType = r.headers.get('content-type') || '';
+    const raw = await r.text();
+
+    if(!contentType.includes('application/json')){
+      throw new Error('API không trả JSON. App sẽ dùng bộ phân tích local.');
+    }
+
+    const data=JSON.parse(raw); if(!r.ok) throw new Error(data.error||'Lỗi phân tích');
+    pending={...data, source:'ai', templateId:null}; renderPending(pending);
+  }catch(e){
+    console.warn('Analyze fallback:', e);
+    try{
+      const data = browserLocalAnalyze(text, new Date().toISOString(), settings);
+      pending={...data, source:'local', templateId:null};
+      renderPending(pending);
+      toast('Đang dùng phân tích local trong app');
+    }catch(err){
+      $('#analysis').innerHTML=`<b style="color:#b91c1c">❌ ${escapeHtml(err.message||e.message)}</b><p class="small">Không phân tích được nội dung. Vui lòng nhập rõ hơn.</p>`;
+    }
+  }
+}
+
+function isCapacitorNativeApp(){
+  return !!(window.Capacitor && typeof window.Capacitor.isNativePlatform === 'function' && window.Capacitor.isNativePlatform());
+}
+
+function browserLocalAnalyze(text, nowISO, settings={}){
+  const now = new Date(nowISO);
+  const raw = String(text||'').trim();
+  const lower = blaStrip(raw.toLowerCase());
+
+  const recurring = blaParseRecurring(raw, lower, now, settings);
+  if(recurring) return blaNormalize(recurring, raw, nowISO, settings, 'local-app');
+
+  const rel = blaParseRelative(lower);
+  if(rel){
+    const dueInfo = blaBuildDueFromRelative(raw, lower, now, rel, settings);
+    const distanceMin = (dueInfo.date.getTime()-now.getTime())/60000;
+    const isLong = distanceMin > 7*24*60;
+    const periodic = isLong && blaLooksPeriodic(lower) && !blaLooksOneTime(lower);
+    const task = blaTitle(blaCleanTask(raw));
+    if(periodic){
+      const pre = blaPeriodicPreAlert(dueInfo.date, distanceMin);
+      return blaNormalize({
+        task, emoji:blaEmoji(lower), type:'periodic', typeLabel:TYPE_LABEL.periodic,
+        dueAt:dueInfo.date.toISOString(), preAlertAt:pre.toISOString(), preAlerts:[{type:blaPeriodicPreType(distanceMin), time:pre.toISOString()}],
+        repeat:{unit:rel.unit, interval:rel.interval}, autoRepeat:true, maxAlertCount:null,
+        alarmSeconds:settingsForType('periodic'), alarmSound:settings.alarmSound||'classic', askBeforeDue:true,
+        defaultTimeUsed:dueInfo.defaultTimeUsed, defaultTime:dueInfo.defaultTime, defaultTimeReason:dueInfo.defaultTimeReason,
+        confidence:'high', explanation:`Nhận biết việc định kỳ dài hạn; thời gian chính = hiện tại + ${rel.interval} ${unitLabel(rel.unit)}.`
+      }, raw, nowISO, settings, 'local-app');
+    }
+    const pres = quickPreAlerts(dueInfo.date, now);
+    return blaNormalize({
+      task, emoji:blaEmoji(lower), type:'quick', typeLabel:TYPE_LABEL.quick,
+      dueAt:dueInfo.date.toISOString(), preAlertAt:pres[0]?pres[0].time:null, preAlerts:pres,
+      repeat:null, autoRepeat:false, maxAlertCount:pres.length+1,
+      alarmSeconds:settingsForType('quick'), alarmSound:settings.alarmSound||'classic', askBeforeDue:false,
+      defaultTimeUsed:dueInfo.defaultTimeUsed, defaultTime:dueInfo.defaultTime, defaultTimeReason:dueInfo.defaultTimeReason,
+      confidence:'high', explanation:isLong?'Sự kiện một lần ở tương lai xa nên xếp Tức thời và có nhắc sớm theo mốc.':'Nhận biết việc nhắc một lần.'
+    }, raw, nowISO, settings, 'local-app');
+  }
+
+  const explicit = blaParseExplicitOrDay(raw, lower, now, settings);
+  if(explicit){
+    const task = blaTitle(blaCleanTask(raw));
+    const pres = quickPreAlerts(explicit.date, now);
+    return blaNormalize({
+      task, emoji:blaEmoji(lower), type:'quick', typeLabel:TYPE_LABEL.quick,
+      dueAt:explicit.date.toISOString(), preAlertAt:pres[0]?pres[0].time:null, preAlerts:pres,
+      repeat:null, autoRepeat:false, maxAlertCount:pres.length+1,
+      alarmSeconds:settingsForType('quick'), alarmSound:settings.alarmSound||'classic', askBeforeDue:false,
+      defaultTimeUsed:explicit.defaultTimeUsed, defaultTime:explicit.defaultTime, defaultTimeReason:explicit.defaultTimeReason,
+      confidence:explicit.defaultTimeUsed?'medium':'high', explanation:explicit.note||'Nhận biết mốc thời gian một lần.'
+    }, raw, nowISO, settings, 'local-app');
+  }
+
+  if(blaLooksPeriodic(lower)){
+    const interval = blaDefaultPeriodicInterval(lower);
+    const due = new Date(now);
+    blaAdd(due, interval.unit, interval.interval);
+    applyTime(due, settings.defaultTime||'09:00');
+    const dist = (due-now)/60000;
+    const pre = blaPeriodicPreAlert(due, dist);
+    const task = blaTitle(blaCleanTask(raw));
+    return blaNormalize({
+      task, emoji:blaEmoji(lower), type:'periodic', typeLabel:TYPE_LABEL.periodic,
+      dueAt:due.toISOString(), preAlertAt:pre.toISOString(), preAlerts:[{type:blaPeriodicPreType(dist), time:pre.toISOString()}],
+      repeat:interval, autoRepeat:true, maxAlertCount:null, alarmSeconds:settingsForType('periodic'),
+      alarmSound:settings.alarmSound||'classic', askBeforeDue:true,
+      defaultTimeUsed:true, defaultTime:settings.defaultTime||'09:00', defaultTimeReason:'Không nói thời gian cụ thể; app dùng chu kỳ mặc định theo loại công việc.',
+      confidence:'medium', explanation:`Tự nhận biết việc định kỳ dài hạn, chu kỳ mặc định ${interval.interval} ${unitLabel(interval.unit)}.`
+    }, raw, nowISO, settings, 'local-app');
+  }
+
+  const due = new Date(now); due.setMinutes(due.getMinutes()+1);
+  const task = blaTitle(blaCleanTask(raw));
+  return blaNormalize({
+    task, emoji:blaEmoji(lower), type:'quick', typeLabel:TYPE_LABEL.quick,
+    dueAt:due.toISOString(), preAlertAt:null, preAlerts:[], repeat:null, autoRepeat:false,
+    maxAlertCount:1, alarmSeconds:settingsForType('quick'), alarmSound:settings.alarmSound||'classic',
+    askBeforeDue:false, defaultTimeUsed:false, defaultTime:null, defaultTimeReason:null,
+    confidence:'low', explanation:'Không thấy thời gian rõ ràng; app tạm đặt sau 1 phút để test.'
+  }, raw, nowISO, settings, 'local-app');
+}
+
+function blaNormalize(r, original, nowISO, settings, engine){
+  const now=new Date(nowISO); let due=new Date(r.dueAt);
+  if(Number.isNaN(due.getTime()) || due<=now){ due=new Date(now); due.setMinutes(due.getMinutes()+1); r.dueAt=due.toISOString(); }
+  const mainOnly = isMainOnlyTask(blaStrip(String(original||'').toLowerCase()));
+  if(r.type==='quick'){
+    const qps=mainOnly ? [] : quickPreAlerts(due, now); r.preAlerts=qps; r.preAlertAt=qps[0]?qps[0].time:null; r.maxAlertCount=qps.length+1; r.repeat=null; r.autoRepeat=false; r.askBeforeDue=false;
+    if(mainOnly) r.explanation='Từ khóa ngủ/dậy: chỉ báo đúng giờ chính, không nhắc sớm.';
+  }else if(r.type==='periodic'){
+    const dist=(due-now)/60000; const pre=blaPeriodicPreAlert(due, dist); r.preAlertAt=pre>now?pre.toISOString():null; r.preAlerts=r.preAlertAt?[{type:blaPeriodicPreType(dist), time:r.preAlertAt}]:[]; r.maxAlertCount=null; r.autoRepeat=true; r.askBeforeDue=true;
+  }else if(r.type==='recurring'){
+    if(mainOnly){ r.preAlertAt=null; r.preAlerts=[]; r.explanation='Từ khóa ngủ/dậy: lịch lặp lại chỉ báo đúng giờ chính, không nhắc sớm.'; }
+    else r.preAlerts=r.preAlertAt?[{type:'custom_early', time:r.preAlertAt}]:[];
+    r.maxAlertCount=r.preAlerts.length+1; r.autoRepeat=true; r.askBeforeDue=false;
+  }
+  r.typeLabel=TYPE_LABEL[r.type]||r.typeLabel;
+  r.alarmSeconds=Number(r.alarmSeconds||settingsForType(r.type));
+  r.alarmSound=r.alarmSound||settings.alarmSound||'classic';
+  return {...r, sourceText:original, engine};
+}
+
+function blaStrip(str){ return str.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d'); }
+
+function isMainOnlyTask(lower){
+  return /(^|\s)(di\s+ngu|ngu|thuc\s+day|day)(\s|$)/.test(lower);
+}
+function parseSkipDayRepeat(lower){
+  // Rule của app: "cách/cứ X ngày" = bỏ qua X ngày, báo tiếp sau X+1 ngày.
+  // Ví dụ: "cứ 2 ngày" hoặc "cách 2 ngày" => báo thứ 2, thứ 5, chủ nhật...
+  const normalized = lower.replace(/cu\s+cach/g, 'cach');
+  let m = normalized.match(/(?:cach|cu)\s+ngay/);
+  if(m) return {skipDays:1, interval:2, text:m[0]};
+  m = normalized.match(/(?:cach|cu)\s+(\d+)\s*ngay/);
+  if(m) return {skipDays:Number(m[1]), interval:Number(m[1])+1, text:m[0]};
+  const tokens=normalized.split(/[^a-z0-9]+/).filter(Boolean);
+  for(let i=0;i<tokens.length-1;i++){
+    if(tokens[i] !== 'cach' && tokens[i] !== 'cu') continue;
+    for(let j=i+1;j<Math.min(tokens.length,i+7);j++){
+      if(tokens[j] !== 'ngay') continue;
+      const val=blaVietnameseNumber(tokens.slice(i+1,j));
+      if(val!=null && val>0) return {skipDays:val, interval:val+1, text:tokens.slice(i,j+1).join(' ')};
+    }
+  }
+  return null;
+}
+function parseStartWeekday(lower){
+  const tail = lower.match(/(?:tu|bat\s*dau\s*tu)\s*(thu\s*(?:2|3|4|5|6|7|hai|ba|tu|nam|sau|bay)|chu\s*nhat|cn)/);
+  if(!tail) return null;
+  return blaWeekday(tail[1]);
+}
+function nextDateForWeekday(now, weekday, hour, minute){
+  const d=new Date(now);
+  d.setHours(hour,minute,0,0);
+  const days=(weekday-d.getDay()+7)%7;
+  d.setDate(d.getDate()+days);
+  if(d<=now) d.setDate(d.getDate()+7);
+  return d;
+}
+
+function blaParseRelative(lower){
+  const map={phut:'minute',gio:'hour',tieng:'hour',ngay:'day',tuan:'week',thang:'month',nam:'year'};
+  let m=lower.match(/(\d+)\s*(phut|gio|tieng|ngay|tuan|thang|nam)\s*(nua|sau)/);
+  if(m) return {interval:Number(m[1]), unit:map[m[2]], text:m[0]};
+  const tokens=lower.split(/[^a-z0-9]+/).filter(Boolean);
+  const units=new Set(['phut','gio','tieng','ngay','tuan','thang','nam']); const suffix=new Set(['nua','sau']);
+  for(let i=0;i<tokens.length-1;i++){
+    if(!units.has(tokens[i]) || !suffix.has(tokens[i+1])) continue;
+    for(let j=Math.max(0,i-6);j<i;j++){
+      const val=blaVietnameseNumber(tokens.slice(j,i));
+      if(val!=null && val>0) return {interval:val, unit:map[tokens[i]], text:tokens.slice(j,i+2).join(' ')};
+    }
+  }
+  return null;
+}
+function blaVietnameseNumber(words){
+  if(!words||!words.length) return null;
+  const single={mot:1,motj:1,hai:2,ba:3,bon:4,tu:4,nam:5,lam:5,sau:6,bay:7,tam:8,chin:9,muoi:10};
+  if(words.length===1 && single[words[0]]!=null) return single[words[0]];
+  let text=words.join(' ');
+  let m=text.match(/^muoi\s+(mot|hai|ba|bon|tu|nam|lam|sau|bay|tam|chin)$/); if(m) return 10+single[m[1]];
+  m=text.match(/^(hai|ba|bon|tu|nam|sau|bay|tam|chin)\s+muoi(?:\s+(mot|hai|ba|bon|tu|nam|lam|sau|bay|tam|chin))?$/); if(m) return single[m[1]]*10+(m[2]?single[m[2]]:0);
+  return null;
+}
+function blaBuildDueFromRelative(raw, lower, now, rel, settings){
+  const date=new Date(now); blaAdd(date, rel.unit, rel.interval);
+  const time=blaParseTime(lower);
+  let defaultTimeUsed=false, defaultTime=null, defaultTimeReason=null;
+  if(time.found){ date.setHours(time.hour,time.minute,0,0); }
+  else if(/\bsang\b/.test(lower)){ applyTime(date,'09:00'); defaultTimeUsed=true; defaultTime='09:00'; defaultTimeReason="Người dùng nói sáng nhưng không nói giờ cụ thể"; }
+  else if(/\bchieu\b/.test(lower)){ applyTime(date,'14:00'); defaultTimeUsed=true; defaultTime='14:00'; defaultTimeReason="Người dùng nói chiều nhưng không nói giờ cụ thể"; }
+  else if(['day','week','month','year'].includes(rel.unit)){ const dt=settings.defaultTime||'09:00'; applyTime(date,dt); defaultTimeUsed=true; defaultTime=dt; defaultTimeReason='Người dùng không nói giờ cụ thể'; }
+  return {date, defaultTimeUsed, defaultTime, defaultTimeReason};
+}
+function blaParseExplicitOrDay(raw, lower, now, settings){
+  const hasTime=/\b\d{1,2}h\d{0,2}\b|\b\d{1,2}:\d{1,2}\b|\b\d{1,2}\s*(gio|giờ)(?:\s*\d{1,2})?\b/.test(lower);
+  const hasDay=/hom nay|ngay mai|mai\b|sang mai|chieu mai|toi nay|sang|chieu|tuan sau|thang sau/.test(lower);
+  if(!hasTime && !hasDay) return null;
+  const date=new Date(now); let defaultTimeUsed=false, defaultTime=null, defaultTimeReason=null, note='';
+  if(/ngay mai|mai\b|sang mai|chieu mai/.test(lower)) date.setDate(date.getDate()+1);
+  else if(/tuan sau/.test(lower)) date.setDate(date.getDate()+7);
+  else if(/thang sau/.test(lower)) date.setMonth(date.getMonth()+1);
+  const time=blaParseTime(lower);
+  if(time.found){ date.setHours(time.hour,time.minute,0,0); if(date<=now){date.setDate(date.getDate()+1); note='Giờ hôm nay đã qua, app đặt sang ngày kế tiếp.';} }
+  else if(/sang/.test(lower)){ applyTime(date,'09:00'); defaultTimeUsed=true; defaultTime='09:00'; defaultTimeReason="Người dùng nói sáng nhưng không nói giờ cụ thể"; }
+  else if(/chieu/.test(lower)){ applyTime(date,'14:00'); defaultTimeUsed=true; defaultTime='14:00'; defaultTimeReason="Người dùng nói chiều nhưng không nói giờ cụ thể"; }
+  else { const dt=settings.defaultTime||'09:00'; applyTime(date,dt); defaultTimeUsed=true; defaultTime=dt; defaultTimeReason='Người dùng không nói giờ cụ thể'; }
+  if(date<=now) date.setDate(date.getDate()+1);
+  return {date, defaultTimeUsed, defaultTime, defaultTimeReason, note};
+}
+function blaParseTime(lower){
+  let m=lower.match(/(?:luc\s*)?(\d{1,2})h(\d{1,2})?/);
+  if(!m) m=lower.match(/(?:luc\s*)?(\d{1,2}):(\d{1,2})/);
+  if(!m) m=lower.match(/(?:luc\s*)?(\d{1,2})\s*(?:gio|giờ)(?:\s*(\d{1,2}))?/);
+  if(!m) return {found:false,hour:9,minute:0};
+  let hour=Number(m[1]), minute=Number(m[2]||0);
+  const tail=lower.slice(Math.max(0, m.index-10), m.index+28);
+  if(/ruoi|rưỡi/.test(tail) && !m[2]) minute=30;
+  if(/chieu|toi|dem/.test(tail) && hour<12) hour+=12;
+  if(/sang/.test(tail) && hour===12) hour=0;
+  return {found:true,hour:Math.min(Math.max(hour,0),23),minute:Math.min(Math.max(minute,0),59)};
+}
+function blaParseRecurring(raw, lower, now, settings){
+  const skipRepeat = parseSkipDayRepeat(lower);
+  if(skipRepeat){
+    const mainTime=blaParseMainTimeForRecurring(lower);
+    const startWeekday=parseStartWeekday(lower);
+    const due = startWeekday==null ? new Date(now) : nextDateForWeekday(now, startWeekday, mainTime.hour, mainTime.minute);
+    if(startWeekday==null){ due.setHours(mainTime.hour,mainTime.minute,0,0); if(due<=now) due.setDate(due.getDate()+skipRepeat.interval); }
+    const task=blaTitle(blaCleanTask(raw));
+    return {task, emoji:blaEmoji(lower), type:'recurring', typeLabel:TYPE_LABEL.recurring,
+      dueAt:due.toISOString(), preAlertAt:null, preAlerts:[], repeat:{unit:'day', interval:skipRepeat.interval, skipDays:skipRepeat.skipDays, mode:'skip_days'},
+      autoRepeat:true, maxAlertCount:1, alarmSeconds:settingsForType('recurring'), alarmSound:settings.alarmSound||'classic', askBeforeDue:false,
+      defaultTimeUsed:!mainTime.found, defaultTime:!mainTime.found?mainTime.defaultTime:null, defaultTimeReason:!mainTime.found?mainTime.reason:null,
+      confidence:'high', explanation:`Cách ${skipRepeat.skipDays} ngày: báo xong bỏ qua ${skipRepeat.skipDays} ngày, báo tiếp sau ${skipRepeat.interval} ngày.`};
+  }
+  const daily=/moi ngay|hang ngay/.test(lower);
+  const weekly=/hang tuan|moi tuan|thu\s*(2|3|4|5|6|7|hai|ba|tu|nam|sau|bay)|chu nhat|cn/.test(lower);
+  const monthly=/hang thang|moi thang/.test(lower);
+  if(!daily&&!weekly&&!monthly) return null;
+  const mainTime=blaParseMainTimeForRecurring(lower);
+  const due=new Date(now); due.setHours(mainTime.hour,mainTime.minute,0,0);
+  let repeat={unit:'day',interval:1};
+  if(weekly){ repeat={unit:'week',interval:1}; const target=blaWeekday(lower)??1; const days=(target-due.getDay()+7)%7; due.setDate(due.getDate()+days); if(due<=now) due.setDate(due.getDate()+7); }
+  else if(monthly){ repeat={unit:'month',interval:1}; if(due<=now) due.setMonth(due.getMonth()+1); }
+  else if(due<=now) due.setDate(due.getDate()+1);
+  let preAlertAt=null; const early=blaParseEarlyTime(lower);
+  if(early){ const pre=new Date(due); pre.setHours(early.hour,early.minute,0,0); if(pre<due) preAlertAt=pre.toISOString(); }
+  const task=blaTitle(blaCleanTask(raw));
+  return {task, emoji:blaEmoji(lower), type:'recurring', typeLabel:TYPE_LABEL.recurring,
+    dueAt:due.toISOString(), preAlertAt, preAlerts:preAlertAt?[{type:'custom_early',time:preAlertAt}]:[], repeat,
+    autoRepeat:true, maxAlertCount:preAlertAt?2:1, alarmSeconds:settingsForType('recurring'), alarmSound:settings.alarmSound||'classic',
+    askBeforeDue:false, defaultTimeUsed:!mainTime.found, defaultTime:!mainTime.found?mainTime.defaultTime:null,
+    defaultTimeReason:!mainTime.found?mainTime.reason:null, confidence:'high', explanation:preAlertAt?'Có nhắc sớm theo giờ người dùng nói.':'Lặp lại thường xuyên, chỉ nhắc đúng giờ.'};
+}
+function blaParseMainTimeForRecurring(lower){
+  const cleaned=lower.replace(/nhac\s*(som|truoc).*$/,'').replace(/bao\s*truoc.*$/,'');
+  const t=blaParseTime(cleaned); if(t.found) return {...t};
+  if(/sang/.test(cleaned)) return {found:false,hour:9,minute:0,defaultTime:'09:00',reason:"Người dùng nói sáng nhưng không nói giờ cụ thể"};
+  if(/chieu/.test(cleaned)) return {found:false,hour:14,minute:0,defaultTime:'14:00',reason:"Người dùng nói chiều nhưng không nói giờ cụ thể"};
+  return {found:false,hour:9,minute:0,defaultTime:'09:00',reason:'Không nói giờ cụ thể'};
+}
+function blaParseEarlyTime(lower){ const m=lower.match(/(?:nhac\s*(?:som|truoc)|bao\s*truoc\s*(?:luc)?)\s*(\d{1,2})(?:h|:)?(\d{1,2})?/); if(!m) return null; return {hour:Number(m[1]),minute:Number(m[2]||0)}; }
+function blaWeekday(lower){ const map={'2':1,hai:1,'3':2,ba:2,'4':3,tu:3,'5':4,nam:4,'6':5,sau:5,'7':6,bay:6}; if(/chu nhat|\bcn\b/.test(lower)) return 0; const m=lower.match(/thu\s*(2|3|4|5|6|7|hai|ba|tu|nam|sau|bay)/); return m?map[m[1]]:null; }
+function blaAdd(date,unit,n){ n=Number(n||1); if(unit==='minute')date.setMinutes(date.getMinutes()+n); if(unit==='hour')date.setHours(date.getHours()+n); if(unit==='day')date.setDate(date.getDate()+n); if(unit==='week')date.setDate(date.getDate()+7*n); if(unit==='month')date.setMonth(date.getMonth()+n); if(unit==='year')date.setFullYear(date.getFullYear()+n); return date; }
+function blaPeriodicPreAlert(due, distanceMin){ const d=new Date(due); const days=distanceMin>30*24*60?5:distanceMin>=15*24*60?3:1; d.setDate(d.getDate()-days); return d; }
+function blaPeriodicPreType(distanceMin){ const days=distanceMin>30*24*60?5:distanceMin>=15*24*60?3:1; return `before_${days}_days`; }
+function blaLooksPeriodic(lower){ return /thay dau|bao duong|bao tri|dong tien|tien dien|tien nuoc|tien mang|internet|wifi|gia han|kiem tra he thong|kiem tra camera|dinh ky/.test(lower); }
+function blaLooksOneTime(lower){ return /di kham|gap khach|du lich|dam cuoi|di an|di choi|sinh nhat|phong van|hen/.test(lower); }
+function blaDefaultPeriodicInterval(lower){ if(/tien dien|tien nuoc|tien mang|internet|wifi|dong tien/.test(lower)) return {unit:'month',interval:1}; if(/bao duong|bao tri/.test(lower)) return {unit:'month',interval:6}; if(/gia han|nam/.test(lower)) return {unit:'year',interval:1}; return {unit:'month',interval:3}; }
+function blaCleanTask(raw){ return raw.replace(/\b\d+\s*(phút|phut|giờ|gio|tiếng|tieng|ngày|ngay|tuần|tuan|tháng|thang|năm|nam)\s*(nữa|nua|sau)\b/gi,'').replace(/\b(một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi)(\s+\w+){0,5}\s*(ngày|ngay|tháng|thang|năm|nam|tuần|tuan|giờ|gio|phút|phut)\s*(nữa|nua|sau)\b/gi,'').replace(/\b(lúc|luc)?\s*\d{1,2}\s*(giờ|gio)(\s*\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem|rưỡi|ruoi)?\b/gi,'')
+    .replace(/\b(lúc|luc)?\s*\d{1,2}([h:]\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem)?\b/gi,'').replace(/\b(thứ|thu)\s*(hai|ba|tư|tu|năm|nam|sáu|sau|bảy|bay|2|3|4|5|6|7)\b/gi,'').replace(/\b(chủ nhật|chu nhat|cn|hàng tuần|hang tuan|mỗi tuần|moi tuan|hàng ngày|hang ngay|mỗi ngày|moi ngay|hàng tháng|hang thang|mỗi tháng|moi thang|nhắc sớm|nhac som|nhắc trước|nhac truoc|báo trước|bao truoc|ngày mai|ngay mai|hôm nay|hom nay|sáng|sang|chiều|chieu)\b/gi,'').replace(/\s+/g,' ').trim(); }
+function blaTitle(task){ if(!task) return 'Nhắc việc'; return task.charAt(0).toUpperCase()+task.slice(1); }
+function blaEmoji(lower){ if(/ca phe|coffee/.test(lower)) return '☕'; if(/thuoc/.test(lower)) return '💊'; if(/dau xe|xe may|xe/.test(lower)) return '🏍️'; if(/bao cao|report/.test(lower)) return '📋'; if(/hop|meeting/.test(lower)) return '👥'; if(/dien|nuoc|internet|wifi|tien/.test(lower)) return '💡'; if(/goi|khach|phone/.test(lower)) return '📞'; if(/kham|thuoc/.test(lower)) return '🏥'; return '🔔'; }
+
+function renderPending(r){
+  const pre = preAlertsLabel(r);
+  const repeat = repeatLabel(r.repeat);
+  $('#analysis').style.display='block';
+  $('#analysis').innerHTML=`
+    <div class="section-title"><h2>${r.source==='template'?'⭐ Mẫu đã fill sẵn':'🤖 AI đã phân tích'}</h2><span class="pill">${escapeHtml(r.engine||r.source||'')}</span></div>
+    <div class="kv">
+      <div class="k">Công việc</div><div><b>${escapeHtml(r.emoji||'🔔')} ${escapeHtml(r.task)}</b></div>
+      <div class="k">Loại</div><div><span class="type ${TYPE_CLASS[r.type]||''}">${escapeHtml(r.typeLabel||TYPE_LABEL[r.type]||r.type)}</span></div>
+      <div class="k">Nhắc chính</div><div>${fmt(r.dueAt)}</div>
+      <div class="k">Nhắc sớm</div><div>${pre}</div>
+      <div class="k">Tự lặp lại</div><div>${r.autoRepeat?'Có':'Không'}</div>
+      <div class="k">Chu kỳ</div><div>${repeat}</div>
+      <div class="k">Cách nhắc</div><div>${alertPlanLabel(r)}</div>
+      <div class="k">Chuông</div><div>${Math.round((r.alarmSeconds||180)/60)} phút - ${escapeHtml(r.alarmSound||settings.alarmSound)}</div>
+      <div class="k">Ghi chú</div><div class="small">${escapeHtml(r.explanation||r.defaultTimeReason||'')}</div>
+    </div>
+    <div class="actions"><button class="btn ghost" id="cancelPending">Hủy</button><button class="btn primary" id="savePending">Đặt nhắc nhở</button></div>`;
+  $('#cancelPending').onclick=()=>{ pending=null; $('#analysis').style.display='none'; };
+  $('#savePending').onclick=savePendingReminder;
+}
+function alertPlanLabel(r){
+  if(r.type==='periodic'){
+    const pre = r.preAlertAt ? 'Có nhắc trước theo hạn và hỏi Rồi/Chưa' : 'Không có nhắc trước';
+    return `${pre}; đến hạn nhắc chính. Nếu bấm Chưa, app hỏi lại ngày hôm sau.`;
+  }
+  if(r.type==='recurring'){
+    return getPreAlerts(r).length ? '2 lần mỗi chu kỳ: nhắc sớm + đúng giờ' : '1 lần mỗi chu kỳ: đúng giờ';
+  }
+  const n = getPreAlerts(r).length; return n ? `${n + 1} lần: ${n} nhắc sớm + đúng giờ` : '1 lần: đúng giờ';
+}
+
+async function savePendingReminder(){
+  if(!pending) return;
+  const btn = $('#savePending');
+  if(btn){ btn.disabled = true; btn.textContent = 'Đang đặt...'; }
+
+  const rem={...pending,id:crypto.randomUUID(),createdAt:new Date().toISOString(),status:'active',doneCount:0};
+  reminders.push(rem);
+  persistReminders();
+
+  const scheduleResult = await schedule(rem);
+
+  pending=null;
+  $('#analysis').style.display='none';
+  $('#text').value='';
+  $('#transcript').style.display='none';
+  renderAll();
+  switchTab('add');
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  if(isCapacitorNativeApp()){
+    if(scheduleResult?.loudOk){
+      toast('Đã đặt báo thức native: '+rem.task);
+    }else if(scheduleResult?.nativeOk){
+      toast('Đã đặt nhắc nhở và thông báo hệ thống: '+rem.task);
+    }else{
+      alert('Đã lưu nhắc nhở, nhưng chưa xác nhận được thông báo hệ thống. Hãy kiểm tra quyền Thông báo, Báo thức & lời nhắc, và Pin không hạn chế. Sau đó mở lại app để app đặt lại lịch.');
+    }
+  }else{
+    toast('Đã đặt nhắc nhở: '+rem.task);
+  }
+}
+
+function renderAll(){ renderTemplates(); renderReports(); renderList(); updateCount(); }
+function renderTemplates(){
+  const el=$('#templates');
+  if(!templates.length){ el.innerHTML='<div class="empty">Chưa có mẫu nào.<br>Bấm “+ Tạo mẫu” để tạo công việc của bạn.</div>'; return; }
+  el.innerHTML=templates.map(t=>`
+    <div class="template">
+      <div class="template-icon">${escapeHtml(t.emoji||'⭐')}</div>
+      <div class="template-body"><div class="title">${escapeHtml(t.templateName||t.task)}</div><div class="meta">${escapeHtml(TYPE_LABEL[t.type]||t.type)}<br>${templateSummary(t)}</div><div class="actions"><button class="btn mini primary" onclick="useTemplate('${t.id}')">Dùng ngay</button><button class="btn mini ghost" onclick="editTemplate('${t.id}')">Sửa</button><button class="btn mini danger" onclick="deleteTemplate('${t.id}')">Xóa</button></div></div>
+    </div>`).join('');
+}
+function templateSummary(t){
+  if(t.type==='quick') return `Sau ${t.offset?.interval||1} ${unitLabel(t.offset?.unit||'minute')}`;
+  if(t.type==='periodic') return `Chu kỳ ${t.repeat?.interval||1} ${unitLabel(t.repeat?.unit||'month')} · nhắc trước ${t.preAlert?.before?.interval||0} ngày`;
+  if(t.type==='recurring') return `${repeatLabel(t.repeat)} · giờ chính ${t.mainTime||'09:00'}${t.preAlert?.enabled?' · nhắc sớm '+t.preAlert.time:''}`;
+  return '';
+}
+window.useTemplate=function(id){ const t=templates.find(x=>x.id===id); if(!t)return; pending=buildReminderFromTemplate(t); renderPending(pending); toast('Đã fill mẫu: '+(t.templateName||t.task)); }
+window.editTemplate=function(id){ const t=templates.find(x=>x.id===id); if(t) openTemplateModal(t); }
+window.deleteTemplate=function(id){ if(!confirm('Xóa mẫu này?'))return; templates=templates.filter(t=>t.id!==id); persistTemplates(); renderTemplates(); }
+
+
+function limitTemplatePreAlerts(alerts, type){
+  const settingKey = type==='periodic' ? 'templateAlertPeriodic' : type==='recurring' ? 'templateAlertRecurring' : 'templateAlertQuick';
+  const max = Number(settings[settingKey] ?? (type==='periodic'?1:type==='recurring'?1:2));
+  if(max <= 0) return [];
+  const arr = Array.isArray(alerts) ? [...alerts] : [];
+  // Ưu tiên các mốc gần thời gian chính hơn nếu người dùng chọn ít lần gợi nhắc.
+  return arr.slice(Math.max(0, arr.length - max));
+}
+
+function buildTemplatePeriodicPreAlerts(due, startDays, count, now){
+  const alerts=[];
+  const c = Math.max(0, Number(count||0));
+  const s = Math.max(0, Number(startDays||0));
+  if(!c || !s) return alerts;
+  for(let i=0;i<c;i++){
+    const days = s - i;
+    if(days <= 0) break;
+    const d = new Date(due);
+    d.setDate(d.getDate() - days);
+    if(d > now && d < due) alerts.push({type:`before_${days}_days`, time:d.toISOString()});
+  }
+  return alerts.sort((a,b)=>new Date(a.time)-new Date(b.time));
+}
+
+function buildReminderFromTemplate(t){
+  const now=new Date(); let due=new Date(now), pre=null, repeat=t.repeat||null, maxAlertCount=1, preAlerts=[];
+  if(t.type==='quick'){
+    due=addOffset(new Date(now), t.offset||{unit:'minute',interval:30});
+    const pres=limitTemplatePreAlerts(quickPreAlerts(due, now), 'quick'); preAlerts=pres; pre=pres[0]?new Date(pres[0].time):null; maxAlertCount=pres.length+1; repeat=null;
+  } else if(t.type==='periodic'){
+    due=addOffset(new Date(now), t.offset||t.repeat||{unit:'month',interval:3}); applyTime(due, t.mainTime || settings.defaultTime || '09:00');
+    const days=Number(t.preAlert?.before?.interval ?? 5);
+    preAlerts=buildTemplatePeriodicPreAlerts(due, days, Number(settings.templateAlertPeriodic ?? 1), now);
+    pre=preAlerts[0]?new Date(preAlerts[0].time):null; maxAlertCount=null;
+  } else if(t.type==='recurring'){
+    due=nextRecurringDate(t, now); const allowEarly = Number(settings.templateAlertRecurring ?? 1) > 0;
+    if(allowEarly && t.preAlert?.enabled && t.preAlert.time){ pre=new Date(due); applyTime(pre, t.preAlert.time); if(pre>=due || pre<=now) pre=null; }
+    preAlerts=pre?[{type:'custom_early',time:pre.toISOString()}]:[]; maxAlertCount=preAlerts.length+1;
+  }
+  return {
+    source:'template', sourceText:null, templateId:t.id, task:t.task, emoji:t.emoji||'🔔', type:t.type,
+    typeLabel:TYPE_LABEL[t.type], dueAt:due.toISOString(), preAlertAt:pre?pre.toISOString():null, preAlerts,
+    repeat, autoRepeat:t.type!=='quick' ? true : false, maxAlertCount, alarmSeconds:Number(t.alarmSeconds||settingsForType(t.type)),
+    alarmSound:t.alarmSound||settings.alarmSound, askBeforeDue:t.type==='periodic', status:'draft', doneCount:0,
+    defaultTimeUsed:false, defaultTime:null, defaultTimeReason:null, confidence:'high', explanation:'Tạo từ mẫu Công việc của tôi, không dùng AI phân tích.'
+  };
+}
+
+function openTemplateModal(t=null){
+  $('#tplTitle').textContent=t?'Sửa mẫu công việc':'Tạo mẫu công việc';
+  $('#tplId').value=t?.id||''; $('#tplName').value=t?.templateName||''; $('#tplTask').value=t?.task||''; $('#tplEmoji').value=t?.emoji||''; $('#tplType').value=t?.type||'quick';
+  $('#tplQuickInterval').value=t?.offset?.interval||30; $('#tplQuickUnit').value=t?.offset?.unit||'minute';
+  $('#tplPeriodicInterval').value=t?.repeat?.interval||t?.offset?.interval||3; $('#tplPeriodicUnit').value=t?.repeat?.unit||t?.offset?.unit||'month'; $('#tplPeriodicTime').value=t?.mainTime||settings.defaultTime||'09:00'; $('#tplPreDays').value=t?.preAlert?.before?.interval??5;
+  $('#tplFreq').value=t?.repeat?.unit||'week'; $('#tplMainTime').value=t?.mainTime||'14:00'; $('#tplWeekday').value=t?.weekday??1; $('#tplMonthday').value=t?.monthday??1; $('#tplEarlyEnabled').checked=!!t?.preAlert?.enabled; $('#tplEarlyTime').value=t?.preAlert?.time||'10:00';
+  $('#tplAlarmSeconds').value=String(t?.alarmSeconds||180); $('#tplAlarmSound').value=t?.alarmSound||settings.alarmSound||'classic';
+  toggleTemplateType(); $('#templateModal').classList.add('show');
+}
+function closeTemplateModal(){ $('#templateModal').classList.remove('show'); }
+function toggleTemplateType(){ const type=$('#tplType').value; $('#tplQuick').style.display=type==='quick'?'block':'none'; $('#tplPeriodic').style.display=type==='periodic'?'block':'none'; $('#tplRecurring').style.display=type==='recurring'?'block':'none'; }
+function saveTemplateFromForm(){
+  const type=$('#tplType').value; const id=$('#tplId').value||crypto.randomUUID(); const task=$('#tplTask').value.trim(); if(!task) return toast('Nhập tên công việc');
+  let t={id,templateName:$('#tplName').value.trim()||task,task,emoji:$('#tplEmoji').value.trim()||'🔔',type,typeLabel:TYPE_LABEL[type],alarmSeconds:Number($('#tplAlarmSeconds').value||180),alarmSound:$('#tplAlarmSound').value||'classic',createdAt:new Date().toISOString()};
+  if(type==='quick') t={...t,offset:{unit:$('#tplQuickUnit').value,interval:Number($('#tplQuickInterval').value||1)},repeat:null,autoRepeat:false,askBeforeDue:false};
+  if(type==='periodic') t={...t,offset:{unit:$('#tplPeriodicUnit').value,interval:Number($('#tplPeriodicInterval').value||1)},repeat:{unit:$('#tplPeriodicUnit').value,interval:Number($('#tplPeriodicInterval').value||1)},mainTime:$('#tplPeriodicTime').value||settings.defaultTime,preAlert:{enabled:Number($('#tplPreDays').value||0)>0,before:{unit:'day',interval:Number($('#tplPreDays').value||0)}},autoRepeat:true,askBeforeDue:true};
+  if(type==='recurring') t={...t,repeat:{unit:$('#tplFreq').value,interval:1},mainTime:$('#tplMainTime').value||'09:00',weekday:Number($('#tplWeekday').value),monthday:Number($('#tplMonthday').value||1),preAlert:{enabled:$('#tplEarlyEnabled').checked,time:$('#tplEarlyTime').value||'10:00'},autoRepeat:true,askBeforeDue:false};
+  const i=templates.findIndex(x=>x.id===id); if(i>=0) templates[i]=t; else templates.push(t); persistTemplates(); renderTemplates(); closeTemplateModal(); toast('Đã lưu mẫu');
+}
+
+function renderReports(){
+  const groups=[['quick','Tức thời','quick-r'],['recurring','Lặp lại thường xuyên','recurring-r'],['periodic','Định kỳ dài hạn','periodic-r']];
+  $('#reports').innerHTML=groups.map(([type,label,cls])=>{ const arr=reminders.filter(r=>r.type===type); return `<div class="report ${cls}"><div class="report-body"><div class="title">${label}: ${arr.length} việc</div><div class="meta">${arr.length?arr.map(r=>'• '+escapeHtml(r.task)).join('<br>'):'Chưa có việc nào'}</div></div></div>`; }).join('');
+}
+function renderList(){
+  const el=$('#reminders'); if(!reminders.length){ el.innerHTML='<div class="empty">🔕<br>Chưa có nhắc nhở nào</div>'; return; }
+  const sorted=[...reminders].sort((a,b)=>new Date(a.dueAt)-new Date(b.dueAt));
+  el.innerHTML=sorted.map(r=>`<div class="rem ${r.status==='ringing'?'ringing':''}"><div class="icon">${escapeHtml(r.emoji||'🔔')}</div><div class="rem-body"><div class="title">${escapeHtml(r.task)}</div><div class="meta"><span class="type ${TYPE_CLASS[r.type]||''}">${escapeHtml(r.typeLabel||TYPE_LABEL[r.type])}</span><br>Nhắc chính: <b>${fmt(r.dueAt)}</b>${getPreAlerts(r).length?`<br>Nhắc sớm:<br>${preAlertsHtml(r)}`:''}<br>Tự lặp lại: ${r.autoRepeat?'Có':'Không'} · Chu kỳ: ${repeatLabel(r.repeat)}${r.loudAlarmScheduledAt?'<br>Báo thức: đã đặt':(r.nativeScheduledAt?'<br>Thông báo: đã đặt':'')}</div><div class="actions"><button class="btn mini ghost" onclick="duplicateReminder('${r.id}')">Nhân bản</button><button class="btn mini danger" onclick="deleteReminder('${r.id}')">Xóa</button></div></div></div>`).join('');
+}
+window.deleteReminder=async function(id,silent=false){ const old=reminders.find(r=>r.id===id); cancelTimers(id); if(old){ await cancelNativeLocalNotifications(old); await cancelNativeLoudAlarms(old); } reminders=reminders.filter(r=>r.id!==id); persistReminders(); renderAll(); if(!silent) toast('Đã xóa nhắc nhở'); }
+window.duplicateReminder=function(id){ const r=reminders.find(x=>x.id===id); if(!r)return; pending={...r,id:undefined,status:'draft',source:'duplicate',dueAt:new Date(Date.now()+5*60000).toISOString(),preAlertAt:null,preAlerts:[]}; renderPending(pending); switchTab('add'); }
+
+function rescheduleAll(){ clearAllTimers(); reminders.forEach(schedule); }
+function clearAllTimers(){ for(const t of timers.values()) clearTimeout(t); timers.clear(); }
+async function schedule(rem){
+  // Trên Android APK V7.8: chỉ dùng báo thức native SmartAlarm.
+  // Không đặt thêm Local Notification song song để tránh chỉ hiện notification cơ bản hoặc phát chuông muộn khi mở app.
+  if(isCapacitorNativeApp()){
+    const loudOk = await scheduleNativeLoudAlarms(rem);
+    return { nativeOk: loudOk, loudOk };
+  }
+
+  // Trên Chrome/web: dùng timer trong tab để test logic.
+  const now=Date.now();
+  getPreAlerts(rem).forEach((a,i)=>{ const preMs=new Date(a.time).getTime(); if(preMs>now) setLongTimeout(`pre:${rem.id}:${i}`,()=>ring(rem.id,'pre'),preMs-now); });
+  const dueMs=new Date(rem.dueAt).getTime();
+  if(dueMs<=now) setTimeout(()=>ring(rem.id,'main'),500); else setLongTimeout('main:'+rem.id,()=>ring(rem.id,'main'),dueMs-now);
+  return { nativeOk:false, loudOk:false };
+}
+
+
+async function scheduleNativeLoudAlarms(rem){
+  try{
+    if(!isCapacitorNativeApp()) return false;
+    const SmartAlarm = window.Capacitor?.Plugins?.SmartAlarm;
+    if(!SmartAlarm) return false;
+
+    // Cần quyền thông báo + exact alarm trước khi đặt báo thức native.
+    const permissionOk = await ensureNativeNotificationPermissions();
+    if(!permissionOk) return false;
+
+    await cancelNativeLoudAlarms(rem);
+
+    const now = new Date();
+    const ids=[];
+    const scheduleOne = async (id, at, title, body, phase) => {
+      if(!(at > now)) return;
+      const result = await SmartAlarm.schedule({
+        id,
+        at: at.getTime(),
+        title,
+        body,
+        task: rem.task || body || 'Nhắc nhở',
+        reminderId: rem.id,
+        phase,
+        durationSeconds: Math.min(Math.max(Number(rem.alarmSeconds || 30), 10), 600),
+        snoozeMinutes: Number(settings.snoozeMinutes || 5),
+        soundDataUrl: rem.alarmSound === 'uploaded' ? (settings.customRingtoneDataUrl || '') : ''
+      });
+      if(result && result.scheduled === false){
+        console.warn('SmartAlarm không đặt được', result);
+        return;
+      }
+      ids.push(id);
+    };
+
+    const preAlerts = getPreAlerts(rem);
+    for(let i=0;i<preAlerts.length;i++){
+      const a = preAlerts[i];
+      const at = new Date(a.time);
+      await scheduleOne(
+        numericNotificationId(rem.id, i+1),
+        at,
+        rem.type === 'periodic' && rem.askBeforeDue ? 'Sắp đến hạn' : 'Nhắc sớm',
+        rem.type === 'periodic' && rem.askBeforeDue ? `Bạn ${String(rem.task||'').toLowerCase()} chưa?` : `${rem.task}\nNhắc chính: ${fmt(rem.dueAt)}`,
+        'pre'
+      );
+    }
+
+    await scheduleOne(
+      numericNotificationId(rem.id, 99),
+      new Date(rem.dueAt),
+      'Đến giờ rồi',
+      rem.task,
+      'main'
+    );
+
+    if(!ids.length) return false;
+    rem.loudAlarmScheduledAt = new Date().toISOString();
+    rem.loudAlarmIds = ids;
+    persistReminders();
+    return true;
+  }catch(e){
+    console.warn('Native gentle alarm schedule failed:', e);
+    return false;
+  }
+}
+
+async function cancelNativeLoudAlarms(rem){
+  try{
+    if(!isCapacitorNativeApp()) return;
+    const SmartAlarm = window.Capacitor?.Plugins?.SmartAlarm;
+    if(!SmartAlarm) return;
+    const ids=[];
+    if(rem && Array.isArray(rem.loudAlarmIds) && rem.loudAlarmIds.length){
+      rem.loudAlarmIds.forEach(id=>ids.push(Number(id)));
+    }else if(rem){
+      getPreAlerts(rem).forEach((a,i)=>ids.push(numericNotificationId(rem.id,i+1)));
+      ids.push(numericNotificationId(rem.id,99));
+    }
+    for(const id of ids){
+      try{ await SmartAlarm.cancel({id}); }catch{}
+    }
+  }catch(e){ console.warn('Cancel native loud alarms failed:', e); }
+}
+
+async function cancelAllNativeLoudAlarms(){
+  try{
+    if(!isCapacitorNativeApp()) return;
+    for(const rem of reminders){ await cancelNativeLoudAlarms(rem); }
+  }catch(e){ console.warn('Cancel all native loud alarms failed:', e); }
+}
+
+async function scheduleNativeLocalNotifications(rem){
+  try{
+    if(!isCapacitorNativeApp()) return false;
+    const LocalNotifications = window.Capacitor?.Plugins?.LocalNotifications;
+    if(!LocalNotifications) return false;
+
+    const ok = await ensureNativeNotificationPermissions();
+    if(!ok) return false;
+
+    await cancelNativeLocalNotifications(rem);
+
+    // Dùng channel mới để tránh bị Android giữ cấu hình channel cũ.
+    try{
+      await LocalNotifications.createChannel({
+        id: NATIVE_CHANNEL_ID,
+        name: NATIVE_CHANNEL_NAME,
+        description: 'Thông báo nhắc việc của Smart Reminder',
+        importance: 5,
+        visibility: 1,
+        vibration: true
+      });
+    }catch(e){
+      console.warn('Không tạo được notification channel, vẫn tiếp tục schedule:', e);
+    }
+
+    const notifications=[];
+    const now = new Date();
+
+    getPreAlerts(rem).forEach((a,i)=>{
+      const at=new Date(a.time);
+      if(at>now){
+        notifications.push({
+          id:numericNotificationId(rem.id, i+1),
+          title: rem.type === 'periodic' && rem.askBeforeDue ? 'Sắp đến hạn' : 'Nhắc sớm',
+          body: rem.type === 'periodic' && rem.askBeforeDue ? `Bạn ${String(rem.task||'').toLowerCase()} chưa?` : `${rem.task}\nNhắc chính: ${fmt(rem.dueAt)}`,
+          schedule:{at, allowWhileIdle:true},
+          channelId: NATIVE_CHANNEL_ID,
+          extra:{reminderId:rem.id, phase:'pre'}
+        });
+      }
+    });
+
+    const due=new Date(rem.dueAt);
+    if(due>now){
+      notifications.push({
+        id:numericNotificationId(rem.id, 99),
+        title:'Đến giờ rồi',
+        body:rem.task,
+        schedule:{at:due, allowWhileIdle:true},
+        channelId: NATIVE_CHANNEL_ID,
+        extra:{reminderId:rem.id, phase:'main'}
+      });
+    }
+
+    if(!notifications.length) return false;
+
+    await LocalNotifications.schedule({notifications});
+
+    // Xác nhận lại notification đã nằm trong pending queue của Android.
+    if(typeof LocalNotifications.getPending === 'function'){
+      try{
+        const pendingNative = await LocalNotifications.getPending();
+        const pendingIds = new Set((pendingNative?.notifications || []).map(n=>Number(n.id)));
+        const allFound = notifications.every(n=>pendingIds.has(Number(n.id)));
+        if(!allFound){
+          console.warn('Native notifications scheduled but not all visible in pending list', notifications, pendingNative);
+        }
+      }catch(e){ console.warn('Không đọc được pending notifications:', e); }
+    }
+
+    rem.nativeScheduledAt = new Date().toISOString();
+    rem.nativeNotificationIds = notifications.map(n=>n.id);
+    persistReminders();
+    return true;
+  }catch(e){
+    console.warn('Native local notification schedule failed:', e);
+    return false;
+  }
+}
+
+async function cancelNativeLocalNotifications(rem){
+  try{
+    if(!isCapacitorNativeApp()) return;
+    const LocalNotifications = window.Capacitor?.Plugins?.LocalNotifications;
+    if(!LocalNotifications) return;
+    const ids=[];
+    if(Array.isArray(rem.nativeNotificationIds) && rem.nativeNotificationIds.length){
+      rem.nativeNotificationIds.forEach(id=>ids.push({id:Number(id)}));
+    }else{
+      getPreAlerts(rem).forEach((a,i)=>ids.push({id:numericNotificationId(rem.id,i+1)}));
+      ids.push({id:numericNotificationId(rem.id,99)});
+    }
+    if(ids.length) await LocalNotifications.cancel({notifications:ids});
+  }catch(e){ console.warn('Cancel native notifications failed:', e); }
+}
+
+async function cancelAllNativeLocalNotifications(){
+  try{
+    if(!isCapacitorNativeApp()) return;
+    const LocalNotifications = window.Capacitor?.Plugins?.LocalNotifications;
+    if(!LocalNotifications || typeof LocalNotifications.getPending !== 'function') return;
+    const pendingNative = await LocalNotifications.getPending();
+    const ids = (pendingNative?.notifications || []).map(n=>({id:Number(n.id)}));
+    if(ids.length) await LocalNotifications.cancel({notifications:ids});
+  }catch(e){ console.warn('Cancel all native notifications failed:', e); }
+}
+
+function initNativeNotificationHandlers(){
+  try{
+    if(!isCapacitorNativeApp()) return;
+    const LocalNotifications = window.Capacitor?.Plugins?.LocalNotifications;
+    if(!LocalNotifications || typeof LocalNotifications.addListener !== 'function') return;
+
+    // Trên Android, chuông chính do SmartAlarmActivity native xử lý.
+    // Không gọi ring() ở đây để tránh WebView bắt đầu phát chuông khi người dùng mở lại app.
+    LocalNotifications.addListener('localNotificationReceived', ()=>{});
+    LocalNotifications.addListener('localNotificationActionPerformed', ()=>{});
+  }catch(e){ console.warn('initNativeNotificationHandlers failed:', e); }
+}
+
+function numericNotificationId(id, suffix){
+  let h=0; for(const ch of String(id)){ h=((h*31)+ch.charCodeAt(0))|0; }
+  return Math.abs((h % 10000000)*100 + Number(suffix||0));
+}
+
+function setLongTimeout(key,fn,delay){ const id=setTimeout(()=>{timers.delete(key); if(delay>MAX_DELAY) setLongTimeout(key,fn,delay-MAX_DELAY); else fn();}, Math.min(delay,MAX_DELAY)); timers.set(key,id); }
+function cancelTimers(id){ for(const [k,t] of [...timers.entries()]){ if(k===`main:${id}` || k===`pre:${id}` || k.startsWith(`pre:${id}:`)){ clearTimeout(t); timers.delete(k); } } }
+
+function ring(id,phase){
+  const rem=reminders.find(r=>r.id===id); if(!rem)return; activeAlarm={id,phase}; rem.status='ringing'; persistReminders(); renderAll();
+  $('#alarm').classList.add('show'); $('#alarmEmoji').textContent=rem.emoji||'🔔';
+  const isPre=phase==='pre';
+  if(isPre && rem.type==='periodic' && rem.askBeforeDue){
+    $('#alarmTitle').textContent='Sắp đến hạn'; $('#alarmMsg').textContent=`${rem.task}\nHạn chính: ${fmt(rem.dueAt)}\n\nBạn ${rem.task.toLowerCase()} chưa?`;
+    $('#alarmActions').innerHTML='<button class="btn warn" id="notDone">Chưa</button><button class="btn ok" id="done">Rồi</button>';
+    $('#notDone').onclick=()=>answerPeriodic(false); $('#done').onclick=()=>answerPeriodic(true);
+  } else {
+    $('#alarmTitle').textContent=isPre?'Nhắc sớm':'Đến giờ rồi'; $('#alarmMsg').textContent=isPre?`${rem.task}\nNhắc chính: ${fmt(rem.dueAt)}`:rem.task;
+    $('#alarmActions').innerHTML='<button class="btn primary" id="stopAlarm">Dừng chuông</button>';
+    $('#stopAlarm').onclick=dismissAlarm;
+  }
+  startBeep(rem.alarmSeconds||180, rem.alarmSound||settings.alarmSound); notify((isPre?'Nhắc sớm: ':'Đến giờ: ')+rem.task, isPre?`Nhắc chính: ${fmt(rem.dueAt)}`:rem.typeLabel);
+}
+function answerPeriodic(done){
+  const rem=getActive(); if(!rem) return emergencyStop(); stopBeep(); rem.status='active';
+  if(done){ moveToNextCycle(rem,new Date()); toast('Đã ghi nhận. Đã cài chu kỳ tiếp theo.'); }
+  else { const next=new Date(); next.setDate(next.getDate()+1); applyTime(next, settings.defaultTime||'09:00'); rem.preAlertAt = next < new Date(rem.dueAt) ? next.toISOString() : null; rem.preAlerts = rem.preAlertAt ? [{type:'ask_again_tomorrow', time:rem.preAlertAt}] : []; toast('Sẽ hỏi lại vào ngày mai.'); }
+  closeAlarm(); persistReminders(); cancelTimers(rem.id); schedule(rem); renderAll();
+}
+function dismissAlarm(){
+  const rem=getActive(); const phase=activeAlarm?.phase; stopBeep(); closeAlarm(); if(!rem)return;
+  rem.status='active';
+  if(phase==='pre'){ persistReminders(); renderAll(); return; }
+  if(rem.type==='quick'){ deleteReminder(rem.id,true); toast('Đã hoàn thành nhắc tức thời.'); return; }
+  if(rem.autoRepeat){ moveToNextCycle(rem,new Date(rem.dueAt)); persistReminders(); cancelTimers(rem.id); schedule(rem); renderAll(); }
+}
+function emergencyStop(){ stopBeep(); closeAlarm(); if(activeAlarm){ const rem=reminders.find(r=>r.id===activeAlarm.id); if(rem){ rem.status='active'; persistReminders(); renderAll(); } } activeAlarm=null; }
+function getActive(){ return reminders.find(r=>r.id===activeAlarm?.id); }
+function closeAlarm(){ $('#alarm').classList.remove('show'); activeAlarm=null; }
+function moveToNextCycle(rem,fromDate){
+  const rep=rem.repeat || {unit:'month',interval:1};
+  const oldDue = new Date(rem.dueAt);
+  const oldPre = rem.preAlertAt ? new Date(rem.preAlertAt) : null;
+  const next=addOffset(new Date(fromDate),rep); rem.dueAt=next.toISOString();
+  if(rem.type==='periodic'){
+    const pre=new Date(next);
+    let days=5;
+    if(oldPre && !Number.isNaN(oldPre.getTime()) && !Number.isNaN(oldDue.getTime())){
+      days=Math.max(1,Math.round((oldDue-oldPre)/86400000));
+    }
+    pre.setDate(pre.getDate()-days); rem.preAlertAt=pre.toISOString(); rem.preAlerts=[{type:`before_${days}_days`, time:rem.preAlertAt}]; rem.maxAlertCount=null;
+  }
+  else if(rem.type==='recurring'){ rem.preAlertAt=null; rem.preAlerts=[]; rem.maxAlertCount=1; }
+}
+
+function startBeep(seconds=3,sound='classic'){
+  stopBeep(); beepStopAt=Date.now()+seconds*1000;
+  const beep=()=>{ if(Date.now()>beepStopAt) return stopBeep(); playTone(sound); };
+  beep(); beepTimer=setInterval(beep, sound==='urgent'?650:1100);
+}
+async function handleCustomRingtoneUpload(event){
+  const file = event?.target?.files?.[0];
+  if(!file) return;
+  if(!file.type.startsWith('audio/')) return toast('Vui lòng chọn file âm thanh.');
+  if(file.size > 2 * 1024 * 1024) return toast('File hơi lớn. Nên dùng file dưới 2MB để lưu ổn định.');
+  const reader = new FileReader();
+  reader.onload = () => {
+    settings.customRingtoneName = file.name;
+    settings.customRingtoneDataUrl = reader.result;
+    settings.alarmSound = 'uploaded';
+    persistSettings();
+    initSettingsUI();
+    toast('Đã tải nhạc chuông: ' + file.name);
+  };
+  reader.onerror = () => toast('Không đọc được file nhạc.');
+  reader.readAsDataURL(file);
+}
+function removeCustomRingtone(){
+  if(!settings.customRingtoneDataUrl) return toast('Chưa có nhạc chuông tự tải lên.');
+  if(!confirm('Xóa nhạc chuông đã tải lên?')) return;
+  settings.customRingtoneName = null;
+  settings.customRingtoneDataUrl = null;
+  if(settings.alarmSound === 'uploaded') settings.alarmSound = 'classic';
+  persistSettings();
+  initSettingsUI();
+  toast('Đã xóa nhạc chuông tự tải lên.');
+}
+function updateCustomRingtoneStatus(){
+  const text = settings.customRingtoneDataUrl ? ('Nhạc của tôi - ' + (settings.customRingtoneName || 'đã tải lên')) : 'Nhạc của tôi đã tải lên';
+  const el = $('#customRingtoneStatus');
+  if(el) el.textContent = settings.customRingtoneDataUrl ? ('Đã tải: ' + (settings.customRingtoneName || 'nhạc chuông của tôi')) : 'Chưa có nhạc chuông tự tải lên.';
+  ['#setAlarmSound','#tplAlarmSound'].forEach(sel=>{
+    const opt = document.querySelector(sel + ' option[value="uploaded"]');
+    if(opt) opt.textContent = text;
+  });
+}
+function playUploadedRingtonePreview(){
+  if(!settings.customRingtoneDataUrl) return toast('Bạn chưa tải nhạc chuông lên.');
+  const audio = new Audio(settings.customRingtoneDataUrl);
+  audio.volume = 0.9;
+  audio.play().catch(()=>toast('Không phát được file nhạc này. Hãy thử file mp3/wav/m4a khác.'));
+}
+function soundFileName(sound){
+  // Chỉ âm thanh đóng gói sẵn trong android/app/src/main/res/raw mới dùng được làm native notification sound khi app đã tắt.
+  // Nhạc người dùng tự tải lên được phát trong app bằng Data URL, chưa thể gán trực tiếp cho notification channel native.
+  return null;
+}
+function soundLabel(sound){
+  const map={classic:'Classic',double:'Double',soft:'Soft',urgent:'Urgent',uploaded:'Nhạc của tôi'};
+  if(sound === 'uploaded' && settings.customRingtoneName) return 'Nhạc của tôi - ' + settings.customRingtoneName;
+  return map[sound] || sound || 'Classic';
+}
+function playTone(sound){
+  if(sound === 'uploaded'){
+    if(settings.customRingtoneDataUrl){
+      const audio = new Audio(settings.customRingtoneDataUrl);
+      audio.volume = 0.9;
+      audio.play().catch(()=>{ toast('Không phát được nhạc đã tải. App dùng chuông mặc định.'); playTone('classic'); });
+      return;
+    }
+    toast('Chưa tải nhạc chuông. App dùng chuông mặc định.');
+    sound = 'classic';
+  }
+  try{ const ctx=new (window.AudioContext||window.webkitAudioContext)(); const seq = sound==='double'?[880,660]:sound==='soft'?[520]:sound==='urgent'?[980,980]:[880]; let t=ctx.currentTime; seq.forEach((freq,i)=>{ const o=ctx.createOscillator(); const g=ctx.createGain(); o.frequency.value=freq; o.type='sine'; o.connect(g); g.connect(ctx.destination); g.gain.setValueAtTime(sound==='soft'?0.18:0.34,t); g.gain.exponentialRampToValueAtTime(0.001,t+0.28); o.start(t); o.stop(t+0.3); t+=0.34; }); setTimeout(()=>ctx.close(),1000); }catch{}
+}
+function stopBeep(){ if(beepTimer){ clearInterval(beepTimer); beepTimer=null; } }
+function notify(title,body){ if('Notification' in window && Notification.permission==='granted') new Notification(title,{body}); }
+
+function initSettingsUI(){ fillDurationSelect('#setAlarmQuick', settings.alarmQuick); fillDurationSelect('#setAlarmRecurring', settings.alarmRecurring); fillDurationSelect('#setAlarmPeriodic', settings.alarmPeriodic); fillDurationSelect('#tplAlarmSeconds', 180); fillCountSelect('#setTplAlertsQuick', settings.templateAlertQuick, 0, 4, 'lần nhắc sớm'); fillCountSelect('#setTplAlertsRecurring', settings.templateAlertRecurring, 0, 1, 'lần nhắc sớm'); fillCountSelect('#setTplAlertsPeriodic', settings.templateAlertPeriodic, 0, 5, 'lần nhắc trước hạn'); $('#setDefaultTime').value=settings.defaultTime||'09:00'; $('#setAlarmSound').value=settings.alarmSound||'classic'; if($('#setSnoozeMinutes')) $('#setSnoozeMinutes').value=String(settings.snoozeMinutes||5); updateCustomRingtoneStatus(); }
+function fillDurationSelect(sel,value){ const el=$(sel); if(!el)return; el.innerHTML='<option value="60">1 phút</option><option value="180">3 phút</option><option value="300">5 phút</option><option value="600">10 phút</option>'; el.value=String(value||180); }
+function fillCountSelect(sel,value,min,max,label){ const el=$(sel); if(!el)return; let html=''; for(let i=min;i<=max;i++){ html+=`<option value="${i}">${i} ${label}</option>`; } el.innerHTML=html; el.value=String(value ?? min); }
+function saveSettings(){ settings={...settings,defaultTime:$('#setDefaultTime').value||'09:00',alarmQuick:Number($('#setAlarmQuick').value),alarmRecurring:Number($('#setAlarmRecurring').value),alarmPeriodic:Number($('#setAlarmPeriodic').value),alarmSound:$('#setAlarmSound').value,templateAlertQuick:Number($('#setTplAlertsQuick').value||0),templateAlertRecurring:Number($('#setTplAlertsRecurring').value||0),templateAlertPeriodic:Number($('#setTplAlertsPeriodic').value||0),snoozeMinutes:Number($('#setSnoozeMinutes')?.value||5)}; persistSettings(); initSettingsUI(); toast('Đã lưu cài đặt'); }
+function resetSettings(){ settings={defaultTime:'09:00',alarmQuick:180,alarmRecurring:180,alarmPeriodic:180,alarmSound:'classic',templateAlertQuick:2,templateAlertRecurring:1,templateAlertPeriodic:1,customRingtoneName:null,customRingtoneDataUrl:null,snoozeMinutes:5}; persistSettings(); initSettingsUI(); toast('Đã khôi phục mặc định'); }
+function settingsForType(type){ return type==='periodic'?settings.alarmPeriodic:type==='recurring'?settings.alarmRecurring:settings.alarmQuick; }
+
+function addOffset(date, off){ const n=Number(off.interval||1); if(off.unit==='minute')date.setMinutes(date.getMinutes()+n); if(off.unit==='hour')date.setHours(date.getHours()+n); if(off.unit==='day')date.setDate(date.getDate()+n); if(off.unit==='week')date.setDate(date.getDate()+n*7); if(off.unit==='month')date.setMonth(date.getMonth()+n); if(off.unit==='year')date.setFullYear(date.getFullYear()+n); return date; }
+function applyTime(date,time){ const [h,m]=String(time||'09:00').split(':').map(Number); date.setHours(h||0,m||0,0,0); return date; }
+function quickPreAlerts(due, now){
+  const diff=due.getTime()-now.getTime(), day=86400000, alerts=[];
+  const add=(type,ms)=>{ const d=new Date(due.getTime()-ms); if(d>now && d<due) alerts.push({type,time:d.toISOString()}); };
+  if(diff<=2*60*60*1000) return [];
+  if(diff>30*day){ add('before_3_days',3*day); add('before_2_days',2*day); add('before_1_day',day); }
+  else if(diff>14*day){ add('before_2_days',2*day); add('before_1_day',day); }
+  else if(diff>7*day){ add('before_1_day',day); }
+  add('before_60_minutes',60*60*1000);
+  return alerts.sort((a,b)=>new Date(a.time)-new Date(b.time));
+}
+function nextRecurringDate(t,now){ const due=new Date(now); applyTime(due,t.mainTime||'09:00'); const unit=t.repeat?.unit||'week'; if(unit==='day'){ if(due<=now) due.setDate(due.getDate()+1); } else if(unit==='week'){ const target=Number(t.weekday??1); const days=(target-due.getDay()+7)%7; due.setDate(due.getDate()+days); if(due<=now) due.setDate(due.getDate()+7); } else if(unit==='month'){ const day=Math.min(Number(t.monthday||1),28); due.setDate(day); if(due<=now) due.setMonth(due.getMonth()+1); } return due; }
+function repeatLabel(rep){ if(!rep)return 'Không'; if(rep.mode==='skip_days') return `Cách ${rep.skipDays||1} ngày · báo lại sau mỗi ${rep.interval||2} ngày`; return `${rep.interval||1} ${unitLabel(rep.unit)}`; }
+function getPreAlerts(r){
+  if(Array.isArray(r.preAlerts) && r.preAlerts.length) return r.preAlerts.filter(a=>a&&a.time).sort((a,b)=>new Date(a.time)-new Date(b.time));
+  return r.preAlertAt ? [{type:'legacy',time:r.preAlertAt}] : [];
+}
+function preAlertTypeLabel(type){
+  return ({before_5_days:'Trước 5 ngày',before_3_days:'Trước 3 ngày',before_2_days:'Trước 2 ngày',before_1_day:'Trước 1 ngày',before_60_minutes:'Trước 60 phút',custom_early:'Nhắc sớm',ask_again_tomorrow:'Hỏi lại ngày mai',legacy:'Nhắc sớm'})[type] || 'Nhắc sớm';
+}
+function preAlertsLabel(r){ const arr=getPreAlerts(r); return arr.length ? arr.map(a=>`${preAlertTypeLabel(a.type)}: ${fmt(a.time)}`).join('<br>') : 'Không có'; }
+function preAlertsHtml(r){ return getPreAlerts(r).map(a=>`• ${preAlertTypeLabel(a.type)}: ${fmt(a.time)}`).join('<br>'); }
+
+function unitLabel(unit){ return ({minute:'phút',hour:'giờ',day:'ngày',week:'tuần',month:'tháng',year:'năm'})[unit]||unit; }
+function fmt(iso){ if(!iso)return 'Không'; return new Date(iso).toLocaleString('vi-VN',{weekday:'short',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}); }
+function escapeHtml(s){ return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._timer); t._timer=setTimeout(()=>t.classList.remove('show'),2800); }
+
+
+
+// ===== Web deployment helpers =====
+(function registerSmartReminderPwa(){
+  try{
+    if('serviceWorker' in navigator){
+      window.addEventListener('load',()=>{
+        navigator.serviceWorker.register('/sw.js').catch(err=>console.warn('Service worker registration failed', err));
+      });
+    }
+  }catch(e){ console.warn('PWA helper failed', e); }
+})();
+
+</script>
+</body>
+</html>
