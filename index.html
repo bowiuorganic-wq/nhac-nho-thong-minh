@@ -539,6 +539,35 @@ function blaStrip(str){ return str.normalize('NFD').replace(/[\u0300-\u036f]/g,'
 function isMainOnlyTask(lower){
   return /(^|\s)(di\s+ngu|ngu|thuc\s+day|day)(\s|$)/.test(lower);
 }
+
+function parseEveryIntervalRepeat(lower){
+  // Rule mới: "cứ X phút/giờ/ngày/tháng/năm ... 1 lần" = lặp lại thường xuyên từ hiện tại + X đơn vị.
+  // Ví dụ: "cứ 10 phút gọi dậy 1 lần" => báo lần đầu sau 10 phút, rồi cứ 10 phút báo lại.
+  const unitMap={phut:'minute',gio:'hour',tieng:'hour',ngay:'day',tuan:'week',thang:'month',nam:'year'};
+  let m=lower.match(/(?:cu|moi)\s+(\d+)\s*(phut|gio|tieng|ngay|tuan|thang|nam)(?:\s+[^\n]*)?(?:\s+1\s*lan|\s+mot\s*lan|\s+lan)?/);
+  if(m) return {interval:Number(m[1]), unit:unitMap[m[2]], unitText:m[2], text:m[0]};
+  const tokens=lower.split(/[^a-z0-9]+/).filter(Boolean);
+  const units=new Set(['phut','gio','tieng','ngay','tuan','thang','nam']);
+  for(let i=0;i<tokens.length-1;i++){
+    if(tokens[i] !== 'cu' && tokens[i] !== 'moi') continue;
+    for(let j=i+1;j<Math.min(tokens.length,i+7);j++){
+      if(!units.has(tokens[j])) continue;
+      const val=blaVietnameseNumber(tokens.slice(i+1,j));
+      if(val!=null && val>0) return {interval:val, unit:unitMap[tokens[j]], unitText:tokens[j], text:tokens.slice(i,j+1).join(' ')};
+    }
+  }
+  return null;
+}
+function shouldUseIntervalRepeat(intervalRepeat, lower){
+  if(!intervalRepeat) return false;
+  if(intervalRepeat.unit !== 'day') return true;
+  // Với "cứ/cách X ngày" đã chốt trước đó: nếu có giờ cố định hoặc "từ thứ X" thì hiểu theo rule bỏ qua X ngày.
+  // Với mẫu mới như "cứ 1 ngày gọi dậy 1 lần" không có giờ bắt đầu cụ thể thì hiểu là lặp từ hiện tại + X ngày.
+  const hasStartWeekday = parseStartWeekday(lower) != null;
+  const hasExplicitClock = blaParseTime(lower).found;
+  const hasOneTimePhrase = /\b(1|mot)\s*lan\b/.test(lower);
+  return hasOneTimePhrase || (!hasStartWeekday && !hasExplicitClock);
+}
 function parseSkipDayRepeat(lower){
   // Rule của app: "cách/cứ X ngày" = bỏ qua X ngày, báo tiếp sau X+1 ngày.
   // Ví dụ: "cứ 2 ngày" hoặc "cách 2 ngày" => báo thứ 2, thứ 5, chủ nhật...
@@ -635,6 +664,18 @@ function blaParseTime(lower){
   return {found:true,hour:Math.min(Math.max(hour,0),23),minute:Math.min(Math.max(minute,0),59)};
 }
 function blaParseRecurring(raw, lower, now, settings){
+  const intervalRepeat = parseEveryIntervalRepeat(lower);
+  if(shouldUseIntervalRepeat(intervalRepeat, lower)){
+    const due = new Date(now);
+    blaAdd(due, intervalRepeat.unit, intervalRepeat.interval);
+    const task=blaTitle(blaCleanTask(raw));
+    return {task, emoji:blaEmoji(lower), type:'recurring', typeLabel:TYPE_LABEL.recurring,
+      dueAt:due.toISOString(), preAlertAt:null, preAlerts:[], repeat:{unit:intervalRepeat.unit, interval:intervalRepeat.interval, mode:'interval_from_now'},
+      autoRepeat:true, maxAlertCount:1, alarmSeconds:settingsForType('recurring'), alarmSound:settings.alarmSound||'classic', askBeforeDue:false,
+      defaultTimeUsed:false, defaultTime:null, defaultTimeReason:null,
+      confidence:'high', explanation:`Cứ ${intervalRepeat.interval} ${unitLabel(intervalRepeat.unit)}: báo lần đầu sau ${intervalRepeat.interval} ${unitLabel(intervalRepeat.unit)}, rồi tự lặp lại theo chu kỳ này.`};
+  }
+
   const skipRepeat = parseSkipDayRepeat(lower);
   if(skipRepeat){
     const mainTime=blaParseMainTimeForRecurring(lower);
@@ -685,9 +726,26 @@ function blaDefaultPeriodicInterval(lower){ if(/tien dien|tien nuoc|tien mang|in
 function blaCleanTask(raw){
   // Bảo vệ cụm “ăn sáng” để không xóa chữ “sáng” như một buổi trong ngày.
   const token='__MEAL_SANG__';
-  let protectedRaw = String(raw||'').replace(/ăn\s+sáng/gi, 'ăn '+token).replace(/an\s+sang/gi, 'an '+token);
-  return protectedRaw.replace(/\d+\s*(phút|phut|giờ|gio|tiếng|tieng|ngày|ngay|tuần|tuan|tháng|thang|năm|nam)\s*(nữa|nua|sau)/gi,'').replace(/(một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi)(\s+\w+){0,5}\s*(ngày|ngay|tháng|thang|năm|nam|tuần|tuan|giờ|gio|phút|phut)\s*(nữa|nua|sau)/gi,'').replace(/(lúc|luc)?\s*\d{1,2}\s*(giờ|gio)(\s*\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem|rưỡi|ruoi)?/gi,'')
-    .replace(/(lúc|luc)?\s*\d{1,2}([h:]\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem)?/gi,'').replace(/(thứ|thu)\s*(hai|ba|tư|tu|năm|nam|sáu|sau|bảy|bay|2|3|4|5|6|7)/gi,'').replace(/(chủ nhật|chu nhat|cn|hàng tuần|hang tuan|mỗi tuần|moi tuan|hàng ngày|hang ngay|mỗi ngày|moi ngay|hàng tháng|hang thang|mỗi tháng|moi thang|nhắc sớm|nhac som|nhắc trước|nhac truoc|báo trước|bao truoc|ngày mai|ngay mai|hôm nay|hom nay|sáng|sang|chiều|chieu)/gi,'').replace(new RegExp(token,'g'),'sáng').replace(/\s+/g,' ').trim(); }
+  let x = String(raw||'').replace(/ăn\s+sáng/gi, 'ăn '+token).replace(/an\s+sang/gi, 'an '+token);
+  x = x
+    .replace(/\b(cứ|cu|mỗi|moi)\s+\d+\s*(phút|phut|giờ|gio|tiếng|tieng|ngày|ngay|tuần|tuan|tháng|thang|năm|nam)(?:\s+1\s*lần|\s+một\s*lần|\s+mot\s*lan)?\b/gi,'')
+    .replace(/\b(cứ|cu|mỗi|moi)\s+(một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi)(\s+\w+){0,5}\s*(phút|phut|giờ|gio|tiếng|tieng|ngày|ngay|tuần|tuan|tháng|thang|năm|nam)(?:\s+1\s*lần|\s+một\s*lần|\s+mot\s*lan)?\b/gi,'')
+    .replace(/\b(cách|cach)\s+\d+\s*(ngày|ngay)\b/gi,'')
+    .replace(/\b(cách|cach)\s+(một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi)(\s+\w+){0,4}\s*(ngày|ngay)\b/gi,'')
+    .replace(/\b(cách|cach|cứ|cu)\s*(ngày|ngay)\b/gi,'')
+    .replace(/\b(1|một|mot)\s*lần\b/gi,'')
+    .replace(/\b\d+\s*(phút|phut|giờ|gio|tiếng|tieng|ngày|ngay|tuần|tuan|tháng|thang|năm|nam)\s*(nữa|nua|sau)\b/gi,'')
+    .replace(/\b(một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi)(\s+\w+){0,5}\s*(ngày|ngay|tháng|thang|năm|nam|tuần|tuan|giờ|gio|phút|phut)\s*(nữa|nua|sau)\b/gi,'')
+    .replace(/\b(lúc|luc)?\s*\d{1,2}\s*(giờ|gio)(\s*\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem|rưỡi|ruoi)?\b/gi,'')
+    .replace(/\b(lúc|luc)?\s*\d{1,2}([h:]\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem)?\b/gi,'')
+    .replace(/\b(từ|tu|bắt đầu từ|bat dau tu)\s*(thứ|thu)\s*(hai|ba|tư|tu|năm|nam|sáu|sau|bảy|bay|2|3|4|5|6|7)\b/gi,'')
+    .replace(/\b(thứ|thu)\s*(hai|ba|tư|tu|năm|nam|sáu|sau|bảy|bay|2|3|4|5|6|7)\b/gi,'')
+    .replace(/\b(chủ nhật|chu nhat|cn|hàng tuần|hang tuan|mỗi tuần|moi tuan|hàng ngày|hang ngay|mỗi ngày|moi ngay|hàng tháng|hang thang|mỗi tháng|moi thang|nhắc sớm|nhac som|nhắc trước|nhac truoc|báo trước|bao truoc|ngày mai|ngay mai|hôm nay|hom nay|sáng|sang|chiều|chieu)\b/gi,'')
+    .replace(new RegExp(token,'g'),'sáng')
+    .replace(/\s+/g,' ')
+    .trim();
+  return x;
+}
 
 function blaTitle(task){ if(!task) return 'Nhắc việc'; return task.charAt(0).toUpperCase()+task.slice(1); }
 function blaEmoji(lower){ if(/ca phe|coffee/.test(lower)) return '☕'; if(/thuoc/.test(lower)) return '💊'; if(/dau xe|xe may|xe/.test(lower)) return '🏍️'; if(/bao cao|report/.test(lower)) return '📋'; if(/hop|meeting/.test(lower)) return '👥'; if(/dien|nuoc|internet|wifi|tien/.test(lower)) return '💡'; if(/goi|khach|phone/.test(lower)) return '📞'; if(/kham|thuoc/.test(lower)) return '🏥'; return '🔔'; }
@@ -1236,7 +1294,7 @@ function quickPreAlerts(due, now){
   return alerts.sort((a,b)=>new Date(a.time)-new Date(b.time));
 }
 function nextRecurringDate(t,now){ const due=new Date(now); applyTime(due,t.mainTime||'09:00'); const unit=t.repeat?.unit||'week'; if(unit==='day'){ if(due<=now) due.setDate(due.getDate()+1); } else if(unit==='week'){ const target=Number(t.weekday??1); const days=(target-due.getDay()+7)%7; due.setDate(due.getDate()+days); if(due<=now) due.setDate(due.getDate()+7); } else if(unit==='month'){ const day=Math.min(Number(t.monthday||1),28); due.setDate(day); if(due<=now) due.setMonth(due.getMonth()+1); } return due; }
-function repeatLabel(rep){ if(!rep)return 'Không'; if(rep.mode==='skip_days') return `Cách ${rep.skipDays||1} ngày · báo lại sau mỗi ${rep.interval||2} ngày`; return `${rep.interval||1} ${unitLabel(rep.unit)}`; }
+function repeatLabel(rep){ if(!rep)return 'Không'; if(rep.mode==='skip_days') return `Cách ${rep.skipDays||1} ngày · báo lại sau mỗi ${rep.interval||2} ngày`; if(rep.mode==='interval_from_now') return `Cứ mỗi ${rep.interval||1} ${unitLabel(rep.unit)}`; return `${rep.interval||1} ${unitLabel(rep.unit)}`; }
 function getPreAlerts(r){
   if(Array.isArray(r.preAlerts) && r.preAlerts.length) return r.preAlerts.filter(a=>a&&a.time).sort((a,b)=>new Date(a.time)-new Date(b.time));
   return r.preAlertAt ? [{type:'legacy',time:r.preAlertAt}] : [];
