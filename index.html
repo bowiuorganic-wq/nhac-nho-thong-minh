@@ -7,7 +7,7 @@
   <style>
     *{box-sizing:border-box}body{margin:0;background:#eef2f7;color:#0f172a;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}.app{max-width:560px;min-height:100vh;margin:0 auto;background:#fff;box-shadow:0 0 36px rgba(15,23,42,.10)}header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#0f67d8,#0ea5e9);color:#fff;padding:18px}header h1{font-size:20px;margin:0 0 4px}header p{margin:0;font-size:13px;opacity:.92}.tabs{display:flex;background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:76px;z-index:18}.tab{flex:1;border:0;background:#fff;padding:13px 6px;font-weight:800;color:#64748b;cursor:pointer}.tab.active{color:#0f67d8;border-bottom:3px solid #0f67d8}.page{display:none;padding:16px}.page.active{display:block}.card{border:1px solid #e5e7eb;border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(15,23,42,.05);padding:16px;margin-bottom:14px}.row{display:flex;gap:8px}.row>*{min-width:0}.input,select{width:100%;border:1.5px solid #dbe2ea;border-radius:14px;padding:12px 13px;font-size:14px;outline:none;background:#fff}.input:focus,select:focus{border-color:#0f67d8}.btn{border:0;border-radius:14px;padding:11px 13px;font-weight:850;cursor:pointer;white-space:nowrap}.btn:disabled{opacity:.55;cursor:not-allowed}.primary{background:#0f67d8;color:#fff}.ghost{background:#f1f5f9;color:#334155}.danger{background:#fee2e2;color:#b91c1c}.ok{background:#16a34a;color:#fff}.warn{background:#f59e0b;color:#fff}.mini{padding:8px 10px;font-size:12px;border-radius:11px}.mic-wrap{text-align:center}.mic{width:86px;height:86px;border-radius:999px;border:0;background:#0f67d8;color:white;font-size:36px;cursor:pointer;box-shadow:0 12px 28px rgba(15,103,216,.32);transition:.2s}.mic.recording{background:#dc2626;animation:pulse 1s infinite}@keyframes pulse{50%{transform:scale(1.06)}}.hint{font-size:13px;color:#64748b;margin:10px 0 0}.transcript{display:none;margin-top:12px;text-align:left;background:#eff6ff;border:1px dashed #93c5fd;padding:12px;border-radius:14px;font-size:14px;line-height:1.5}.small{font-size:12px;color:#64748b;line-height:1.55}.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.section-title h2{font-size:15px;margin:0}.templates,.list,.report-grid{display:grid;gap:10px}.template,.rem,.report{display:flex;gap:12px;align-items:flex-start;border:1px solid #e5e7eb;border-radius:18px;padding:13px;background:#fff}.template-icon,.icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:#eff6ff;flex-shrink:0}.template-body,.rem-body,.report-body{min-width:0;flex:1}.title{font-weight:900;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{font-size:12px;color:#64748b;line-height:1.55}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.analysis{display:none}.kv{display:grid;grid-template-columns:120px 1fr;gap:8px;font-size:14px}.k{color:#64748b}.type{display:inline-block;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:900}.quick{background:#dbeafe;color:#1d4ed8}.periodic{background:#dcfce7;color:#15803d}.recurring{background:#ffedd5;color:#c2410c}.empty{text-align:center;color:#94a3b8;padding:34px 10px}.permission{display:none;align-items:center;gap:10px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:14px;padding:10px 12px;font-size:13px;margin-bottom:14px}.permission .btn{margin-left:auto;padding:8px 10px;background:#ea580c;color:#fff}.modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.64);z-index:100;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.box{width:min(430px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px;padding:22px 18px;box-shadow:0 24px 80px rgba(15,23,42,.35)}.box h2{margin:0 0 10px;font-size:19px}.alarm-box{text-align:center}.bell{font-size:58px;animation:shake .42s infinite alternate}@keyframes shake{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}.alarm-box p{color:#475569;white-space:pre-line;line-height:1.55}.modal-actions{display:flex;gap:9px;margin-top:16px}.modal-actions .btn{flex:1}.field{margin-bottom:11px}.field label{display:block;font-size:12px;font-weight:800;color:#475569;margin-bottom:5px}.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}.form-section{border:1px solid #e5e7eb;border-radius:16px;padding:12px;margin:10px 0;background:#f8fafc}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,90px);background:#111827;color:#fff;padding:11px 16px;border-radius:999px;font-size:13px;z-index:120;transition:.25s;white-space:nowrap;max-width:calc(100vw - 24px);overflow:hidden;text-overflow:ellipsis}.toast.show{transform:translate(-50%,0)}.settings-grid{display:grid;gap:12px}.pill{display:inline-flex;align-items:center;gap:5px;background:#f1f5f9;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800}.report.quick-r{border-color:#bfdbfe;background:#eff6ff}.report.recurring-r{border-color:#fed7aa;background:#fff7ed}.report.periodic-r{border-color:#bbf7d0;background:#f0fdf4}@media(max-width:460px){.row,.two,.three{grid-template-columns:1fr;flex-direction:column}.btn{width:100%}.kv{grid-template-columns:96px 1fr}.tabs{top:82px}.modal-actions{flex-direction:column}}
   
-    /* Smart Reminder web UI */
+    /* V8.3 UX/UI polish */
     :root{--brand:#2563eb;--brand2:#06b6d4;--ink:#0f172a;--muted:#64748b;--soft:#f8fafc;--line:#e2e8f0;--radius:22px}
     body{background:radial-gradient(circle at top left,#dbeafe 0,#eef2ff 30%,#f8fafc 65%,#fff 100%)}
     .app{max-width:590px;background:rgba(255,255,255,.96);box-shadow:0 28px 90px rgba(15,23,42,.16)}
@@ -23,16 +23,53 @@
     .template,.rem,.report{border-radius:20px;border-color:#e2e8f0;background:linear-gradient(180deg,#fff,#fbfdff)}.template-icon,.icon{width:48px;height:48px;border-radius:18px;background:#e0f2fe}.title{font-size:15px}.meta{font-size:12.5px}.type{padding:5px 10px}.analysis{border:1px solid #bfdbfe;background:linear-gradient(180deg,#eff6ff,#fff)}.kv{gap:10px}.k{font-weight:800;color:#475569}.pill{background:#e0f2fe;color:#075985}.form-section{background:#f8fafc;border-radius:18px;border-color:#e2e8f0}.toast{box-shadow:0 16px 38px rgba(0,0,0,.22)}
     @media(max-width:460px){.tabs{top:96px}.btn{padding:13px 14px}.mic{width:92px;height:92px}}
 
-  .report{cursor:pointer;transition:.18s}.report:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(15,23,42,.08)}.report.active-filter{outline:3px solid rgba(15,103,216,.24);box-shadow:0 12px 30px rgba(15,103,216,.15)}.rule-table{display:grid;gap:8px}.rule-item{border:1px solid #e5e7eb;border-radius:14px;padding:10px;background:#fff}.sound-slot{border:1px dashed #cbd5e1;border-radius:14px;padding:10px;margin:8px 0;background:#fff}.sound-slot-title{font-weight:900;font-size:13px;margin-bottom:6px}.sound-slot-status{font-size:12px;color:#64748b;margin-top:6px}.list-filter-note{font-size:12px;color:#64748b;margin:0 0 10px}</style>
+  .report{cursor:pointer;transition:.18s}.report:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(15,23,42,.08)}.report.active-filter{outline:3px solid rgba(15,103,216,.24);box-shadow:0 12px 30px rgba(15,103,216,.15)}.rule-table{display:grid;gap:8px}.rule-item{border:1px solid #e5e7eb;border-radius:14px;padding:10px;background:#fff}.sound-slot{border:1px dashed #cbd5e1;border-radius:14px;padding:10px;margin:8px 0;background:#fff}.sound-slot-title{font-weight:900;font-size:13px;margin-bottom:6px}.sound-slot-status{font-size:12px;color:#64748b;margin-top:6px}.list-filter-note{font-size:12px;color:#64748b;margin:0 0 10px}
+
+    /* V9.5 scroll menu behavior + template builder polish */
+    .topbar{position:relative;z-index:30;background:transparent;box-shadow:none;--hero-hide:0}
+    .topbar header{position:relative;top:auto;z-index:1;box-shadow:0 12px 34px rgba(37,99,235,.28);opacity:calc(1 - var(--hero-hide));transform:translateY(calc(var(--hero-hide) * -18px));transition:opacity .08s linear,transform .08s linear;will-change:opacity,transform}
+    .topbar .tabs{position:sticky;top:0;z-index:95;margin:0 14px;border-radius:0 0 18px 18px;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(15,23,42,.10)}
+    .topbar .tabs::before{content:"";position:absolute;left:-14px;right:-14px;top:-1px;height:1px;background:#fff}
+    .page{scroll-margin-top:70px}
+    .template-preview{border:1px dashed #93c5fd;background:#eff6ff;border-radius:16px;padding:12px;margin-top:12px;font-size:13px;line-height:1.55;color:#1e3a8a}
+    .template-preview b{color:#0f172a}
+    .conditional-field.is-hidden{display:none!important}
+    .box.template-box{width:min(500px,100%)}
+    @media(max-width:460px){.topbar .tabs{top:0;margin:0 10px}.page{scroll-margin-top:72px}}
+
+
+    /* V9.6 mic-first UX: hide manual text input by default */
+    .text-toggle-wrap{display:flex;justify-content:center;margin:-4px 0 14px}
+    .text-toggle{display:inline-flex;align-items:center;gap:8px;border:1px solid #dbeafe;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:10px 14px;font-weight:900;font-size:13px;box-shadow:0 10px 24px rgba(37,99,235,.08)}
+    .text-toggle .arrow{display:inline-block;transition:transform .18s;font-size:14px}
+    .text-toggle.is-open .arrow{transform:rotate(180deg)}
+    .text-panel{overflow:hidden;transition:max-height .22s ease,opacity .18s ease,transform .18s ease,margin .18s ease,padding .18s ease,border-width .18s ease}
+    .text-panel.collapsed{max-height:0;opacity:0;transform:translateY(-8px);margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;border-width:0;pointer-events:none}
+    .text-panel:not(.collapsed){max-height:260px;opacity:1;transform:translateY(0)}
+    @media(max-width:460px){.text-toggle{width:auto;max-width:100%;padding:10px 13px}.text-toggle-wrap{margin-top:-2px}}
+
+    /* V9.7 post-mic flow: after speaking, keep manual input collapsed and bring result into view */
+    .mic-wrap.post-mic-ready{border-color:#bfdbfe;background:linear-gradient(180deg,#ffffff,#f8fbff);}
+    .mic-wrap.post-mic-ready .transcript{display:block;background:#eff6ff;border-color:#93c5fd;color:#0f172a;font-size:15px;font-weight:700;}
+    .analysis.post-mic-result{border-color:#bfdbfe;background:linear-gradient(180deg,#f8fbff,#ffffff);box-shadow:0 16px 36px rgba(37,99,235,.10);}
+
+    /* V9.8 post-mic focus: after mic, hide banner/menu to match the requested screen */
+    body.post-mic-focus .topbar{display:none!important;}
+    body.post-mic-focus #add.page.active{padding-top:14px;}
+    body.post-mic-focus .mic-wrap{margin-top:0;}
+
+  </style>
 </head>
 <body>
   <main class="app">
-    <header><h1>🔔 Smart Reminder</h1><p>Thiết lập lịch trình công việc &gt; Mốc thời gian được ghi nhận &gt; Thông báo được gửi đi</p></header>
-    <nav class="tabs">
-      <button class="tab active" data-tab="add">➕ Thêm mới</button>
-      <button class="tab" data-tab="list">📋 Danh sách <span id="count"></span></button>
-      <button class="tab" data-tab="settings">⚙️ Cài đặt</button>
-    </nav>
+    <div class="topbar">
+      <header><h1>🔔 Smart Reminder</h1><p>Thiết lập lịch trình công việc &gt; Mốc thời gian được ghi nhận &gt; Thông báo được gửi đi</p></header>
+      <nav class="tabs">
+        <button class="tab active" data-tab="add">➕ Thêm mới</button>
+        <button class="tab" data-tab="list">📋 Danh sách <span id="count"></span></button>
+        <button class="tab" data-tab="settings">⚙️ Cài đặt</button>
+      </nav>
+    </div>
 
     <section id="add" class="page active">
       <div id="permission" class="permission">🔔 Bật thông báo để Chrome nhắc ngoài tab <button class="btn" id="btnPerm">Cho phép</button></div>
@@ -42,12 +79,18 @@
         <div id="transcript" class="transcript"></div>
       </div>
 
-      <div class="card">
+      <div class="text-toggle-wrap">
+        <button id="toggleTextPanel" class="text-toggle" type="button" aria-expanded="false">
+          <span class="arrow">⌄</span> Gõ nội dung thủ công / Phân tích
+        </button>
+      </div>
+
+      <div id="textPanel" class="card text-panel collapsed">
         <div class="row">
           <input id="text" class="input" placeholder="Gõ tự nhiên: Sáng mai gọi khách, ba tháng sau thay dầu xe máy..." />
           <button id="analyze" class="btn primary">Phân tích</button>
         </div>
-        <p class="small">AI chỉ dùng cho câu nhập tự nhiên. Với “Công việc của tôi”, app dùng đúng cấu hình bạn đã cài, không phân tích lại.</p>
+        <p class="small">Phần này chỉ mở khi cần gõ tay. Mặc định app ưu tiên thao tác bằng mic.</p>
       </div>
 
       <div id="analysis" class="analysis card"></div>
@@ -177,32 +220,34 @@
   </div>
 
   <div id="templateModal" class="modal">
-    <div class="box">
+    <div class="box template-box">
       <h2 id="tplTitle">Tạo mẫu công việc</h2>
       <input type="hidden" id="tplId" />
-      <div class="two"><div class="field"><label>Tên mẫu</label><input id="tplName" class="input" placeholder="Thay dầu xe máy" /></div><div class="field"><label>Emoji</label><input id="tplEmoji" class="input" placeholder="🏍️" /></div></div>
-      <div class="field"><label>Tên công việc</label><input id="tplTask" class="input" placeholder="Thay dầu xe máy" /></div>
-      <div class="field"><label>Loại nhắc</label><select id="tplType"><option value="quick">Tức thời</option><option value="periodic">Định kỳ dài hạn</option><option value="recurring">Lặp lại thường xuyên</option></select></div>
+      <div class="field"><label>Tên công việc</label><input id="tplTask" class="input" placeholder="Ví dụ: Đóng tiền nhà, Pha cà phê, Làm báo cáo" /></div>
+      <div class="field"><label>Loại nhắc</label><select id="tplType"><option value="quick">Tức thời</option><option value="recurring">Lặp lại thường xuyên</option><option value="periodic">Định kỳ dài hạn</option></select></div>
 
       <div id="tplQuick" class="form-section">
-        <b>Tức thời</b><p class="small">Khi bấm mẫu, app sẽ đặt thời gian chính = hiện tại + khoảng thời gian này. Nếu lớn hơn 2 giờ, app tự nhắc trước 60 phút.</p>
-        <div class="two"><div class="field"><label>Sau bao lâu?</label><input id="tplQuickInterval" class="input" type="number" min="1" value="30" /></div><div class="field"><label>Đơn vị</label><select id="tplQuickUnit"><option value="minute">Phút</option><option value="hour">Giờ</option><option value="day">Ngày</option><option value="week">Tuần</option><option value="month">Tháng</option></select></div></div>
-      </div>
-
-      <div id="tplPeriodic" class="form-section" style="display:none">
-        <b>Định kỳ dài hạn</b><p class="small">Dùng cho thay dầu, đóng tiền, gia hạn, bảo trì...</p>
-        <div class="two"><div class="field"><label>Chu kỳ</label><input id="tplPeriodicInterval" class="input" type="number" min="1" value="3" /></div><div class="field"><label>Đơn vị</label><select id="tplPeriodicUnit"><option value="day">Ngày</option><option value="week">Tuần</option><option value="month">Tháng</option><option value="year">Năm</option></select></div></div>
-        <div class="two"><div class="field"><label>Giờ nhắc chính</label><input id="tplPeriodicTime" class="input" type="time" value="09:00" /></div><div class="field"><label>Nhắc trước bao nhiêu ngày?</label><input id="tplPreDays" class="input" type="number" min="0" value="5" /></div></div>
+        <b>Tức thời</b><p class="small">Dùng cho việc một lần. Khi bấm mẫu, app đặt thời gian chính = hiện tại + khoảng thời gian này và áp dụng rule nhắc sớm giống AI phân tích.</p>
+        <div class="two"><div class="field"><label>Sau bao lâu?</label><input id="tplQuickInterval" class="input" type="number" min="1" value="30" /></div><div class="field"><label>Đơn vị</label><select id="tplQuickUnit"><option value="minute">Phút</option><option value="hour">Giờ</option><option value="day">Ngày</option><option value="week">Tuần</option><option value="month">Tháng</option><option value="year">Năm</option></select></div></div>
       </div>
 
       <div id="tplRecurring" class="form-section" style="display:none">
-        <b>Lặp lại thường xuyên</b><p class="small">Nếu không bật nhắc sớm, app chỉ nhắc đúng giờ.</p>
-        <div class="two"><div class="field"><label>Tần suất</label><select id="tplFreq"><option value="day">Hàng ngày</option><option value="week">Hàng tuần</option><option value="month">Hàng tháng</option></select></div><div class="field"><label>Giờ nhắc chính</label><input id="tplMainTime" class="input" type="time" value="14:00" /></div></div>
-        <div class="two"><div class="field"><label>Thứ trong tuần</label><select id="tplWeekday"><option value="1">Thứ 2</option><option value="2">Thứ 3</option><option value="3">Thứ 4</option><option value="4">Thứ 5</option><option value="5">Thứ 6</option><option value="6">Thứ 7</option><option value="0">Chủ nhật</option></select></div><div class="field"><label>Ngày trong tháng</label><input id="tplMonthday" class="input" type="number" min="1" max="28" value="1" /></div></div>
-        <div class="two"><div class="field"><label><input id="tplEarlyEnabled" type="checkbox" /> Có nhắc sớm</label></div><div class="field"><label>Giờ nhắc sớm</label><input id="tplEarlyTime" class="input" type="time" value="10:00" /></div></div>
+        <b>Lặp lại thường xuyên</b><p class="small">Dùng cho việc lặp theo ngày/tuần/tháng hoặc chu kỳ cố định. Nếu không bật nhắc sớm, app chỉ nhắc đúng giờ chính.</p>
+        <div class="two"><div class="field"><label>Tần suất</label><select id="tplFreq"><option value="day">Hàng ngày</option><option value="week">Hàng tuần</option><option value="month">Hàng tháng</option><option value="every_minute">Cứ X phút</option><option value="every_hour">Cứ X giờ</option><option value="every_day">Cứ X ngày</option><option value="every_month">Cứ X tháng</option><option value="every_year">Cứ X năm</option><option value="skip_days">Cách X ngày</option></select></div><div id="tplFreqValueWrap" class="field conditional-field"><label>Giá trị X</label><input id="tplFreqValue" class="input" type="number" min="1" value="1" /></div></div>
+        <div class="two"><div class="field"><label>Giờ nhắc chính</label><input id="tplMainTime" class="input" type="time" value="14:00" /></div><div id="tplWeekdayWrap" class="field conditional-field"><label>Thứ trong tuần</label><select id="tplWeekday"><option value="1">Thứ 2</option><option value="2">Thứ 3</option><option value="3">Thứ 4</option><option value="4">Thứ 5</option><option value="5">Thứ 6</option><option value="6">Thứ 7</option><option value="0">Chủ nhật</option></select></div></div>
+        <div id="tplMonthdayWrap" class="field conditional-field"><label>Ngày trong tháng</label><input id="tplMonthday" class="input" type="number" min="1" max="28" value="1" /></div>
+        <div class="two"><div class="field"><label><input id="tplEarlyEnabled" type="checkbox" /> Có nhắc sớm?</label></div><div id="tplEarlyTimeWrap" class="field conditional-field"><label>Giờ nhắc sớm</label><input id="tplEarlyTime" class="input" type="time" value="10:00" /></div></div>
+      </div>
+
+      <div id="tplPeriodic" class="form-section" style="display:none">
+        <b>Định kỳ dài hạn</b><p class="small">Dùng cho đóng tiền, thay dầu, gia hạn, bảo trì... Có ngày/tháng bắt đầu, nhắc trước theo số ngày bạn cài và tự cộng chu kỳ tiếp theo.</p>
+        <div class="two"><div class="field"><label>Chu kỳ</label><input id="tplPeriodicInterval" class="input" type="number" min="1" value="3" /></div><div class="field"><label>Đơn vị</label><select id="tplPeriodicUnit"><option value="day">Ngày</option><option value="week">Tuần</option><option value="month">Tháng</option><option value="year">Năm</option></select></div></div>
+        <div class="two"><div class="field"><label>Giờ nhắc chính</label><input id="tplPeriodicTime" class="input" type="time" value="09:00" /></div><div class="field"><label>Nhắc trước bao nhiêu ngày?</label><input id="tplPreDays" class="input" type="number" min="0" value="5" /></div></div>
+        <div class="field"><label>Ngày tháng bắt đầu</label><input id="tplPeriodicStartDate" class="input" type="date" /></div>
       </div>
 
       <div class="two"><div class="field"><label>Thời lượng chuông</label><select id="tplAlarmSeconds"></select></div><div class="field"><label>Nhạc chuông</label><select id="tplAlarmSound"><option value="classic">Classic</option><option value="double">Double</option><option value="soft">Soft</option><option value="urgent">Urgent</option></select></div></div>
+      <div id="tplPreview" class="template-preview"></div>
       <div class="modal-actions"><button id="cancelTemplate" class="btn ghost">Hủy</button><button id="saveTemplate" class="btn primary">Lưu mẫu</button></div>
     </div>
   </div>
@@ -224,16 +269,36 @@ let customRules = load('sr_v5_custom_rules', []);
 let activeReportType = null;
 let timers = new Map();
 let recognition = null, recording = false, pending = null, activeAlarm = null, beepTimer = null, beepStopAt = 0;
+let analyzeTriggeredByMic = false;
+
+function initScrollMenuBehavior(){
+  const topbar = document.querySelector('.topbar');
+  const hero = topbar ? topbar.querySelector('header') : null;
+  if(!topbar || !hero) return;
+  const update = () => {
+    const h = Math.max(1, hero.offsetHeight || 1);
+    const progress = Math.max(0, Math.min(1, window.scrollY / h));
+    topbar.style.setProperty('--hero-hide', progress.toFixed(3));
+  };
+  update();
+  window.addEventListener('scroll', update, { passive:true });
+  window.addEventListener('resize', update);
+}
 
 init();
 function init(){
+  initScrollMenuBehavior();
   $$('.tab').forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
   $('#btnPerm').onclick=requestPermission;
   $('#mic').onclick=toggleMic;
   $('#analyze').onclick=analyzeInput;
+  if($('#toggleTextPanel')) $('#toggleTextPanel').onclick=toggleTextPanel;
+  setTextPanel(false);
   $('#text').addEventListener('keydown',e=>{if(e.key==='Enter') analyzeInput();});
   $('#addTemplate').onclick=()=>openTemplateModal();
   $('#tplType').onchange=toggleTemplateType;
+  $('#tplFreq').onchange=toggleRecurringFields;
+  ['tplTask','tplQuickInterval','tplQuickUnit','tplFreq','tplFreqValue','tplMainTime','tplWeekday','tplMonthday','tplEarlyEnabled','tplEarlyTime','tplPeriodicInterval','tplPeriodicUnit','tplPeriodicTime','tplPreDays','tplPeriodicStartDate'].forEach(id=>{ const el=$('#'+id); if(el) el.addEventListener('input', renderTemplatePreview); if(el) el.addEventListener('change', renderTemplatePreview); });
   $('#cancelTemplate').onclick=closeTemplateModal;
   $('#saveTemplate').onclick=saveTemplateFromForm;
   $('#emergencyStop').onclick=emergencyStop;
@@ -260,7 +325,54 @@ function persistReminders(){ save('sr_v5_reminders', reminders); updateCount(); 
 function persistTemplates(){ save('sr_v5_templates', templates); }
 function persistSettings(){ save('sr_v5_settings', settings); }
 function persistCustomRules(){ save('sr_v5_custom_rules', customRules); }
-function switchTab(tab){ $$('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab)); $$('.page').forEach(p=>p.classList.toggle('active',p.id===tab)); if(tab==='list') renderAll(); if(tab==='settings') initSettingsUI(); }
+function switchTab(tab){ if(tab!=='add') document.body.classList.remove('post-mic-focus'); $$('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab)); $$('.page').forEach(p=>p.classList.toggle('active',p.id===tab)); if(tab==='list') renderAll(); if(tab==='settings') initSettingsUI(); }
+function setTextPanel(open){
+  const panel=$('#textPanel');
+  const btn=$('#toggleTextPanel');
+  if(!panel||!btn) return;
+  panel.classList.toggle('collapsed', !open);
+  btn.classList.toggle('is-open', !!open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if(open){ setTimeout(()=>{ const input=$('#text'); if(input) input.focus(); },120); }
+}
+function toggleTextPanel(){
+  const panel=$('#textPanel');
+  setTextPanel(panel ? panel.classList.contains('collapsed') : true);
+}
+function handleMicFinalText(text){
+  const finalText = String(text||'').trim();
+  if(!finalText) return;
+  const transcript=$('#transcript');
+  const input=$('#text');
+  const micCard=document.querySelector('.mic-wrap');
+  if(transcript){ transcript.style.display='block'; transcript.textContent=finalText; }
+  if(input) input.value=finalText;
+  if(micCard) micCard.classList.add('post-mic-ready');
+  document.body.classList.add('post-mic-focus');
+  setTextPanel(false);
+  analyzeTriggeredByMic = true;
+  analyzeInput();
+}
+function scrollToPostMicResult(){
+  const micCard=document.querySelector('.mic-wrap');
+  const analysis=$('#analysis');
+  if(analysis) analysis.classList.add('post-mic-result');
+  const target = micCard || analysis;
+  if(!target) return;
+  setTimeout(()=>{
+    const rect=target.getBoundingClientRect();
+    const y=window.scrollY + rect.top - 10;
+    window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+  },120);
+}
+function resetAddScreenPosition(){
+  document.body.classList.remove('post-mic-focus');
+  setTextPanel(false);
+  document.querySelector('.mic-wrap')?.classList.remove('post-mic-ready');
+  $('#analysis')?.classList.remove('post-mic-result');
+  requestAnimationFrame(()=>window.scrollTo({top:0,behavior:'smooth'}));
+}
+
 function updateCount(){ const n=reminders.length; $('#count').textContent=n?`(${n})`:''; }
 async function requestPermission(){
   if(isCapacitorNativeApp()){
@@ -367,10 +479,7 @@ async function toggleNativeMic(){
       return true;
     }
 
-    $('#transcript').style.display='block';
-    $('#transcript').textContent=text;
-    $('#text').value=text;
-    analyzeInput();
+    handleMicFinalText(text);
     return true;
   }catch(error){
     resetMicUi();
@@ -417,8 +526,7 @@ function toggleWebMic(){
     resetMicUi();
     const t=$('#transcript').textContent.trim();
     if(t && t!=='...' && t!=='Đang nghe...'){
-      $('#text').value=t;
-      analyzeInput();
+      handleMicFinalText(t);
     }
   };
 
@@ -441,26 +549,30 @@ function resetMicUi(){
 
 async function analyzeInput(){
   const text=$('#text').value.trim(); if(!text) return toast('Nhập hoặc nói nội dung cần nhắc');
-  $('#analysis').style.display='block'; $('#analysis').innerHTML='<b>🤖 Đang phân tích...</b>';
+  const fromMic = !!analyzeTriggeredByMic;
+  $('#analysis').style.display='block'; $('#analysis').classList.toggle('post-mic-result', fromMic); $('#analysis').innerHTML='<b>🤖 Đang phân tích...</b>';
   try{
     const ruleApplied = applyCustomRule(text);
     if(ruleApplied){
       pending={...ruleApplied, source:'custom-rule', templateId:null};
       renderPending(pending);
+      if(fromMic){ scrollToPostMicResult(); analyzeTriggeredByMic=false; }
       toast('Đã áp dụng quy ước riêng');
       return;
     }
-    // Bản web test dùng parser local trong trình duyệt để giữ đúng múi giờ và đúng rule bản app điện thoại đã chốt.
-    // Không gọi /api/analyze để tránh lệch giờ khi server deploy ở UTC.
+    // Bản web test dùng parser local trong trình duyệt để bám đúng rule bản app điện thoại
+    // và không bị lệch múi giờ/server khi deploy lên Render.
     const data = browserLocalAnalyze(text, new Date().toISOString(), settings);
-    pending={...data, source:'local-app', templateId:null};
+    pending={...data, source:'local-web', templateId:null};
     renderPending(pending);
+    if(fromMic){ scrollToPostMicResult(); analyzeTriggeredByMic=false; }
   }catch(e){
     console.warn('Analyze fallback:', e);
     try{
       const data = browserLocalAnalyze(text, new Date().toISOString(), settings);
       pending={...data, source:'local', templateId:null};
       renderPending(pending);
+      if(fromMic){ scrollToPostMicResult(); analyzeTriggeredByMic=false; }
       toast('Đang dùng phân tích local trong app');
     }catch(err){
       $('#analysis').innerHTML=`<b style="color:#b91c1c">❌ ${escapeHtml(err.message||e.message)}</b><p class="small">Không phân tích được nội dung. Vui lòng nhập rõ hơn.</p>`;
@@ -477,8 +589,11 @@ function browserLocalAnalyze(text, nowISO, settings={}){
   const raw = String(text||'').trim();
   const lower = blaStrip(raw.toLowerCase());
 
+  const periodicFromStart = blaParsePeriodicFromStartDate(raw, lower, now, settings);
+  if(periodicFromStart) return blaNormalize(periodicFromStart, raw, nowISO, settings, 'local-web');
+
   const recurring = blaParseRecurring(raw, lower, now, settings);
-  if(recurring) return blaNormalize(recurring, raw, nowISO, settings, 'local-app');
+  if(recurring) return blaNormalize(recurring, raw, nowISO, settings, 'local-web');
 
   const rel = blaParseRelative(lower);
   if(rel){
@@ -496,7 +611,7 @@ function browserLocalAnalyze(text, nowISO, settings={}){
         alarmSeconds:settingsForType('periodic'), alarmSound:settings.alarmSound||'classic', askBeforeDue:true,
         defaultTimeUsed:dueInfo.defaultTimeUsed, defaultTime:dueInfo.defaultTime, defaultTimeReason:dueInfo.defaultTimeReason,
         confidence:'high', explanation:`Nhận biết việc định kỳ dài hạn; thời gian chính = hiện tại + ${rel.interval} ${unitLabel(rel.unit)}.`
-      }, raw, nowISO, settings, 'local-app');
+      }, raw, nowISO, settings, 'local-web');
     }
     const pres = quickPreAlerts(dueInfo.date, now);
     return blaNormalize({
@@ -506,7 +621,7 @@ function browserLocalAnalyze(text, nowISO, settings={}){
       alarmSeconds:settingsForType('quick'), alarmSound:settings.alarmSound||'classic', askBeforeDue:false,
       defaultTimeUsed:dueInfo.defaultTimeUsed, defaultTime:dueInfo.defaultTime, defaultTimeReason:dueInfo.defaultTimeReason,
       confidence:'high', explanation:isLong?'Sự kiện một lần ở tương lai xa nên xếp Tức thời và có nhắc sớm theo mốc.':'Nhận biết việc nhắc một lần.'
-    }, raw, nowISO, settings, 'local-app');
+    }, raw, nowISO, settings, 'local-web');
   }
 
   const explicit = blaParseExplicitOrDay(raw, lower, now, settings);
@@ -520,7 +635,7 @@ function browserLocalAnalyze(text, nowISO, settings={}){
       alarmSeconds:settingsForType('quick'), alarmSound:settings.alarmSound||'classic', askBeforeDue:false,
       defaultTimeUsed:explicit.defaultTimeUsed, defaultTime:explicit.defaultTime, defaultTimeReason:explicit.defaultTimeReason,
       confidence:explicit.defaultTimeUsed?'medium':'high', explanation:explicit.note||'Nhận biết mốc thời gian một lần.'
-    }, raw, nowISO, settings, 'local-app');
+    }, raw, nowISO, settings, 'local-web');
   }
 
   if(blaLooksPeriodic(lower)){
@@ -538,7 +653,7 @@ function browserLocalAnalyze(text, nowISO, settings={}){
       alarmSound:settings.alarmSound||'classic', askBeforeDue:true,
       defaultTimeUsed:true, defaultTime:settings.defaultTime||'09:00', defaultTimeReason:'Không nói thời gian cụ thể; app dùng chu kỳ mặc định theo loại công việc.',
       confidence:'medium', explanation:`Tự nhận biết việc định kỳ dài hạn, chu kỳ mặc định ${interval.interval} ${unitLabel(interval.unit)}.`
-    }, raw, nowISO, settings, 'local-app');
+    }, raw, nowISO, settings, 'local-web');
   }
 
   const due = new Date(now); due.setMinutes(due.getMinutes()+1);
@@ -549,7 +664,7 @@ function browserLocalAnalyze(text, nowISO, settings={}){
     maxAlertCount:1, alarmSeconds:settingsForType('quick'), alarmSound:settings.alarmSound||'classic',
     askBeforeDue:false, defaultTimeUsed:false, defaultTime:null, defaultTimeReason:null,
     confidence:'low', explanation:'Không thấy thời gian rõ ràng; app tạm đặt sau 1 phút để test.'
-  }, raw, nowISO, settings, 'local-app');
+  }, raw, nowISO, settings, 'local-web');
 }
 
 function blaNormalize(r, original, nowISO, settings, engine){
@@ -671,6 +786,73 @@ function computeOneTimeWeekdayDate(lower, now, hour, minute){
   const days=(weekday-d.getDay()+7)%7;
   d.setDate(d.getDate()+days);
   if(d<=now) d.setDate(d.getDate()+7);
+  return d;
+}
+
+
+function blaParsePeriodicFromStartDate(raw, lower, now, settings){
+  // Nhận câu kiểu: "cứ 3 tháng đóng tiền nhà 1 lần từ ngày mùng 9 tháng 5"
+  // hoặc: "3 tháng đóng tiền nhà 1 lần từ ngày mùng 9 tháng 5".
+  const hasStart = /(?:tu|bat dau tu)\s+(?:ngay\s+)?(?:mung|mong|ngay)?\s*/.test(lower);
+  if(!hasStart) return null;
+  const unitMap={ngay:'day',tuan:'week',thang:'month',nam:'year'};
+  let m=lower.match(/(?:cu\s+)?(\d+)\s*(ngay|tuan|thang|nam)\b/);
+  let interval=null, unit=null;
+  if(m){ interval=Number(m[1]); unit=unitMap[m[2]]; }
+  if(!interval){
+    const tokens=lower.split(/[^a-z0-9]+/).filter(Boolean);
+    for(let i=0;i<tokens.length;i++){
+      if(!unitMap[tokens[i]]) continue;
+      const val=blaVietnameseNumber(tokens.slice(Math.max(0,i-6),i));
+      if(val!=null && val>0){ interval=val; unit=unitMap[tokens[i]]; break; }
+    }
+  }
+  if(!interval || !unit) return null;
+  if(!blaLooksPeriodic(lower) && !/dong\s+tien|tra\s+tien|thanh\s*toan|gia\s*han|bao\s*tri|bao\s*duong|thay\s*dau|dinh\s*ky/.test(lower)) return null;
+
+  const start = blaParseStartDayMonth(lower, now);
+  if(!start) return null;
+  const mainTime = blaParseTime(lower);
+  const time = mainTime.found ? `${String(mainTime.hour).padStart(2,'0')}:${String(mainTime.minute).padStart(2,'0')}` : (settings.defaultTime || '09:00');
+  applyTime(start, time);
+  const due = rollForwardByRepeat(start, {unit, interval}, now);
+  const dist = (due.getTime() - now.getTime())/60000;
+  const pre = blaPeriodicPreAlert(due, dist);
+  const task = blaTitle(cleanPeriodicStartTask(raw));
+  return {
+    task, emoji:blaEmoji(lower), type:'periodic', typeLabel:TYPE_LABEL.periodic,
+    dueAt:due.toISOString(), preAlertAt:pre.toISOString(), preAlerts:[{type:'before_custom_start', time:pre.toISOString()}],
+    repeat:{unit, interval}, autoRepeat:true, maxAlertCount:null,
+    alarmSeconds:settingsForType('periodic'), alarmSound:settings.alarmSound||'classic', askBeforeDue:true,
+    defaultTimeUsed:!mainTime.found, defaultTime:!mainTime.found?time:null,
+    defaultTimeReason:!mainTime.found?'Không nói giờ cụ thể; app dùng giờ mặc định.':null,
+    confidence:'high', explanation:`Định kỳ dài hạn bắt đầu từ ngày/tháng người dùng nói; chu kỳ ${interval} ${unitLabel(unit)}.`
+  };
+}
+function blaParseStartDayMonth(lower, now){
+  let m=lower.match(/(?:tu|bat\s*dau\s*tu)\s+(?:ngay\s+)?(?:mung|mong|ngay)?\s*(\d{1,2}|[a-z]+(?:\s+[a-z]+){0,3})(?:\s+thang\s+(\d{1,2}|[a-z]+(?:\s+[a-z]+){0,3}))?/);
+  if(!m) return null;
+  const day=blaParseDayNumberToken(String(m[1]).trim());
+  const month=m[2]?blaParseMonthNumberToken(String(m[2]).trim()):now.getMonth()+1;
+  if(!day || !month) return null;
+  return new Date(now.getFullYear(), month-1, Math.min(day, blaDaysInMonth(now.getFullYear(), month-1)), 9, 0, 0, 0);
+}
+function cleanPeriodicStartTask(raw){
+  return String(raw||'')
+    .replace(/^\s*(cứ|cu)\s+/i,'')
+    .replace(/\b(\d+|một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi|trăm|tram|nghìn|nghin|linh|lẻ|le|không|khong)\s*(ngày|ngay|tuần|tuan|tháng|thang|năm|nam)\b/gi,'')
+    .replace(/\b\d+\s*(ngày|ngay|tuần|tuan|tháng|thang|năm|nam)\b/gi,'')
+    .replace(/\b\d+\s*(lần|lan)\b/gi,'')
+    .replace(/\b(một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi)\s*(lần|lan)\b/gi,'')
+    .replace(/\b(lần|lan)\b/gi,'')
+    .replace(/\b(từ|tu|bắt đầu từ|bat dau tu)\s+(ngày\s+)?(mùng|mung|mồng|mong|ngày|ngay)?\s*[^,.;]+/gi,'')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function rollForwardByRepeat(start, repeat, now){
+  const d=new Date(start);
+  let guard=0;
+  while(d<=now && guard<500){ blaAdd(d, repeat.unit, repeat.interval); guard++; }
   return d;
 }
 
@@ -941,7 +1123,7 @@ function renderPending(r){
       <div class="k">Ghi chú</div><div class="small">${escapeHtml(r.explanation||r.defaultTimeReason||'')}</div>
     </div>
     <div class="actions"><button class="btn ghost" id="cancelPending">Hủy</button><button class="btn primary" id="savePending">Đặt nhắc nhở</button></div>`;
-  $('#cancelPending').onclick=()=>{ pending=null; $('#analysis').style.display='none'; };
+  $('#cancelPending').onclick=()=>{ pending=null; document.body.classList.remove('post-mic-focus'); $('#analysis').style.display='none'; $('#analysis').classList.remove('post-mic-result'); };
   $('#savePending').onclick=savePendingReminder;
 }
 function alertPlanLabel(r){
@@ -972,7 +1154,7 @@ async function savePendingReminder(){
   $('#transcript').style.display='none';
   renderAll();
   switchTab('add');
-  window.scrollTo({top:0,behavior:'smooth'});
+  resetAddScreenPosition();
 
   if(isCapacitorNativeApp()){
     if(scheduleResult?.loudOk){
@@ -998,10 +1180,24 @@ function renderTemplates(){
     </div>`).join('');
 }
 function templateSummary(t){
-  if(t.type==='quick') return `Sau ${t.offset?.interval||1} ${unitLabel(t.offset?.unit||'minute')}`;
-  if(t.type==='periodic') return `Chu kỳ ${t.repeat?.interval||1} ${unitLabel(t.repeat?.unit||'month')} · nhắc trước ${t.preAlert?.before?.interval||0} ngày`;
+  if(t.type==='quick') return `Sau ${t.offset?.interval||1} ${unitLabel(t.offset?.unit||'minute')} · áp dụng nhắc sớm Tức thời`;
+  if(t.type==='periodic') return `Chu kỳ ${t.repeat?.interval||1} ${unitLabel(t.repeat?.unit||'month')}${t.startDate?' · bắt đầu '+formatDateInputVN(t.startDate):''} · nhắc trước ${t.preAlert?.before?.interval||0} ngày`;
   if(t.type==='recurring') return `${repeatLabel(t.repeat)} · giờ chính ${t.mainTime||'09:00'}${t.preAlert?.enabled?' · nhắc sớm '+t.preAlert.time:''}`;
   return '';
+}
+function formatDateInputVN(value){
+  if(!value) return '';
+  const p=String(value).split('-');
+  return p.length===3 ? `${p[2]}/${p[1]}/${p[0]}` : value;
+}
+function dateFromInput(value){
+  const p=String(value||'').split('-').map(Number);
+  if(p.length===3 && p[0] && p[1] && p[2]) return new Date(p[0], p[1]-1, p[2], 9, 0, 0, 0);
+  return new Date();
+}
+function todayDateInput(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 window.useTemplate=function(id){ const t=templates.find(x=>x.id===id); if(!t)return; pending=buildReminderFromTemplate(t); renderPending(pending); toast('Đã fill mẫu: '+(t.templateName||t.task)); }
 window.editTemplate=function(id){ const t=templates.find(x=>x.id===id); if(t) openTemplateModal(t); }
@@ -1038,7 +1234,14 @@ function buildReminderFromTemplate(t){
     due=addOffset(new Date(now), t.offset||{unit:'minute',interval:30});
     const pres=limitTemplatePreAlerts(quickPreAlerts(due, now), 'quick'); preAlerts=pres; pre=pres[0]?new Date(pres[0].time):null; maxAlertCount=pres.length+1; repeat=null;
   } else if(t.type==='periodic'){
-    due=addOffset(new Date(now), t.offset||t.repeat||{unit:'month',interval:3}); applyTime(due, t.mainTime || settings.defaultTime || '09:00');
+    if(t.startDate){
+      due = dateFromInput(t.startDate);
+      applyTime(due, t.mainTime || settings.defaultTime || '09:00');
+      due = rollForwardByRepeat(due, t.repeat||{unit:'month',interval:3}, now);
+    }else{
+      due=addOffset(new Date(now), t.offset||t.repeat||{unit:'month',interval:3});
+      applyTime(due, t.mainTime || settings.defaultTime || '09:00');
+    }
     const days=Number(t.preAlert?.before?.interval ?? 5);
     preAlerts=buildTemplatePeriodicPreAlerts(due, days, Number(settings.templateAlertPeriodic ?? 1), now);
     pre=preAlerts[0]?new Date(preAlerts[0].time):null; maxAlertCount=null;
@@ -1058,22 +1261,81 @@ function buildReminderFromTemplate(t){
 
 function openTemplateModal(t=null){
   $('#tplTitle').textContent=t?'Sửa mẫu công việc':'Tạo mẫu công việc';
-  $('#tplId').value=t?.id||''; $('#tplName').value=t?.templateName||''; $('#tplTask').value=t?.task||''; $('#tplEmoji').value=t?.emoji||''; $('#tplType').value=t?.type||'quick';
-  $('#tplQuickInterval').value=t?.offset?.interval||30; $('#tplQuickUnit').value=t?.offset?.unit||'minute';
-  $('#tplPeriodicInterval').value=t?.repeat?.interval||t?.offset?.interval||3; $('#tplPeriodicUnit').value=t?.repeat?.unit||t?.offset?.unit||'month'; $('#tplPeriodicTime').value=t?.mainTime||settings.defaultTime||'09:00'; $('#tplPreDays').value=t?.preAlert?.before?.interval??5;
-  $('#tplFreq').value=t?.repeat?.unit||'week'; $('#tplMainTime').value=t?.mainTime||'14:00'; $('#tplWeekday').value=t?.weekday??1; $('#tplMonthday').value=t?.monthday??1; $('#tplEarlyEnabled').checked=!!t?.preAlert?.enabled; $('#tplEarlyTime').value=t?.preAlert?.time||'10:00';
-  $('#tplAlarmSeconds').value=String(t?.alarmSeconds||180); $('#tplAlarmSound').value=t?.alarmSound||settings.alarmSound||'classic';
-  toggleTemplateType(); $('#templateModal').classList.add('show');
+  $('#tplId').value=t?.id||'';
+  $('#tplTask').value=t?.task||'';
+  $('#tplType').value=t?.type||'quick';
+  $('#tplQuickInterval').value=t?.offset?.interval||30;
+  $('#tplQuickUnit').value=t?.offset?.unit||'minute';
+  $('#tplPeriodicInterval').value=t?.repeat?.interval||t?.offset?.interval||3;
+  $('#tplPeriodicUnit').value=t?.repeat?.unit||t?.offset?.unit||'month';
+  $('#tplPeriodicStartDate').value=t?.startDate||todayDateInput();
+  $('#tplPeriodicTime').value=t?.mainTime||settings.defaultTime||'09:00';
+  $('#tplPreDays').value=t?.preAlert?.before?.interval??5;
+  const rf = t?.repeat || {};
+  if(rf.mode==='skip_days'){
+    $('#tplFreq').value='skip_days'; $('#tplFreqValue').value=rf.skipDays||Math.max(1,(rf.interval||2)-1);
+  }else if(rf.mode==='fixed_interval'){
+    $('#tplFreq').value='every_'+(rf.unit||'day'); $('#tplFreqValue').value=rf.interval||1;
+  }else{
+    $('#tplFreq').value=rf.unit||'week'; $('#tplFreqValue').value=rf.interval||1;
+  }
+  $('#tplMainTime').value=t?.mainTime||'14:00';
+  $('#tplWeekday').value=t?.weekday??1;
+  $('#tplMonthday').value=t?.monthday??1;
+  $('#tplEarlyEnabled').checked=!!t?.preAlert?.enabled;
+  $('#tplEarlyTime').value=t?.preAlert?.time||'10:00';
+  $('#tplAlarmSeconds').value=String(t?.alarmSeconds||180);
+  $('#tplAlarmSound').value=t?.alarmSound||settings.alarmSound||'classic';
+  toggleTemplateType(); $('#templateModal').classList.add('show'); renderTemplatePreview();
 }
 function closeTemplateModal(){ $('#templateModal').classList.remove('show'); }
-function toggleTemplateType(){ const type=$('#tplType').value; $('#tplQuick').style.display=type==='quick'?'block':'none'; $('#tplPeriodic').style.display=type==='periodic'?'block':'none'; $('#tplRecurring').style.display=type==='recurring'?'block':'none'; }
+function toggleTemplateType(){
+  const type=$('#tplType').value;
+  $('#tplQuick').style.display=type==='quick'?'block':'none';
+  $('#tplPeriodic').style.display=type==='periodic'?'block':'none';
+  $('#tplRecurring').style.display=type==='recurring'?'block':'none';
+  toggleRecurringFields(); renderTemplatePreview();
+}
+function toggleRecurringFields(){
+  const f=$('#tplFreq')?.value || 'week';
+  const needsValue=/^(every_|skip_days)/.test(f);
+  $('#tplFreqValueWrap')?.classList.toggle('is-hidden', !needsValue);
+  $('#tplWeekdayWrap')?.classList.toggle('is-hidden', !(f==='week'||f==='skip_days'));
+  $('#tplMonthdayWrap')?.classList.toggle('is-hidden', f!=='month');
+  $('#tplEarlyTimeWrap')?.classList.toggle('is-hidden', !$('#tplEarlyEnabled')?.checked);
+}
+function buildTemplateRepeatFromForm(){
+  const f=$('#tplFreq').value;
+  const val=Math.max(1, Number($('#tplFreqValue').value||1));
+  if(f==='skip_days') return {unit:'day', interval:val+1, mode:'skip_days', skipDays:val};
+  if(f.startsWith('every_')) return {unit:f.replace('every_',''), interval:val, mode:'fixed_interval'};
+  return {unit:f, interval:1};
+}
 function saveTemplateFromForm(){
   const type=$('#tplType').value; const id=$('#tplId').value||crypto.randomUUID(); const task=$('#tplTask').value.trim(); if(!task) return toast('Nhập tên công việc');
-  let t={id,templateName:$('#tplName').value.trim()||task,task,emoji:$('#tplEmoji').value.trim()||'🔔',type,typeLabel:TYPE_LABEL[type],alarmSeconds:Number($('#tplAlarmSeconds').value||180),alarmSound:$('#tplAlarmSound').value||'classic',createdAt:new Date().toISOString()};
+  let t={id,templateName:task,task,emoji:blaEmoji(blaStrip(task.toLowerCase()))||'🔔',type,typeLabel:TYPE_LABEL[type],alarmSeconds:Number($('#tplAlarmSeconds').value||180),alarmSound:$('#tplAlarmSound').value||'classic',createdAt:new Date().toISOString()};
   if(type==='quick') t={...t,offset:{unit:$('#tplQuickUnit').value,interval:Number($('#tplQuickInterval').value||1)},repeat:null,autoRepeat:false,askBeforeDue:false};
-  if(type==='periodic') t={...t,offset:{unit:$('#tplPeriodicUnit').value,interval:Number($('#tplPeriodicInterval').value||1)},repeat:{unit:$('#tplPeriodicUnit').value,interval:Number($('#tplPeriodicInterval').value||1)},mainTime:$('#tplPeriodicTime').value||settings.defaultTime,preAlert:{enabled:Number($('#tplPreDays').value||0)>0,before:{unit:'day',interval:Number($('#tplPreDays').value||0)}},autoRepeat:true,askBeforeDue:true};
-  if(type==='recurring') t={...t,repeat:{unit:$('#tplFreq').value,interval:1},mainTime:$('#tplMainTime').value||'09:00',weekday:Number($('#tplWeekday').value),monthday:Number($('#tplMonthday').value||1),preAlert:{enabled:$('#tplEarlyEnabled').checked,time:$('#tplEarlyTime').value||'10:00'},autoRepeat:true,askBeforeDue:false};
+  if(type==='periodic') t={...t,offset:{unit:$('#tplPeriodicUnit').value,interval:Number($('#tplPeriodicInterval').value||1)},repeat:{unit:$('#tplPeriodicUnit').value,interval:Number($('#tplPeriodicInterval').value||1)},startDate:$('#tplPeriodicStartDate').value||todayDateInput(),mainTime:$('#tplPeriodicTime').value||settings.defaultTime,preAlert:{enabled:Number($('#tplPreDays').value||0)>0,before:{unit:'day',interval:Number($('#tplPreDays').value||0)}},autoRepeat:true,askBeforeDue:true};
+  if(type==='recurring'){
+    const rep=buildTemplateRepeatFromForm();
+    t={...t,repeat:rep,mainTime:$('#tplMainTime').value||'09:00',weekday:Number($('#tplWeekday').value),monthday:Number($('#tplMonthday').value||1),preAlert:{enabled:$('#tplEarlyEnabled').checked,time:$('#tplEarlyTime').value||'10:00'},autoRepeat:true,askBeforeDue:false};
+  }
   const i=templates.findIndex(x=>x.id===id); if(i>=0) templates[i]=t; else templates.push(t); persistTemplates(); renderTemplates(); closeTemplateModal(); toast('Đã lưu mẫu');
+}
+function renderTemplatePreview(){
+  const el=$('#tplPreview'); if(!el) return;
+  const task=$('#tplTask')?.value?.trim() || 'Tên công việc';
+  const type=$('#tplType')?.value || 'quick';
+  if(type==='quick'){
+    el.innerHTML=`<b>Xem trước:</b> ${escapeHtml(task)} · Tức thời · báo sau ${Number($('#tplQuickInterval').value||1)} ${unitLabel($('#tplQuickUnit').value||'minute')} · nhắc sớm theo cấu hình Tức thời.`; return;
+  }
+  if(type==='periodic'){
+    const start=$('#tplPeriodicStartDate').value ? formatDateInputVN($('#tplPeriodicStartDate').value) : 'ngày bắt đầu';
+    el.innerHTML=`<b>Xem trước:</b> ${escapeHtml(task)} · Định kỳ dài hạn · ${Number($('#tplPeriodicInterval').value||1)} ${unitLabel($('#tplPeriodicUnit').value||'month')} một lần · giờ ${$('#tplPeriodicTime').value||'09:00'} · bắt đầu ${start} · nhắc trước ${Number($('#tplPreDays').value||0)} ngày.`; return;
+  }
+  const rep=buildTemplateRepeatFromForm();
+  const extra = rep.mode==='skip_days' ? ` · bắt đầu theo thứ đã chọn` : ($('#tplFreq').value==='week' ? ` · thứ ${$('#tplWeekday option:checked').text()}` : ($('#tplFreq').value==='month' ? ` · ngày ${$('#tplMonthday').value} trong tháng` : ''));
+  el.innerHTML=`<b>Xem trước:</b> ${escapeHtml(task)} · Lặp lại thường xuyên · ${repeatLabel(rep)} · giờ chính ${$('#tplMainTime').value||'09:00'}${extra}${$('#tplEarlyEnabled').checked?' · nhắc sớm '+($('#tplEarlyTime').value||'10:00'):''}.`;
 }
 
 function renderReports(){
@@ -1726,7 +1988,31 @@ function quickPreAlerts(due, now){
   }
   return alerts.sort((a,b)=>new Date(a.time)-new Date(b.time));
 }
-function nextRecurringDate(t,now){ const due=new Date(now); applyTime(due,t.mainTime||'09:00'); const unit=t.repeat?.unit||'week'; if(unit==='day'){ if(due<=now) due.setDate(due.getDate()+1); } else if(unit==='week'){ const target=Number(t.weekday??1); const days=(target-due.getDay()+7)%7; due.setDate(due.getDate()+days); if(due<=now) due.setDate(due.getDate()+7); } else if(unit==='month'){ const day=Math.min(Number(t.monthday||1),28); due.setDate(day); if(due<=now) due.setMonth(due.getMonth()+1); } return due; }
+function nextRecurringDate(t,now){
+  const rep=t.repeat||{unit:'week',interval:1};
+  if(rep.mode==='fixed_interval'){
+    return addOffset(new Date(now), {unit:rep.unit||'day', interval:rep.interval||1});
+  }
+  const due=new Date(now); applyTime(due,t.mainTime||'09:00');
+  if(rep.mode==='skip_days'){
+    const target=Number(t.weekday??due.getDay());
+    const days=(target-due.getDay()+7)%7;
+    due.setDate(due.getDate()+days);
+    if(due<=now) due.setDate(due.getDate()+(rep.interval||2));
+    return due;
+  }
+  const unit=rep.unit||'week';
+  if(unit==='day'){
+    if(due<=now) due.setDate(due.getDate()+(rep.interval||1));
+  } else if(unit==='week'){
+    const target=Number(t.weekday??1); const days=(target-due.getDay()+7)%7; due.setDate(due.getDate()+days); if(due<=now) due.setDate(due.getDate()+7*(rep.interval||1));
+  } else if(unit==='month'){
+    const day=Math.min(Number(t.monthday||1),28); due.setDate(day); if(due<=now) due.setMonth(due.getMonth()+(rep.interval||1));
+  } else if(unit==='year'){
+    if(due<=now) due.setFullYear(due.getFullYear()+(rep.interval||1));
+  }
+  return due;
+}
 function repeatLabel(rep){ if(!rep)return 'Không'; if(rep.mode==='skip_days') return `Cách ${rep.skipDays||1} ngày · báo lại sau mỗi ${rep.interval||2} ngày`; if(rep.mode==='fixed_interval') return `Cứ ${rep.interval||1} ${unitLabel(rep.unit)} lặp lại`; return `${rep.interval||1} ${unitLabel(rep.unit)}`; }
 function getPreAlerts(r){
   if(Array.isArray(r.preAlerts) && r.preAlerts.length) return r.preAlerts.filter(a=>a&&a.time).sort((a,b)=>new Date(a.time)-new Date(b.time));
