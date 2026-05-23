@@ -1,6 +1,6 @@
 {
-  "name": "smart-reminder-v8-6-settings-manager",
-  "version": "8.6.0",
+  "name": "smart-reminder-web",
+  "version": "1.0.0",
   "type": "module",
   "private": true,
   "scripts": {
@@ -9,11 +9,5 @@
   "engines": {
     "node": ">=18"
   },
-  "dependencies": {
-    "@capacitor/core": "latest",
-    "@capacitor/cli": "latest",
-    "@capacitor/android": "latest",
-    "@capacitor/local-notifications": "latest",
-    "@capacitor-community/speech-recognition": "latest"
-  }
+  "dependencies": {}
 }

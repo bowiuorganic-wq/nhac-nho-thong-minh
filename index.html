@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Smart Reminder V9.2</title>
+  <title>Smart Reminder</title>
   <style>
     *{box-sizing:border-box}body{margin:0;background:#eef2f7;color:#0f172a;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}.app{max-width:560px;min-height:100vh;margin:0 auto;background:#fff;box-shadow:0 0 36px rgba(15,23,42,.10)}header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#0f67d8,#0ea5e9);color:#fff;padding:18px}header h1{font-size:20px;margin:0 0 4px}header p{margin:0;font-size:13px;opacity:.92}.tabs{display:flex;background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:76px;z-index:18}.tab{flex:1;border:0;background:#fff;padding:13px 6px;font-weight:800;color:#64748b;cursor:pointer}.tab.active{color:#0f67d8;border-bottom:3px solid #0f67d8}.page{display:none;padding:16px}.page.active{display:block}.card{border:1px solid #e5e7eb;border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(15,23,42,.05);padding:16px;margin-bottom:14px}.row{display:flex;gap:8px}.row>*{min-width:0}.input,select{width:100%;border:1.5px solid #dbe2ea;border-radius:14px;padding:12px 13px;font-size:14px;outline:none;background:#fff}.input:focus,select:focus{border-color:#0f67d8}.btn{border:0;border-radius:14px;padding:11px 13px;font-weight:850;cursor:pointer;white-space:nowrap}.btn:disabled{opacity:.55;cursor:not-allowed}.primary{background:#0f67d8;color:#fff}.ghost{background:#f1f5f9;color:#334155}.danger{background:#fee2e2;color:#b91c1c}.ok{background:#16a34a;color:#fff}.warn{background:#f59e0b;color:#fff}.mini{padding:8px 10px;font-size:12px;border-radius:11px}.mic-wrap{text-align:center}.mic{width:86px;height:86px;border-radius:999px;border:0;background:#0f67d8;color:white;font-size:36px;cursor:pointer;box-shadow:0 12px 28px rgba(15,103,216,.32);transition:.2s}.mic.recording{background:#dc2626;animation:pulse 1s infinite}@keyframes pulse{50%{transform:scale(1.06)}}.hint{font-size:13px;color:#64748b;margin:10px 0 0}.transcript{display:none;margin-top:12px;text-align:left;background:#eff6ff;border:1px dashed #93c5fd;padding:12px;border-radius:14px;font-size:14px;line-height:1.5}.small{font-size:12px;color:#64748b;line-height:1.55}.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.section-title h2{font-size:15px;margin:0}.templates,.list,.report-grid{display:grid;gap:10px}.template,.rem,.report{display:flex;gap:12px;align-items:flex-start;border:1px solid #e5e7eb;border-radius:18px;padding:13px;background:#fff}.template-icon,.icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:#eff6ff;flex-shrink:0}.template-body,.rem-body,.report-body{min-width:0;flex:1}.title{font-weight:900;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{font-size:12px;color:#64748b;line-height:1.55}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.analysis{display:none}.kv{display:grid;grid-template-columns:120px 1fr;gap:8px;font-size:14px}.k{color:#64748b}.type{display:inline-block;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:900}.quick{background:#dbeafe;color:#1d4ed8}.periodic{background:#dcfce7;color:#15803d}.recurring{background:#ffedd5;color:#c2410c}.empty{text-align:center;color:#94a3b8;padding:34px 10px}.permission{display:none;align-items:center;gap:10px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:14px;padding:10px 12px;font-size:13px;margin-bottom:14px}.permission .btn{margin-left:auto;padding:8px 10px;background:#ea580c;color:#fff}.modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.64);z-index:100;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.box{width:min(430px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px;padding:22px 18px;box-shadow:0 24px 80px rgba(15,23,42,.35)}.box h2{margin:0 0 10px;font-size:19px}.alarm-box{text-align:center}.bell{font-size:58px;animation:shake .42s infinite alternate}@keyframes shake{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}.alarm-box p{color:#475569;white-space:pre-line;line-height:1.55}.modal-actions{display:flex;gap:9px;margin-top:16px}.modal-actions .btn{flex:1}.field{margin-bottom:11px}.field label{display:block;font-size:12px;font-weight:800;color:#475569;margin-bottom:5px}.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}.form-section{border:1px solid #e5e7eb;border-radius:16px;padding:12px;margin:10px 0;background:#f8fafc}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,90px);background:#111827;color:#fff;padding:11px 16px;border-radius:999px;font-size:13px;z-index:120;transition:.25s;white-space:nowrap;max-width:calc(100vw - 24px);overflow:hidden;text-overflow:ellipsis}.toast.show{transform:translate(-50%,0)}.settings-grid{display:grid;gap:12px}.pill{display:inline-flex;align-items:center;gap:5px;background:#f1f5f9;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800}.report.quick-r{border-color:#bfdbfe;background:#eff6ff}.report.recurring-r{border-color:#fed7aa;background:#fff7ed}.report.periodic-r{border-color:#bbf7d0;background:#f0fdf4}@media(max-width:460px){.row,.two,.three{grid-template-columns:1fr;flex-direction:column}.btn{width:100%}.kv{grid-template-columns:96px 1fr}.tabs{top:82px}.modal-actions{flex-direction:column}}
   
-    /* V8.3 UX/UI polish */
+    /* Smart Reminder web UI */
     :root{--brand:#2563eb;--brand2:#06b6d4;--ink:#0f172a;--muted:#64748b;--soft:#f8fafc;--line:#e2e8f0;--radius:22px}
     body{background:radial-gradient(circle at top left,#dbeafe 0,#eef2ff 30%,#f8fafc 65%,#fff 100%)}
     .app{max-width:590px;background:rgba(255,255,255,.96);box-shadow:0 28px 90px rgba(15,23,42,.16)}
@@ -27,7 +27,7 @@
 </head>
 <body>
   <main class="app">
-    <header><h1>🔔 Nhắc nhở thông minh</h1><p>Thiết lập lịch trình công việc &gt; Mốc thời gian được ghi nhận &gt; Thông báo được gửi đi</p></header>
+    <header><h1>🔔 Smart Reminder</h1><p>Thiết lập lịch trình công việc &gt; Mốc thời gian được ghi nhận &gt; Thông báo được gửi đi</p></header>
     <nav class="tabs">
       <button class="tab active" data-tab="add">➕ Thêm mới</button>
       <button class="tab" data-tab="list">📋 Danh sách <span id="count"></span></button>
@@ -450,27 +450,11 @@ async function analyzeInput(){
       toast('Đã áp dụng quy ước riêng');
       return;
     }
-    const nativeApp = isCapacitorNativeApp();
-
-    // Trong APK Android, server.mjs không chạy trong điện thoại.
-    // Vì vậy không gọi /api/analyze để tránh lỗi nhận về <!doctype html> rồi parse JSON.
-    if(nativeApp){
-      const data = browserLocalAnalyze(text, new Date().toISOString(), settings);
-      pending={...data, source:'local', templateId:null};
-      renderPending(pending);
-      return;
-    }
-
-    const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,nowISO:new Date().toISOString(),settings})});
-    const contentType = r.headers.get('content-type') || '';
-    const raw = await r.text();
-
-    if(!contentType.includes('application/json')){
-      throw new Error('API không trả JSON. App sẽ dùng bộ phân tích local.');
-    }
-
-    const data=JSON.parse(raw); if(!r.ok) throw new Error(data.error||'Lỗi phân tích');
-    pending={...data, source:'ai', templateId:null}; renderPending(pending);
+    // Bản web test dùng parser local trong trình duyệt để giữ đúng múi giờ và đúng rule bản app điện thoại đã chốt.
+    // Không gọi /api/analyze để tránh lệch giờ khi server deploy ở UTC.
+    const data = browserLocalAnalyze(text, new Date().toISOString(), settings);
+    pending={...data, source:'local-app', templateId:null};
+    renderPending(pending);
   }catch(e){
     console.warn('Analyze fallback:', e);
     try{
