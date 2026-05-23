@@ -324,6 +324,51 @@ function stripAccents(str) {
 function isMainOnlyTask(lower) {
   return /(^|\s)(di\s+ngu|ngu|thuc\s+day|day)(\s|$)/.test(lower);
 }
+
+function parseEveryIntervalRepeat(lower) {
+  // Rule: "cứ/cách X phút|giờ|ngày|tháng|năm ... 1 lần"
+  // => Lặp lại thường xuyên, báo lần đầu sau X đơn vị, sau đó cứ X đơn vị báo lại.
+  if (!/\blan\b/.test(lower)) return null;
+  const map = { phut: 'minute', gio: 'hour', tieng: 'hour', ngay: 'day', thang: 'month', nam: 'year' };
+  const normalized = lower.replace(/cu\s+cach/g, 'cach');
+  let m = normalized.match(/(?:^|\s)(?:cu|cach)\s+(\d+)\s*(phut|gio|tieng|ngay|thang|nam)\b/);
+  if (m) {
+    const interval = Number(m[1]);
+    if (interval > 0) { if (map[m[2]] === 'day' && (parseTime(lower).found || parseStartWeekday(lower) != null)) return null; return { interval, unit: map[m[2]], text: m[0].trim(), phraseUnit: m[2] }; }
+  }
+  const tokens = normalized.split(/[^a-z0-9]+/).filter(Boolean);
+  for (let i = 0; i < tokens.length - 1; i++) {
+    if (tokens[i] !== 'cu' && tokens[i] !== 'cach') continue;
+    for (let j = i + 1; j < Math.min(tokens.length, i + 8); j++) {
+      if (!map[tokens[j]]) continue;
+      const val = parseVietnameseNumberWords(tokens.slice(i + 1, j));
+      if (val != null && val > 0) { if (map[tokens[j]] === 'day' && (parseTime(lower).found || parseStartWeekday(lower) != null)) return null; return { interval: val, unit: map[tokens[j]], text: tokens.slice(i, j + 1).join(' '), phraseUnit: tokens[j] }; }
+    }
+  }
+  return null;
+}
+function cleanEveryIntervalTask(raw) {
+  return String(raw || '')
+    .replace(/^\s*(cứ|cu|cách|cach)\s+.*?\s*(phút|phut|giờ|gio|tiếng|tieng|ngày|ngay|tháng|thang|năm|nam)\s*/i, '')
+    .replace(/\b(\d+|một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi|mốt|mot|trăm|tram|nghìn|nghin|linh|lẻ|le|không|khong)(\s+\w+){0,4}\s+lần\b/gi, '')
+    .replace(/\b(lần|lan)\b/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+function cleanSkipDayTask(raw) {
+  return String(raw || '')
+    .replace(/\b(từ|tu|bắt đầu từ|bat dau tu)\s*(thứ|thu)\s*(2|3|4|5|6|7|hai|ba|tư|tu|năm|nam|sáu|sau|bảy|bay)\b/gi, '')
+    .replace(/\b(từ|tu|bắt đầu từ|bat dau tu)\s*(chủ nhật|chu nhat|cn)\b/gi, '')
+    .replace(/\b(lúc|luc)?\s*\d{1,2}\s*(?:h\d{0,2}|:\d{1,2}|giờ|gio)?\s*/gi, '')
+    .replace(/\b(cứ|cu|cách|cach)\s+(ngày|ngay)\b/gi, '')
+    .replace(/\b(cứ|cu|cách|cach)\s+\d+\s*(ngày|ngay)\b/gi, '')
+    .replace(/\b(cứ|cu|cách|cach)\s+(một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi|trăm|tram|nghìn|nghin|linh|lẻ|le|không|khong)(\s+\w+){0,5}\s*(ngày|ngay)\b/gi, '')
+    .replace(/\b\d+\s*(lần|lan)\b/gi, '')
+    .replace(/\b(một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi)\s*(lần|lan)\b/gi, '')
+    .replace(/(lần|lan)/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 function parseSkipDayRepeat(lower) {
   // Rule của app: "cách/cứ X ngày" = bỏ qua X ngày, báo tiếp sau X+1 ngày.
   const normalized = lower.replace(/cu\s+cach/g, 'cach');
@@ -398,44 +443,54 @@ function parseRelative(lower) {
 
 function parseVietnameseNumberWords(words) {
   if (!words || !words.length) return null;
-  const tokens = words.filter(Boolean);
+  const tokens = words.filter(Boolean).map(w => w.replace(/motj/g, 'mot'));
   const digit = {
     khong: 0, mot: 1, hai: 2, ba: 3, bon: 4, tu: 4,
     nam: 5, lam: 5, sau: 6, bay: 7, tam: 8, chin: 9
   };
 
   function parseUnder100(arr) {
-    if (!arr.length) return null;
     arr = arr.filter(t => t !== 'linh' && t !== 'le');
-    if (!arr.length) return null;
+    if (!arr.length) return 0;
     if (arr.length === 1) {
       if (arr[0] === 'muoi') return 10;
       return Object.prototype.hasOwnProperty.call(digit, arr[0]) ? digit[arr[0]] : null;
     }
     if (arr[0] === 'muoi') {
       const ones = digit[arr[1]];
-      if (ones == null) return null;
-      return 10 + ones;
+      return ones == null ? null : 10 + ones;
     }
     if (arr[1] === 'muoi') {
       const tens = digit[arr[0]];
       if (tens == null || tens < 2) return null;
       if (arr.length === 2) return tens * 10;
       const ones = digit[arr[2]];
-      if (ones == null) return null;
-      return tens * 10 + ones;
+      return ones == null ? null : tens * 10 + ones;
     }
     return null;
   }
 
-  const tramIdx = tokens.indexOf('tram');
-  if (tramIdx === 1 && digit[tokens[0]] != null) {
-    const rest = tokens.slice(2);
-    const restVal = rest.length ? parseUnder100(rest) : 0;
-    if (restVal == null) return null;
-    return digit[tokens[0]] * 100 + restVal;
+  function parseUnder1000(arr) {
+    if (!arr.length) return 0;
+    const tramIdx = arr.indexOf('tram');
+    if (tramIdx > 0) {
+      const h = parseUnder100(arr.slice(0, tramIdx));
+      if (h == null) return null;
+      const rest = parseUnder100(arr.slice(tramIdx + 1));
+      if (rest == null) return null;
+      return h * 100 + rest;
+    }
+    return parseUnder100(arr);
   }
-  return parseUnder100(tokens);
+
+  const nghinIdx = tokens.findIndex(t => t === 'nghin' || t === 'ngan');
+  if (nghinIdx >= 0) {
+    const left = parseUnder1000(tokens.slice(0, nghinIdx));
+    const right = parseUnder1000(tokens.slice(nghinIdx + 1));
+    if (left == null || right == null) return null;
+    return left * 1000 + right;
+  }
+  return parseUnder1000(tokens);
 }
 
 function buildDueFromRelative(raw, lower, now, rel, settings) {
@@ -501,6 +556,19 @@ function parseExplicitOrDay(raw, lower, now, settings) {
 }
 
 function parseRecurring(raw, lower, now, settings) {
+  const everyRepeat = parseEveryIntervalRepeat(lower);
+  if (everyRepeat) {
+    const due = new Date(now);
+    addToDate(due, everyRepeat.unit, everyRepeat.interval);
+    const task = titleCaseTask(cleanEveryIntervalTask(raw) || cleanTask(raw));
+    return {
+      task, emoji: guessEmoji(lower), type: 'recurring', typeLabel: TYPE_LABEL.recurring,
+      dueAt: due.toISOString(), preAlertAt: null, preAlerts: [], repeat: { unit: everyRepeat.unit, interval: everyRepeat.interval, mode: 'fixed_interval' }, autoRepeat: true,
+      maxAlertCount: 1, alarmSeconds: alarmFor('recurring', settings), alarmSound: settings.alarmSound || 'classic', askBeforeDue: false,
+      defaultTimeUsed: false, defaultTime: null, defaultTimeReason: null, confidence: 'high',
+      explanation: `Cứ ${everyRepeat.interval} ${unitLabel(everyRepeat.unit)}: báo lần đầu sau ${everyRepeat.interval} ${unitLabel(everyRepeat.unit)}, sau đó lặp lại cùng chu kỳ.`
+    };
+  }
   const skipRepeat = parseSkipDayRepeat(lower);
   if (skipRepeat) {
     const explicit = parseTime(lower);
@@ -516,7 +584,7 @@ function parseRecurring(raw, lower, now, settings) {
     let firstDue = due;
     if (startWeekday != null) firstDue = nextDateForWeekday(now, startWeekday, due.getHours(), due.getMinutes());
     else if (firstDue <= now) firstDue.setDate(firstDue.getDate() + skipRepeat.interval);
-    const task = titleCaseTask(cleanTask(raw));
+    const task = titleCaseTask(cleanSkipDayTask(raw) || cleanTask(raw));
     return {
       task, emoji: guessEmoji(lower), type: 'recurring', typeLabel: TYPE_LABEL.recurring,
       dueAt: firstDue.toISOString(), preAlertAt: null, preAlerts: [], repeat: { unit: 'day', interval: skipRepeat.interval, skipDays: skipRepeat.skipDays, mode: 'skip_days' }, autoRepeat: true,
@@ -654,16 +722,15 @@ function defaultPeriodicInterval(lower) {
 }
 
 function cleanTask(raw) {
-  const token = '__MEAL_SANG__';
-  let protectedRaw = String(raw || '').replace(/ăn\s+sáng/gi, 'ăn ' + token).replace(/an\s+sang/gi, 'an ' + token);
-  return protectedRaw
-    .replace(/\d+\s*(phút|phut|giờ|gio|tiếng|tieng|ngày|ngay|tuần|tuan|tháng|thang|năm|nam)\s*(nữa|nua|sau)/gi, '')
-    .replace(/(một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|lăm|lam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi)(\s+\w+){0,5}\s*(ngày|ngay|tháng|thang|năm|nam|tuần|tuan|giờ|gio|phút|phut)\s*(nữa|nua|sau)/gi, '')
-    .replace(/(lúc|luc)?\s*\d{1,2}\s*(giờ|gio)(\s*\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem|rưỡi|ruoi)?/gi, '')
-    .replace(/(lúc|luc)?\s*\d{1,2}([h:]\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem)?/gi, '')
-    .replace(/(thứ|thu)\s*(hai|ba|tư|tu|năm|nam|sáu|sau|bảy|bay|2|3|4|5|6|7)/gi, '')
-    .replace(/(chủ nhật|chu nhat|cn|hàng tuần|hang tuan|mỗi tuần|moi tuan|hàng ngày|hang ngay|mỗi ngày|moi ngay|hàng tháng|hang thang|mỗi tháng|moi thang|nhắc sớm|nhac som|nhắc trước|nhac truoc|báo trước|bao truoc|ngày mai|ngay mai|hôm nay|hom nay|sáng|sang|chiều|chieu)/gi, '')
-    .replace(new RegExp(token, 'g'), 'sáng')
+  return raw
+    .replace(/((một|mot|hai|ba|bốn|bon|tư|tu|năm|nam|sáu|sau|bảy|bay|tám|tam|chín|chin|mười|muoi|mốt|lăm|lam|linh|lẻ|le|mươi|trăm|tram)\s+){1,6}(ngày|ngay|tuần|tuan|tháng|thang|năm|nam|phút|phut|giờ|gio|tiếng|tieng)\s*(nữa|nua|sau)/gi, '')
+    .replace(/\b\d+\s*(phút|phut|giờ|gio|tiếng|tieng|ngày|ngay|tuần|tuan|tháng|thang|năm|nam)\s*(nữa|nua|sau)\b/gi, '')
+    .replace(/\b(lúc|luc)?\s*\d{1,2}\s*(giờ|gio)(\s*\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem|rưỡi|ruoi)?\b/gi, '')
+    .replace(/\b(lúc|luc)?\s*\d{1,2}([h:]\d{1,2})?\s*(sáng|sang|chiều|chieu|tối|toi|đêm|dem)?\b/gi, '')
+    .replace(/\b(thứ|thu)\s*(hai|ba|tư|tu|năm|nam|sáu|sau|bảy|bay|2|3|4|5|6|7)\b/gi, '')
+    .replace(/\b(chủ nhật|chu nhat|cn|hàng tuần|hang tuan|mỗi tuần|moi tuan|hàng ngày|hang ngay|mỗi ngày|moi ngay|hàng tháng|hang thang|mỗi tháng|moi thang)\b/gi, '')
+    .replace(/\b(nhắc sớm|nhac som|nhắc trước|nhac truoc|báo trước|bao truoc)\b.*$/gi, '')
+    .replace(/\b(sáng mai|sang mai|chiều mai|chieu mai|ngày mai|ngay mai|mai|hôm nay|hom nay|sáng|sang|chiều|chieu|tuần sau|tuan sau|tháng sau|thang sau)\b/gi, '')
     .replace(/\s+/g, ' ')
     .trim();
 }
